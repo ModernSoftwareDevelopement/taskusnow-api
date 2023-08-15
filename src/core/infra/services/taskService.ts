@@ -13,12 +13,13 @@ export class TaskService {
   }
 
   async createTask(taskData: Task): Promise<Task> {
-    const validation = taskData.taskIsValid();
+    const tmpTask = new Task(taskData.title,taskData.description,taskData.userid);
+    const validation = tmpTask.taskIsValid();
 
     if (!validation.valid) {
       throw new Error(validation.error);
     }
 
-    return this.taskRepository.createTask(taskData);
+    return this.taskRepository.createTask(tmpTask);
   }
 }
