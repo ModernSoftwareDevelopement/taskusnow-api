@@ -15,16 +15,22 @@ class MockDataSource implements TaskInterface {
   }
 }
 
-test('TaskRepository', async () => {
-  const mockDataSource = new MockDataSource();
-  const taskRepository = new TaskRepository(mockDataSource);
+describe('TaskRepository', () => {
+  it('should get an empty list of tasks', async () => {
+    const mockDataSource = new MockDataSource();
+    const taskRepository = new TaskRepository(mockDataSource);
 
-  // Test getTasks method
-  const tasks = await taskRepository.getTasks();
-  expect(tasks).toEqual([]);
+    const tasks = await taskRepository.getTasks();
+    expect(tasks).toEqual([]);
+  });
 
-  // Test createTask method
-  const newTaskData = new Task('Sample Title', 'Sample Description', 123);
-  const createdTask = await taskRepository.createTask(newTaskData);
-  expect(createdTask).toEqual(newTaskData);
+  it('should create a task', async () => {
+    const mockDataSource = new MockDataSource();
+    const taskRepository = new TaskRepository(mockDataSource);
+
+    const newTaskData = new Task('Sample Title', 'Sample Description', 123);
+    const createdTask = await taskRepository.createTask(newTaskData);
+
+    expect(createdTask).toEqual(newTaskData);
+  });
 });
