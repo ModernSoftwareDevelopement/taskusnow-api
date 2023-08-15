@@ -14,23 +14,27 @@ const taskRepository = new TaskRepository(inMemoryDataSource);
 const taskService = new TaskService(taskRepository);
 
 // GET /task
-router.get('/task', async (req: Request, res: Response) => {
-  try {
-    const tasks = await taskService.getTasks();
-    res.json(tasks);
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred while fetching tasks.' });
-  }
+router.get('/task', (req, res) => {
+  (async () => {
+    try {
+      const tasks = await taskService.getTasks();
+      res.json(tasks);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred while fetching tasks.' });
+    }
+  })();
 });
 
 // POST /task
-router.post('/task', async (req: Request, res: Response) => {
-  try {
-    const newTask = await taskService.createTask(req.body);
-    res.status(201).json(newTask);
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred while creating a task.' });
-  }
+router.post('/task', (req, res) => {
+  (async () => {
+    try {
+      const newTask = await taskService.createTask(req.body);
+      res.status(201).json(newTask);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred while creating a task.' });
+    }
+  })();
 });
 
 export default router;
