@@ -15,5 +15,9 @@ export default async (): Promise<Config.InitialOptions> => {
    transform: { "^.+\\.tsx?$": "ts-jest" },
    globalTeardown: "<rootDir>/src/tests/jest-globals-teardown.ts",
    forceExit: true,
+   coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "<rootDir>/src/tests/**/*.test.ts",
+  ],
  };
 };
