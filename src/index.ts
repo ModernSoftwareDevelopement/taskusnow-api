@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
-import apiRoutes from './Task/routes/apiRoutes';
+import TaskApiRoutes from './Task/routes/apiRoutes';
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // API Routes
-app.use('/api', apiRoutes);
+app.use('/api', TaskApiRoutes);
 
 // Route handler for the root URL
 app.get('/', (req, res) => {
