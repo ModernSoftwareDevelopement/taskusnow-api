@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { TaskRepository } from './../core/infra/repositories/taskRepository';
 import { TaskService } from './../core/infra/services/taskService';
 import { InMemoryDataSource } from './../core/infra/dataSource/inMemoryTask';
