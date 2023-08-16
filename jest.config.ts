@@ -20,7 +20,7 @@ export default async (): Promise<Config.InitialOptions> => {
       "src/**/*.{ts,tsx,js,jsx}",      
       "!src/**/*.d.ts",
       "!src/Task/routes/*.ts",
-      "!src/Task/*.ts",
+      "!src/*.ts",
     ],    
   };
 };
