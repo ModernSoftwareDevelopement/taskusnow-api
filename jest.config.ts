@@ -16,6 +16,9 @@ export default async (): Promise<Config.InitialOptions> => {
     globalTeardown: "<rootDir>/src/tests/jest-globals-teardown.ts",
     forceExit: true,
     testResultsProcessor: "jest-sonar-reporter",
-    coveragePathIgnorePatterns: ["/node_modules/", "/src/tests/"],
+    collectCoverageFrom: [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "!src/**/*.d.ts"
+    ],    
   };
 };
