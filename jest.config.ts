@@ -19,7 +19,8 @@ export default async (): Promise<Config.InitialOptions> => {
     collectCoverageFrom: [
       "src/**/*.{ts,tsx,js,jsx}",
       "!src/**/*.d.ts",
-      "!src/routes/*.ts"
+      "!src/routes/*.ts",
+      "!src/*.ts",
     ],    
   };
 };
