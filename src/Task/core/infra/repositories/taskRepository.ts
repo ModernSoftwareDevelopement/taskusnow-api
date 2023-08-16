@@ -1,5 +1,5 @@
-import Task from '../../../core/entity/Task';
-import { TaskInterface } from '../dataSource/taskInterface';
+import Task from '../../entity/Task';
+import { TaskInterface } from '../../../core/infra/dataSource/taskInterface';
 
 export class TaskRepository implements TaskInterface {
   constructor(private dataSource: TaskInterface) {}

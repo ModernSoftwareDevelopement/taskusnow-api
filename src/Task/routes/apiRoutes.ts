@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { TaskRepository } from './../core/infra/repositories/taskRepository';
-import { TaskService } from './../core/infra/services/taskService';
-import { InMemoryDataSource } from './../core/infra/dataSource/inMemoryTask';
+import { TaskRepository } from '../core/infra/repositories/taskRepository';
+import { TaskService } from '../core/infra/services/taskService';
+import { InMemoryDataSource } from '../core/infra/dataSource/inMemoryTask';
 
 const router = Router();
 

@@ -1,4 +1,4 @@
-import Task from '../../../core/entity/Task';
+import Task from '../../entity/Task';
 import { TaskInterface } from './taskInterface';
 
 export class InMemoryDataSource implements TaskInterface {

@@ -1,4 +1,4 @@
-import Task from '../../../core/entity/Task';
+import Task from '../../entity/Task';
 import { TaskInterface } from '../dataSource/taskInterface';
 
 export class TaskService {
