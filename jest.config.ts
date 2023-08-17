@@ -13,13 +13,13 @@ export default async (): Promise<Config.InitialOptions> => {
     detectOpenHandles: true,
     collectCoverage: true,
     transform: { "^.+\\.tsx?$": "ts-jest" },
-    globalTeardown: "<rootDir>/jest-globals-teardown.ts",
+    globalTeardown: "<rootDir>/src/Task/tests/jest-globals-teardown.ts",
     forceExit: true,
     testResultsProcessor: "jest-sonar-reporter",   
     collectCoverageFrom: [
       "src/**/*.{ts,tsx,js,jsx}",      
       "!src/**/*.d.ts",
-      "!src/**/**/*.ts",
+      "!src/Task/routes/*.ts",
       "!src/*.ts",
     ],    
   };
