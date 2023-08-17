@@ -17,11 +17,10 @@ export default async (): Promise<Config.InitialOptions> => {
     forceExit: true,
     testResultsProcessor: "jest-sonar-reporter",   
     collectCoverageFrom: [
-      "src/**/*.{ts,tsx,js,jsx}",      
-      "!src/**/*.d.ts",
+      "src/**/*.{ts,tsx,js,jsx}",            
       "!**/apiRoutes.ts",
       "!src/*.ts",
-      "!**/tests/unit_tests/*.ts",
+      "!**/*.test.ts",
     ],    
   };
 };
