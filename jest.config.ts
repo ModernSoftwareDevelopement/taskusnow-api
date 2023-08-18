@@ -7,5 +7,7 @@ const config: Config.InitialOptions = {
   automock: false,
   testMatch: [ '**/?(*.)+(spec|test).+(ts|tsx|js)' ],
   testPathIgnorePatterns: [ '/node_modules/', '/dist/' ],
+  collectCoverage: true,
+
 };
 export default config;
