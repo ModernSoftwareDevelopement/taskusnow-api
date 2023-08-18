@@ -8,6 +8,8 @@ const config: Config.InitialOptions = {
   testMatch: [ '**/?(*.)+(spec|test).+(ts|tsx|js)' ],
   testPathIgnorePatterns: [ '/node_modules/', '/dist/' ],
   collectCoverage: true,
+  coverageReporters: [ 'clover', 'json', 'lcov', [ 'text', { 'skipFull': true } ] ],
+  coverageDirectory: 'coverage',
 
 };
 export default config;
