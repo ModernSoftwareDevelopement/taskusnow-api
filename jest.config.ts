@@ -8,7 +8,7 @@ export default async (): Promise<Config.InitialOptions> => {
     },
     verbose: true,
     setupFiles: ["dotenv/config"],
-    testMatch: ["**/**/*.test.ts"],
+    testMatch: ["**/*.test.ts"],
     testEnvironment: "node",
     detectOpenHandles: true,
     collectCoverage: true,
@@ -18,9 +18,12 @@ export default async (): Promise<Config.InitialOptions> => {
     testResultsProcessor: "jest-sonar-reporter",   
     collectCoverageFrom: [
       "src/**/*.{ts,tsx,js,jsx}",            
-      "!**/apiRoutes.ts",
-      "!src/*.ts",
-      "!**/*.test.ts",
-    ],    
+    ],
+    coverageReporters: ["json", "lcov", "text", "clover", "cobertura"],
+    coverageDirectory: "coverage",
+    coveragePathIgnorePatterns: [
+      "/node_modules/",
+      "**/*.test.ts",
+      ],
   };
 };
