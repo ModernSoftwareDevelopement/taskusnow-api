@@ -1,13 +1,18 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
+import TaskRoutes from './Task/routes/taskRoutes';
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
+app.use(express.json());
+
+app.use('/api', TaskRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Express + TypeScript Server!');
 });
 
 app.listen(port, () => {
