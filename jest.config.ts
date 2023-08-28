@@ -10,5 +10,7 @@ const config: Config.InitialOptions = {
   collectCoverage: true,
   coverageReporters: ['clover', 'json', 'lcov', ['text', { 'skipFull': true }]],
   coverageDirectory: 'coverage',
+  clearMocks: true,
+  resetMocks: true,
 };
 export default config;

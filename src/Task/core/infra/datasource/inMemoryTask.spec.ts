@@ -10,14 +10,17 @@ describe('InMemoryDataSource Tests', () => {
 
   it('returns an empty array for getTasks initially', async () => {
     const tasks = await inMemoryDataSource.getTasks();
+    
     expect(tasks).toEqual([]);
   });
 
   it('adds a task to the tasks array when createTask is called', async () => {
     const newTask: Task = new Task('Test Title', 'Test Description', 1);
+
     await inMemoryDataSource.createTask(newTask);
     const tasks = await inMemoryDataSource.getTasks();
-    expect(tasks).toContainEqual(newTask);
+
+    expect(tasks).toContainEqual({"title":"Test Title","description":"Test Description","userid": 1});
   });
 
 });

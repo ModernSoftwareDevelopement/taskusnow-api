@@ -1,38 +1,37 @@
-import { Router } from 'express';
-import { TaskRepository } from '../core/infra/repository/taskRepository';
-import { TaskService } from '../core/infra/service/taskService';
-import { InMemoryDataSource } from '../core/infra/datasource/inMemoryTask';
+import { NextFunction, Request, Response, Router } from "express";
+import { TaskService } from "../core/infra/service/taskService";
+import ValidationError from "../middleware/ValdationError";
 
 const router = Router();
 
-const inMemoryDataSource = new InMemoryDataSource();
+const setupTaskRoutes = (taskService: TaskService) => {
+  router.get("/tasks", (req: Request, res: Response, next: NextFunction) => {
+    (async () => {
+      try {
+        const tasks = await taskService.getTasks();
+        res.json(tasks);
+      } catch (error: unknown) {
+        next(error);
+      }
+    })();
+  });
 
-const taskRepository = new TaskRepository(inMemoryDataSource);
+  router.post("/task", (req: Request, res: Response, next: NextFunction) => {
+    (async () => {
+      try {
+        const newTask = await taskService.createTask(req.body);
+        res.status(201).json(newTask);
+      } catch (error: unknown) {
+        if (error instanceof ValidationError) {
+          res.status(400).json({ error: "Bad request", message: error.message });
+        } else {
+          next(error);
+        }
+      }
+    })();
+  });
 
-const taskService = new TaskService(taskRepository);
+  return router;
+};
 
-
-router.get('/task', (req, res) => {
-  (async () => {
-    try {
-      const tasks = await taskService.getTasks();
-      res.json(tasks);
-    } catch (error) {
-        console.error('Error fetching tasks:', error);
-      res.status(500).json({ error: 'An error occurred while fetching tasks.' });
-    }
-  })();
-});
-
-router.post('/task', (req, res) => {
-  (async () => {
-    try {
-      const newTask = await taskService.createTask(req.body);
-      res.status(201).json(newTask);
-    } catch (error) {
-      res.status(500).json({ error: 'An error occurred while creating a task.' });
-    }
-  })();
-});
-
-export default router;
+export default setupTaskRoutes;

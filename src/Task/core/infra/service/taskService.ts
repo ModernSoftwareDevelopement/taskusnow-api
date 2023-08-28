@@ -1,5 +1,7 @@
 import Task from '../../entity/Task';
 import { TaskInterface } from '../interface/taskInterface';
+import ValidationError from '../../../middleware/ValdationError';
+
 
 export class TaskService {
   private taskRepository: TaskInterface;
@@ -17,7 +19,7 @@ export class TaskService {
     const validation = tmpTask.taskIsValid();
 
     if (!validation.valid) {
-      throw new Error(validation.error);
+      throw new ValidationError(validation.error);
     }
 
     return this.taskRepository.createTask(tmpTask);
