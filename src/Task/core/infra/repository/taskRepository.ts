@@ -1,4 +1,4 @@
-import Task from '../../entity/Task';
+import { Task }  from '../../entity/Task';
 import { TaskInterface } from '../interface/taskInterface';
 
 export class TaskRepository implements TaskInterface {

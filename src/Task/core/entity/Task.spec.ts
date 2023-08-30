@@ -1,4 +1,4 @@
-import Task from '../../core/entity/Task';
+import { Task } from '../../core/entity/Task';
 
 describe('Task Entity', () => {
   it('should create a valid task', () => {

@@ -4,7 +4,7 @@ import ValidationError from '../../../middleware/ValdationError';
 
 
 export class TaskService {
-  private taskRepository: TaskInterface;
+  private taskRepository: TaskInterface;    
 
   constructor(taskRepository: TaskInterface) {
     this.taskRepository = taskRepository;

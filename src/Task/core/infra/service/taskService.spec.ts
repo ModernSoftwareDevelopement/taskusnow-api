@@ -1,7 +1,7 @@
-import Task from '../../entity/Task';
-import { TaskService } from './taskService'
-import { TaskInterface } from '../interface/taskInterface';
-import ValidationError from '../../../middleware/ValdationError';
+import { Task } from "../../entity/Task";
+import { TaskService } from "./taskService";
+import { TaskInterface } from "../interface/taskInterface";
+import { ValidationError } from "../../../middleware/ValdationError";
 
 class MockDataSource implements TaskInterface {
   private tasks: Task[] = [];
@@ -31,48 +31,54 @@ class MockTaskRepository implements TaskInterface {
   }
 }
 
-describe('TaskService', () => {
+describe("TaskService", () => {
   let taskService: TaskService;
 
   beforeEach(() => {
     const mockDataSource = new MockDataSource();
-    const mockTaskRepository = new MockTaskRepository(mockDataSource);
+    const mockTaskRepository = new MockTaskRepository(mockDataSource);    
     taskService = new TaskService(mockTaskRepository);
   });
 
-  it('should get an empty list of tasks', async () => {
+  it("should get an empty list of tasks", async () => {
     const tasks = await taskService.getTasks();
+
     expect(tasks).toEqual([]);
   });
 
-  it('should create a task with valid data', async () => {
-    const newTaskData = new Task('Sample Title', 'Sample Description', 123);
+  it("should create a task with valid data", async () => {
+    const newTaskData = new Task("Sample Title", "Sample Description", 123);
     const createdTask = await taskService.createTask(newTaskData);
-    expect(createdTask).toEqual({"title":"Sample Title","description":"Sample Description","userid": 123});
+    
+    expect(createdTask).toEqual({
+      title: "Sample Title",
+      description: "Sample Description",
+      userid: 123,
+    });
   });
 
-  it('should throw an error when creating a task with invalid data', async () => {
-    const invalidTaskData = new Task('', 'Sample Description', 123);
+  it("should throw an error when creating a task with invalid data", async () => {
+    const invalidTaskData = new Task("", "Sample Description", 123);
 
     try {
       await taskService.createTask(invalidTaskData);
     } catch (error: unknown) {
       if (error instanceof ValidationError) {
-        expect(error.message).toBe('Empty or invalid title or description');
+        expect(error.message).toBe("Empty or invalid title or description");
       } else {
         throw error;
       }
     }
   });
 
-  it('should throw an error when creating a task with invalid userid', async () => {
-    const invalidTaskData = new Task('New Task', 'Sample Description', 0);
+  it("should throw an error when creating a task with invalid userid", async () => {
+    const invalidTaskData = new Task("New Task", "Sample Description", 0);
 
     try {
       await taskService.createTask(invalidTaskData);
     } catch (error: unknown) {
       if (error instanceof ValidationError) {
-        expect(error.message).toBe('Invalid userid');
+        expect(error.message).toBe("Invalid userid");
       } else {
         throw error;
       }

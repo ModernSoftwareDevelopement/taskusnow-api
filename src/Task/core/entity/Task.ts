@@ -1,4 +1,4 @@
-export default class Task {
+export class Task {
     title: string;
     description: string;
     userid: number;

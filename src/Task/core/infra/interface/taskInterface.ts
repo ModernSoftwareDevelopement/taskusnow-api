@@ -1,4 +1,4 @@
-import Task from '../../entity/Task';
+import { Task }  from '../../entity/Task';
 
 export interface TaskInterface {
   getTasks(): Promise<Task[]>;

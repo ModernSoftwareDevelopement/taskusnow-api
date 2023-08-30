@@ -1,4 +1,4 @@
-import Task from '../../entity/Task';
+import { Task }  from '../../entity/Task';
 import { InMemoryDataSource } from '../datasource/inMemoryTask';
 
 describe('InMemoryDataSource Tests', () => {
