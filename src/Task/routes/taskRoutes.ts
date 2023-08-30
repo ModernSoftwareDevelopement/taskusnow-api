@@ -7,7 +7,7 @@ export const setupTaskRoutes = (taskService: TaskService) => {
 
   router.get(
     "/tasks",
-    asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+    asyncMiddleware(async (req: Request, res: Response) => {
       const tasks = await taskService.getTasks();
       res.json(tasks);
     })
@@ -15,7 +15,7 @@ export const setupTaskRoutes = (taskService: TaskService) => {
 
   router.post(
     "/task",
-    asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+    asyncMiddleware(async (req: Request, res: Response) => {
       const newTask = await taskService.createTask(req.body);
       res.status(201).json(newTask);
     })
