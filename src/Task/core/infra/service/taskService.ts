@@ -1,6 +1,6 @@
-import Task from '../../entity/Task';
+import { Task }  from '../../entity/Task';
 import { TaskInterface } from '../interface/taskInterface';
-import ValidationError from '../../../middleware/ValdationError';
+import { ValidationError } from '../../../middleware/ValdationError';
 
 
 export class TaskService {

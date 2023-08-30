@@ -1,6 +1,6 @@
-import Task from '../../entity/Task';
-import { TaskInterface } from '../interface/taskInterface';
-import { TaskRepository } from './taskRepository';
+import { Task } from "../../entity/Task";
+import { TaskInterface } from "../interface/taskInterface";
+import { TaskRepository } from "./taskRepository";
 
 class MockDataSource implements TaskInterface {
   private tasks: Task[] = [];
@@ -15,24 +15,28 @@ class MockDataSource implements TaskInterface {
   }
 }
 
-describe('TaskRepository', () => {
-  let taskRepository : TaskRepository;
+describe("TaskRepository", () => {
+  let taskRepository: TaskRepository;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     const mockDataSource = new MockDataSource();
-    taskRepository = new TaskRepository(mockDataSource);    
-  })
+    taskRepository = new TaskRepository(mockDataSource);
+  });
 
-  it('should get an empty list of tasks', async () => {
+  it("should get an empty list of tasks", async () => {
     const tasks = await taskRepository.getTasks();
-    
+
     expect(tasks).toEqual([]);
   });
 
-  it('should create a task', async () => {
-    const newTaskData = new Task('Sample Title', 'Sample Description', 123);    
+  it("should create a task", async () => {
+    const newTaskData = new Task("Sample Title", "Sample Description", 123);
     const createdTask = await taskRepository.createTask(newTaskData);
 
-    expect(createdTask).toEqual({"title":"Sample Title","description":"Sample Description","userid": 123});
+    expect(createdTask).toEqual({
+      title: "Sample Title",
+      description: "Sample Description",
+      userid: 123,
+    });
   });
 });
