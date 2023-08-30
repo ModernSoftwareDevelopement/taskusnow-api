@@ -5,6 +5,12 @@ module.exports = {
     plugins: ['@typescript-eslint'],
     root: true,
     rules: {
-      "no-console": "warn"
+      "no-console": "warn",
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+          "checksVoidReturn": false
+        }
+      ]
     }
   };
