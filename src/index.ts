@@ -5,6 +5,7 @@ import { errorHandler } from "./Task/middleware/error";
 import { TaskService } from "./Task/core/infra/service/taskService";
 import { TaskRepository } from "./Task//core/infra/repository/taskRepository";
 import { InMemoryDataSource } from "./Task//core/infra/datasource/inMemoryTask";
+import helmet from 'helmet'
 
 dotenv.config();
 
@@ -16,6 +17,9 @@ const taskRoutes = setupTaskRoutes(taskService);
 const app: Express = express();
 const port = process.env.PORT ?? 3000;
 
+app.disable('x-powered-by');
+
+app.use(helmet());
 app.use(express.json());
 
 app.get("/", (req, res) => {

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ValidationError } from "./ValdationError";
 
 export function asyncMiddleware(
-  handler: (req: Request, res: Response) => Promise<any>
+  handler: (req: Request, res: Response) => Promise<void>
 ) {
   return async (
     req: Request,
