@@ -10,9 +10,10 @@ export class CreateUserController {
     try {
       const userResponse = await this.createUserUseCase.execute(userDTO);
       response.status(201).json(userResponse);
-    } catch (err: unknown) {
+    }
+    catch (err: unknown) {
       response.status(500).json({
-        message: (err as Error).message,
+        message: (err as Error).message
       });
     }
   }
