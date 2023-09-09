@@ -1,12 +1,12 @@
 import { Task }  from '../../entity/Task';
-import { TaskInterface } from '../interface/taskInterface';
+import { TaskRepoInterface } from '../interface/TaskRepoInterface';
 import { ValidationError } from '../../../middleware/ValdationError';
 
 
 export class TaskService {
-  private taskRepository: TaskInterface;    
+  private taskRepository: TaskRepoInterface;    
 
-  constructor(taskRepository: TaskInterface) {
+  constructor(taskRepository: TaskRepoInterface) {
     this.taskRepository = taskRepository;
   }
 
@@ -15,7 +15,12 @@ export class TaskService {
   }
 
   async createTask(taskData: Task): Promise<Task> {
-    const tmpTask = new Task(taskData.title,taskData.description,taskData.userid);
+    const tmpTask = new Task({
+      title: taskData.title,
+      description: taskData.description,
+      userid: taskData.userid,
+    });  
+    
     const validation = tmpTask.taskIsValid();
 
     if (!validation.valid) {
@@ -23,5 +28,9 @@ export class TaskService {
     }
 
     return this.taskRepository.createTask(tmpTask);
+  }
+
+  async getTaskByTaskID(taskID: string): Promise<Task> {
+    return this.taskRepository.getTaskByTaskID(taskID);
   }
 }

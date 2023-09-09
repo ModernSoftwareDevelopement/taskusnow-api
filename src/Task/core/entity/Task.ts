@@ -1,12 +1,16 @@
+import { TaskInterface } from "./TaskInterface";
+
 export class Task {
+    taskId?: string;
     title: string;
     description: string;
     userid: number;
     
-    constructor(title: string, description: string, userid: number) {
-        this.title = title;
-        this.description = description;
-        this.userid = userid;
+    constructor(data: TaskInterface) {
+        this.taskId = data.taskid;
+        this.title = data.title;
+        this.description = data.description;
+        this.userid = data.userid;
     }
 
     taskIsValid(): { valid: boolean; error?: string } {

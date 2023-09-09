@@ -4,6 +4,9 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     plugins: ['@typescript-eslint'],
     root: true,
+    parserOptions: {
+      "project": "./tsconfig.json"
+    },
     rules: {
       "no-console": "warn",
       "@typescript-eslint/no-misused-promises": [

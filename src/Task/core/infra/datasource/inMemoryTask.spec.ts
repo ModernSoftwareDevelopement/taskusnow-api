@@ -15,12 +15,18 @@ describe('InMemoryDataSource Tests', () => {
   });
 
   it('adds a task to the tasks array when createTask is called', async () => {
-    const newTask: Task = new Task('Test Title', 'Test Description', 1);
+    const newTask: Task = new Task({
+      title: "Test Title",
+      description: "Test Description",
+      userid: 1,
+    });
 
-    await inMemoryDataSource.createTask(newTask);
+    const createdTask = await inMemoryDataSource.createTask(newTask);
     const tasks = await inMemoryDataSource.getTasks();
 
-    expect(tasks).toContainEqual({"title":"Test Title","description":"Test Description","userid": 1});
+    expect(createdTask.title).toEqual('Test Title');
+    expect(createdTask.description).toEqual('Test Description');
+    expect(tasks.length).toEqual(1);
   });
 
 });

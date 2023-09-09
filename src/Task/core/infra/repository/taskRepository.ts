@@ -1,8 +1,8 @@
 import { Task }  from '../../entity/Task';
-import { TaskInterface } from '../interface/taskInterface';
+import { TaskRepoInterface } from '../interface/TaskRepoInterface';
 
-export class TaskRepository implements TaskInterface {
-  constructor(private dataSource: TaskInterface) {}
+export class TaskRepository implements TaskRepoInterface {
+  constructor(private dataSource: TaskRepoInterface) {}
 
   async getTasks(): Promise<Task[]> {
     return this.dataSource.getTasks();
@@ -10,5 +10,9 @@ export class TaskRepository implements TaskInterface {
 
   async createTask(taskData: Task): Promise<Task> {
     return this.dataSource.createTask(taskData);
+  }
+
+  async getTaskByTaskID(taskID: string): Promise<Task> {
+    return this.dataSource.getTaskByTaskID(taskID);
   }
 }

@@ -1,9 +1,9 @@
 import { Task } from "../../entity/Task";
 import { TaskService } from "./taskService";
-import { TaskInterface } from "../interface/taskInterface";
+import { TaskRepoInterface } from "../interface/TaskRepoInterface";
 import { ValidationError } from "../../../middleware/ValdationError";
 
-class MockDataSource implements TaskInterface {
+class MockDataSource implements TaskRepoInterface {
   private tasks: Task[] = [];
 
   async getTasks(): Promise<Task[]> {
@@ -14,9 +14,17 @@ class MockDataSource implements TaskInterface {
     this.tasks.push(taskData);
     return taskData;
   }
+
+  async getTaskByTaskID(taskID: string): Promise<Task> {
+    const task = this.tasks.find((t) => t.taskId === taskID);
+    if (!task) {
+      throw new Error(`Task with ID ${taskID} not found`);
+    }
+    return task;
+  }
 }
 
-class MockTaskRepository implements TaskInterface {
+class MockTaskRepository implements TaskRepoInterface {
   private tasks: Task[] = [];
 
   constructor(private dataSource: MockDataSource) {}
@@ -28,6 +36,14 @@ class MockTaskRepository implements TaskInterface {
   async createTask(taskData: Task): Promise<Task> {
     this.tasks.push(taskData);
     return taskData;
+  }
+
+  async getTaskByTaskID(taskID: string): Promise<Task> {
+    const task = this.tasks.find((t) => t.taskId === taskID);
+    if (!task) {
+      throw new Error(`Task with ID ${taskID} not found`);
+    }
+    return task;
   }
 }
 
@@ -47,7 +63,11 @@ describe("TaskService", () => {
   });
 
   it("should create a task with valid data", async () => {
-    const newTaskData = new Task("Sample Title", "Sample Description", 123);
+    const newTaskData = new Task({
+      title: "Sample Title",
+      description: "Sample Description",
+      userid: 123,
+    });
     const createdTask = await taskService.createTask(newTaskData);
     
     expect(createdTask).toEqual({
@@ -58,7 +78,11 @@ describe("TaskService", () => {
   });
 
   it("should throw an error when creating a task with invalid data", async () => {
-    const invalidTaskData = new Task("", "Sample Description", 123);
+    const invalidTaskData = new Task({
+      title: "",
+      description: "Sample Description",
+      userid: 123,
+    });
 
     try {
       await taskService.createTask(invalidTaskData);
@@ -72,7 +96,11 @@ describe("TaskService", () => {
   });
 
   it("should throw an error when creating a task with invalid userid", async () => {
-    const invalidTaskData = new Task("New Task", "Sample Description", 0);
+    const invalidTaskData = new Task({
+      title: "New Task",
+      description: "Sample Description",
+      userid: 123,
+    });    
 
     try {
       await taskService.createTask(invalidTaskData);

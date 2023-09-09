@@ -5,7 +5,7 @@ import { errorHandler } from "./Task/middleware/error";
 import { TaskService } from "./Task/core/infra/service/taskService";
 import { TaskRepository } from "./Task//core/infra/repository/taskRepository";
 import { InMemoryDataSource } from "./Task//core/infra/datasource/inMemoryTask";
-import helmet from 'helmet'
+import helmet from 'helmet';
 
 dotenv.config();
 

@@ -1,8 +1,8 @@
 import { Task } from "../../entity/Task";
-import { TaskInterface } from "../interface/taskInterface";
+import { TaskRepoInterface } from "../interface/TaskRepoInterface";
 import { TaskRepository } from "./taskRepository";
 
-class MockDataSource implements TaskInterface {
+class MockDataSource implements TaskRepoInterface {
   private tasks: Task[] = [];
 
   async getTasks(): Promise<Task[]> {
@@ -12,6 +12,14 @@ class MockDataSource implements TaskInterface {
   async createTask(taskData: Task): Promise<Task> {
     this.tasks.push(taskData);
     return taskData;
+  }
+
+  async getTaskByTaskID(taskID: string): Promise<Task> {
+    const task = this.tasks.find((t) => t.taskId === taskID);
+    if (!task) {
+      throw new Error(`Task with ID ${taskID} not found`);
+    }
+    return task;
   }
 }
 
@@ -30,13 +38,15 @@ describe("TaskRepository", () => {
   });
 
   it("should create a task", async () => {
-    const newTaskData = new Task("Sample Title", "Sample Description", 123);
-    const createdTask = await taskRepository.createTask(newTaskData);
-
-    expect(createdTask).toEqual({
+    const newTaskData = new Task({
       title: "Sample Title",
       description: "Sample Description",
       userid: 123,
     });
+    const createdTask = await taskRepository.createTask(newTaskData);
+
+    expect(createdTask.title).toEqual('Sample Title');
+    expect(createdTask.description).toEqual('Sample Description');
+    expect(createdTask.userid).toEqual(123);
   });
 });
