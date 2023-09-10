@@ -15,7 +15,7 @@ export const setupTaskRoutes = (taskService: TaskService) => {
 
   router.post(
     "/task",
-    asyncMiddleware(async (req: Request, res: Response) => {
+    asyncMiddleware(async (req: Request, res: Response) => {      
       const newTask = await taskService.createTask(req.body);
       res.status(201).json(newTask);
     })
