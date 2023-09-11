@@ -8,7 +8,7 @@ const userRepositoryMock: IUserRepository = {
   createUser: jest.fn(),
 };
 
-jest.mock('../../1useCases/createUser/CreateUserUseCase', () => {
+jest.mock('../../useCases/createUser/CreateUserUseCase', () => {
   const useCase = {
     execute: jest.fn(),
   };
