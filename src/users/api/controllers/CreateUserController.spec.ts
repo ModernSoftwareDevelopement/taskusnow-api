@@ -1,7 +1,7 @@
 import { IUserRepository } from '../../repos/IUserRepository';
-import { CreateUserUseCase } from './CreateUserUseCase';
+import { CreateUserUseCase } from '../../useCases/createUser/CreateUserUseCase';
 import { CreateUserController } from './CreateUserController';
-import { CreateUserDTO } from './CreateUserDTO';
+import { CreateUserDTO } from '../dtos/CreateUserDTO';
 import httpMocks from 'node-mocks-http';
 
 const userRepositoryMock: IUserRepository = {

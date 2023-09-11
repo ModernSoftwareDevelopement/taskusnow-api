@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../repos/IUserRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { CreateUserDTO } from './CreateUserDTO';
+import { CreateUserDTO } from '../../api/dtos/CreateUserDTO';
 import { CreateUserResponse } from './CreateUserResponse';
 
 const userRepositoryMock: IUserRepository = {

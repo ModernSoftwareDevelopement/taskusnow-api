@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { createUserController } from '../../useCases/createUser';
+import { createUserController } from '../controllers';
 import { validateJwt } from '../../authService/middleware/auth0.middleware';
 
 const userRouter = Router();

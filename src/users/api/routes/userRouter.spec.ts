@@ -1,7 +1,7 @@
 import { userRouter } from './userRouter';
 import express from 'express';
 import request from 'supertest';
-import { createUserController } from '../../useCases/createUser';
+import { createUserController } from '../controllers';
 
 const app = express();
 app.use(userRouter);

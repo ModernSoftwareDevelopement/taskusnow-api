@@ -1,5 +1,5 @@
 import { IUserRepository } from '../../repos/IUserRepository';
-import { CreateUserDTO } from './CreateUserDTO';
+import { CreateUserDTO } from '../../api/dtos/CreateUserDTO';
 import { User } from '../../domain/entity/User';
 import { CreateUserResponse } from './CreateUserResponse';
 
