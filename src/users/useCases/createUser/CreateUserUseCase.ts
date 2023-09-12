@@ -1,13 +1,13 @@
-import { IUserRepository } from '../../repos/IUserRepository';
+import { ICreateUserRepository } from '../../repos/createUser/ICreateUserRepository';
 import { CreateUserDTO } from '../../api/dtos/CreateUserDTO';
 import { User } from '../../domain/entity/User';
 import { CreateUserResponse } from './CreateUserResponse';
 
 export class CreateUserUseCase {
-  constructor(private readonly userRepository: IUserRepository) {}
+  constructor(private readonly userRepository: ICreateUserRepository) {}
 
   async execute(userDTO: CreateUserDTO): Promise<CreateUserResponse> {
-    const user = new User(userDTO.email);
+    const user = new User(userDTO.getEmail());
 
     await this.userRepository.createUser(user);
 

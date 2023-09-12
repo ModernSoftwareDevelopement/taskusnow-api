@@ -4,6 +4,7 @@ import request from 'supertest';
 import { createUserController } from '../controllers';
 
 const app = express();
+app.use(express.json());
 app.use(userRouter);
 
 describe('User Router', () => {
@@ -15,7 +16,7 @@ describe('User Router', () => {
     const mockExecute = jest.spyOn(createUserController, 'execute');
 
     await request(app).post('/users').send({
-      email: 'liucuxiu@gmail.com'
+      email: 'liucuxiu@gmail.com',
     });
 
     expect(mockExecute).toBeCalledTimes(1);
