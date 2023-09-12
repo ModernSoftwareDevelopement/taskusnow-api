@@ -1,11 +1,7 @@
 import { userRouter } from './userRouter';
-import express from 'express';
 import request from 'supertest';
 import { createUserController } from '../controllers';
-
-const app = express();
-app.use(express.json());
-app.use(userRouter);
+import app from '../../../app';
 
 describe('User Router', () => {
   it('should define a route', async () => {
