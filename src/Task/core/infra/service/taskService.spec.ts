@@ -47,6 +47,14 @@ class MockTaskRepository implements TaskRepoInterface {
   }
 }
 
+function getNewSampleTask (): Task {
+  return new Task({
+    title: "Sample Title",
+    description: "Sample Description",
+    userid: 123,
+  });
+}
+
 describe("TaskService", () => {
   let taskService: TaskService;
 
@@ -63,11 +71,7 @@ describe("TaskService", () => {
   });
 
   it("should create a task with valid data", async () => {
-    const newTaskData = new Task({
-      title: "Sample Title",
-      description: "Sample Description",
-      userid: 123,
-    });
+    const newTaskData = getNewSampleTask();
     const createdTask = await taskService.createTask(newTaskData);
     
     expect(createdTask).toEqual({
@@ -112,4 +116,14 @@ describe("TaskService", () => {
       }
     }
   });
+
+  it("should get the task with valid taskID", async () => {
+    const newTaskData = getNewSampleTask()
+    
+    const createdTask = await taskService.createTask(newTaskData);
+    const getTask = await taskService.getTaskByTaskID(createdTask.taskId as string);
+    
+    expect(getTask.taskId).toBe(createdTask.taskId);
+  });
+
 });

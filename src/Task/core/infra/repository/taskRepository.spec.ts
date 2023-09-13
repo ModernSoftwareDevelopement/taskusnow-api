@@ -23,6 +23,14 @@ class MockDataSource implements TaskRepoInterface {
   }
 }
 
+function getNewSampleTask (): Task {
+  return new Task({
+    title: "Sample Title",
+    description: "Sample Description",
+    userid: 123,
+  });
+}
+
 describe("TaskRepository", () => {
   let taskRepository: TaskRepository;
 
@@ -38,15 +46,21 @@ describe("TaskRepository", () => {
   });
 
   it("should create a task", async () => {
-    const newTaskData = new Task({
-      title: "Sample Title",
-      description: "Sample Description",
-      userid: 123,
-    });
+    const newTaskData = getNewSampleTask();
+    
     const createdTask = await taskRepository.createTask(newTaskData);
 
     expect(createdTask.title).toEqual('Sample Title');
     expect(createdTask.description).toEqual('Sample Description');
     expect(createdTask.userid).toEqual(123);
+  });
+
+  it("should get a task with valid taskID", async () => {
+    const newTaskData = getNewSampleTask();
+
+    const createdTask = await taskRepository.createTask(newTaskData);
+    const getTask = await taskRepository.getTaskByTaskID(createdTask.taskId as string);
+
+    expect(getTask.taskId).toBe(createdTask.taskId);
   });
 });
