@@ -18,14 +18,15 @@ const taskRoutes = setupTaskRoutes(taskService);
 const app: Express = express();
 const port = process.env.PORT ?? 4000;
 
-const allowedOrigins: string[] = ["http://127.0.0.1:5173/"];
+const whitelist: string[] = ['http://127.0.0.1:5173','http://localhost:5173']
+
 
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("Not allowed by CORS : " + origin));
     }
   },
 };
