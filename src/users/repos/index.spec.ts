@@ -1,7 +1,7 @@
-import { userRepo } from './index';
+import { createUserRepository } from './index';
 
 describe('Create dependencies', () => {
   it('should create user repository instance', () => {
-    expect(userRepo).toBeDefined();
+    expect(createUserRepository).toBeDefined();
   });
 });

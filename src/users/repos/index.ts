@@ -1,5 +1,7 @@
 import { InMemoryCreateUserRepository } from './createUser/impl/InMemoryCreateUserRepository';
+import { InMemoryGetUserByIdRepository } from './getUserById/impl/InMemoryGetUserByIdRepository';
 
-const userRepo = new InMemoryCreateUserRepository();
+const createUserRepository = new InMemoryCreateUserRepository();
+const getUserByIdRepository = new InMemoryGetUserByIdRepository();
 
-export { userRepo };
+export { createUserRepository, getUserByIdRepository };
