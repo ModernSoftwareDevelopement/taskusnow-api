@@ -8,10 +8,6 @@ export class GetTaskByTaskIDUseCase {
     try {
       const resultTask = await this.taskRepo.getTaskByTaskID(taskId);
 
-      if (!resultTask) {
-        throw new Error('Task not found!');
-      }
-
       return {
         taskId: resultTask.taskId as string,
         title: resultTask.title,
