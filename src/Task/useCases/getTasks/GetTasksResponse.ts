@@ -1,5 +1,5 @@
-import { Task } from './../../domain/entity/Task';
+import { GetTaskDTO } from './../../repos/dtos/GetTaskDTO';
 
 export interface GetTasksResponse {
-  tasks: Task[];
+  tasks: GetTaskDTO[];
 }

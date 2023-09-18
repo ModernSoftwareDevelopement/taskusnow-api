@@ -1,21 +1,18 @@
 import { InMemoryGetTasksRepository } from './InMemoryGetTasksRepository';
 
-const inMemoryGetTasksRepo: InMemoryGetTasksRepository = {
-  getTasks: jest.fn(),
-};
-
-const getTasksMock = inMemoryGetTasksRepo.getTasks as jest.Mock;
-
 describe('InMemoryGetTasksRepository Testing', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should get tasks', async () => {
-    getTasksMock.mockResolvedValue([]);
+    const repo = new InMemoryGetTasksRepository();
 
-    await inMemoryGetTasksRepo.getTasks();
+    const tasks = await repo.getTasks();
 
-    expect(inMemoryGetTasksRepo.getTasks).toHaveBeenCalled();
+    expect(tasks).toEqual([
+      {
+        taskId: 'generatedTaskID',
+        title: 'sample title',
+        description: 'sample description',
+        userid: 123,
+      },
+    ]);
   });
 });

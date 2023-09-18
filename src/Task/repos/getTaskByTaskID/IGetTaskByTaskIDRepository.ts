@@ -1,5 +1,5 @@
-import { Task } from '../../domain/entity/Task';
+import { GetTaskDTO } from './../dtos/GetTaskDTO';
 
 export interface GetTaskByTaskIDRepoInterface {
-  getTaskByTaskID(taskID: string): Promise<Task>;
+  getTaskByTaskID(taskID: string): Promise<GetTaskDTO>;
 }
