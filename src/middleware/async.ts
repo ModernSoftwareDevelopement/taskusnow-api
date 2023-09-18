@@ -6,7 +6,7 @@ export function asyncMiddleware(
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await handler(req, res);
+      await handler(req, res).catch();
     } catch (ex) {
       if (ex instanceof ValidationError) {
         res.status(400).json({ error: 'Bad request', message: ex.message });
