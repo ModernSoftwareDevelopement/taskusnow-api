@@ -12,21 +12,21 @@ export const setupTaskRoutes = () => {
   router.get(
     '/tasks',
     asyncMiddleware(async (req: Request, res: Response) => {
-      await getTasksController.execute(req, res);
+      getTasksController.execute(req, res).catch();
     }),
   );
 
   router.post(
     '/task',
     asyncMiddleware(async (req: Request, res: Response) => {
-      await createTaskController.execute(req, res);
+      createTaskController.execute(req, res).catch();
     }),
   );
 
   router.get(
     '/task',
     asyncMiddleware(async (req: Request, res: Response) => {
-      await getTaskbyTaskIDController.execute(req, res);
+      getTaskbyTaskIDController.execute(req, res).catch();
     }),
   );
   return router;
