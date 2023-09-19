@@ -9,7 +9,7 @@ const getTasksMock = mockGetTasksRepo.getTasks as jest.Mock;
 
 const getTasksUseCase = new GetTasksUseCase(mockGetTasksRepo);
 
-describe('GetTasksUseCase', () => {
+describe('GetTasksUseCase Testing', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
