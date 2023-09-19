@@ -1,5 +1,4 @@
 import { GetTasksUseCase } from '../../../useCases/getTasks/GetTasksUseCase';
-import { GetTaskDTO } from '../../../repos/dtos/GetTaskDTO';
 import { GetTasksController } from './GetTasksController';
 import { GetTasksRepoInterface } from '../../../repos/getTasks/IGetTasksRepository';
 import httpMocks from 'node-mocks-http';
