@@ -1,5 +1,5 @@
 import { GetTaskByTaskIDResponse } from './GetTaskByTaskIDResponse';
-import { GetTaskByTaskIDRepoInterface } from '../../repos/getTaskByTaskID/IGetTaskByTaskIDRepository';
+import { GetTaskByTaskIDRepoInterface } from '../../repos/getTask/IGetTaskByTaskIDRepository';
 
 export class GetTaskByTaskIDUseCase {
   constructor(private readonly taskRepo: GetTaskByTaskIDRepoInterface) {}

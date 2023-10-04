@@ -1,6 +1,6 @@
 import { CreateTaskController } from './createTask/CreateTaskController';
 import { GetTasksController } from './getTasks/GetTasksController';
-import { GetTaskbyTaskIDController } from './getTaskByTaskID/GetTaskbyTaskIDController';
+import { GetTaskbyTaskIDController } from './getTask/GetTaskbyTaskIDController';
 import { CreateTaskUseCase } from './../../useCases/createTask/CreateTaskUseCase';
 import { GetTaskByTaskIDUseCase } from './../../useCases/getTaskByID/GetTaskByTaskIDUseCase';
 import { GetTasksUseCase } from '../../useCases/getTasks/GetTasksUseCase';

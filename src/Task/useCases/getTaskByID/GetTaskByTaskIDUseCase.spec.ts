@@ -1,5 +1,5 @@
 import { GetTaskByTaskIDUseCase } from './GetTaskByTaskIDUseCase';
-import { GetTaskByTaskIDRepoInterface } from '../../repos/getTaskByTaskID/IGetTaskByTaskIDRepository';
+import { GetTaskByTaskIDRepoInterface } from '../../repos/getTask/IGetTaskByTaskIDRepository';
 import { GetTaskDTO } from '../../repos/dtos/GetTaskDTO';
 
 const mockGetTaskByTaskIDRepo: GetTaskByTaskIDRepoInterface = {
