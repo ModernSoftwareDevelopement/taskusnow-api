@@ -1,7 +1,7 @@
-import { CreateTaskUseCase } from './../../../useCases/createTask/CreateTaskUseCase';
+import { CreateTaskUseCase } from '../../../useCases/createTask/CreateTaskUseCase';
 import { CreateTaskDTO } from '../../dtos/CreateTaskDTO';
 import { CreateTaskController } from './CreateTaskController';
-import { CreateTaskRepoInterface } from './../../../repos/createTask/ICreateTaskRepository';
+import { CreateTaskRepoInterface } from '../../../repos/createTask/ICreateTaskRepository';
 import httpMocks from 'node-mocks-http';
 
 const mockCreateTaskRepo: CreateTaskRepoInterface = {

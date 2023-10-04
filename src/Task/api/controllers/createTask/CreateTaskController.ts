@@ -1,4 +1,4 @@
-import { CreateTaskUseCase } from './../../../useCases/createTask/CreateTaskUseCase';
+import { CreateTaskUseCase } from '../../../useCases/createTask/CreateTaskUseCase';
 import { CreateTaskDTO } from '../../dtos/CreateTaskDTO';
 import { Request, Response } from 'express';
 

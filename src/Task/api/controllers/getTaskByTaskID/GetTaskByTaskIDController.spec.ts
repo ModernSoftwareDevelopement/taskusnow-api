@@ -1,7 +1,7 @@
 import { GetTaskByTaskIDUseCase } from '../../../useCases/getTaskByID/GetTaskByTaskIDUseCase';
-import { GetTaskDTO } from './../../../repos/dtos/GetTaskDTO';
+import { GetTaskDTO } from '../../../repos/dtos/GetTaskDTO';
 import { GetTaskbyTaskIDController } from './GetTaskbyTaskIDController';
-import { GetTaskByTaskIDRepoInterface } from './../../../repos/getTaskByTaskID/IGetTaskByTaskIDRepository';
+import { GetTaskByTaskIDRepoInterface } from '../../../repos/getTaskByTaskID/IGetTaskByTaskIDRepository';
 import httpMocks from 'node-mocks-http';
 
 const mockGetTaskByTaskIDRepo: GetTaskByTaskIDRepoInterface = {

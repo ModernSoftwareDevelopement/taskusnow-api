@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { GetTaskByTaskIDUseCase } from './../../../useCases/getTaskByID/GetTaskByTaskIDUseCase';
+import { GetTaskByTaskIDUseCase } from '../../../useCases/getTaskByID/GetTaskByTaskIDUseCase';
 
 export class GetTaskbyTaskIDController {
   constructor(
