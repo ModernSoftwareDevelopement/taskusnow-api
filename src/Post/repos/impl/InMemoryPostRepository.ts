@@ -15,10 +15,19 @@ export class InMemoryPostRepository implements IPostRepository
             return null;
         }
     }
-    
+
     async getPostByID(id: string): Promise<Post | null> {
-        throw new Error("Method not implemented.");
+        const post = posts.find((p) => p.ID === id);
+        if (post)
+        {
+            return post;
+        }
+        else   
+        {
+            return null;
+        }
     }
+    
     async searchPost(post: Post): Promise<Post[] | null> {
         throw new Error("Method not implemented.");
     }

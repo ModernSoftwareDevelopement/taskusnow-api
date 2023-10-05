@@ -1,12 +1,13 @@
+import { get } from 'http';
 import { PostInterface } from './PostInterface';
 
 export class Post {
   
   private id?: string;
-  private category?: string;
-  private content: string;
-  private userid: string;
-  private userName:string
+  public category?: string;
+  public content: string;
+  public userid: string;
+  public userName:string
 
   constructor(data: PostInterface) {
     this.id =data.id;
@@ -15,6 +16,12 @@ export class Post {
     this.userid = data.userid;
     this.userName = data.userName;
   }
+
+  get ID()
+  {
+    return this.id;
+  }
+
   isValidObject(): { valid: boolean; error?: string } {
     if (!this.content || !this.category) {
       return { valid: false, error: "Invalid content or category" };
