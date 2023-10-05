@@ -8,15 +8,15 @@ import {
 export const setupTaskRoutes = () => {
   const router = Router();
 
-  router.get('/tasks', (req: Request, res: Response) => {
+  router.get('/', (req: Request, res: Response) => {
     getTasksController.execute(req, res).catch();
   });
 
-  router.post('/task', (req: Request, res: Response) => {
+  router.post('/', (req: Request, res: Response) => {
     createTaskController.execute(req, res).catch();
   });
 
-  router.get('/task', (req: Request, res: Response) => {
+  router.get('/', (req: Request, res: Response) => {
     getTaskbyTaskIDController.execute(req, res).catch();
   });
   return router;

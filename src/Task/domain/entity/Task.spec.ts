@@ -6,7 +6,7 @@ describe('Task Entity', () => {
       title: 'Sample Title',
       description: 'Sample Description',
       userid: 123,
-    });
+    });     
 
     expect(task.taskIsValid()).toEqual({ valid: true });
   });
