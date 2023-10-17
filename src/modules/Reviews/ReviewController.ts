@@ -1,12 +1,9 @@
-// src/controllers/ReviewController.ts
 import express from 'express'
-import ReviewRepository from './interface/ReviewRepository'
 import CreateUserReview from './usecases/CreateUserReview'
 import GetUserReviews from './usecases/GetUserReviews'
 
 class ReviewController {
   constructor(
-    private reviewRepository: ReviewRepository,
     private createUserReview: CreateUserReview,
     private getUserReviews: GetUserReviews,
   ) {}

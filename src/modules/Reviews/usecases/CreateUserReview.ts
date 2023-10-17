@@ -1,5 +1,5 @@
 // src/usecases/CreateUserReview.ts
-import Review from '../Review'
+import Review from '../entity/Review'
 import ReviewRepository from '../interface/ReviewRepository'
 
 class CreateUserReview {

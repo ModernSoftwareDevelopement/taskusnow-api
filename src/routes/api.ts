@@ -17,11 +17,7 @@ const createUserReview = new CreateUserReview(reviewRepository)
 const getUserReviews = new GetUserReviews(reviewRepository)
 
 const userController = new UserController(userRepository, createUser)
-const reviewController = new ReviewController(
-  reviewRepository,
-  createUserReview,
-  getUserReviews,
-)
+const reviewController = new ReviewController(createUserReview, getUserReviews)
 
 router.post('/users', userController.createUser.bind(userController))
 router.post('/reviews', reviewController.createReview.bind(reviewController))
@@ -29,6 +25,5 @@ router.get(
   '/reviews/byuserId/:userId',
   reviewController.getUserReviewsDetail.bind(reviewController),
 )
-// getUserReviewByUserId()
 
 export default router
