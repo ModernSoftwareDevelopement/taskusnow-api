@@ -1,6 +1,5 @@
 import { ICreateUserRepository } from '../../repos/createUser/ICreateUserRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { CreateUserDTO } from '../../api/dtos/CreateUserDTO';
 import { CreateUserResponse } from './CreateUserResponse';
 
 const userRepositoryMock: ICreateUserRepository = {
@@ -12,7 +11,9 @@ const useCase = new CreateUserUseCase(userRepositoryMock);
 
 describe('CreateUserUseCase', () => {
   it('should create user', async () => {
-    const mockUserDTO = new CreateUserDTO('liucuxiu@gmail.com');
+    const mockUserDTO = {
+      email: 'liucuxiu@gmail.com',
+    };
 
     createUserMock.mockResolvedValue({
       id: 'random_id',

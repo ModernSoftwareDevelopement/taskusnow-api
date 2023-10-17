@@ -1,7 +1,6 @@
 import { ICreateUserRepository } from '../../../repos/createUser/ICreateUserRepository';
 import { CreateUserUseCase } from '../../../useCases/createUser/CreateUserUseCase';
 import { CreateUserController } from './CreateUserController';
-import { CreateUserDTO } from '../../dtos/CreateUserDTO';
 import httpMocks from 'node-mocks-http';
 
 const userRepositoryMock: ICreateUserRepository = {
@@ -28,7 +27,9 @@ describe('CreateUserController', () => {
   });
 
   it('should create a user successfully', async () => {
-    const mockUserDTO = new CreateUserDTO('liucuxiu@gmail.com');
+    const mockUserDTO = {
+      email: 'liucuxiu@gmail.com',
+    };
     const mockRequest = httpMocks.createRequest({
       body: mockUserDTO,
     });
@@ -49,7 +50,9 @@ describe('CreateUserController', () => {
   });
 
   it('should response Unexpected error when there is an error ', async () => {
-    const mockUserDTO = new CreateUserDTO('liucuxiu@gmail.com');
+    const mockUserDTO = {
+      email: 'liucuxiu@gmail.com',
+    };
     const mockRequest = httpMocks.createRequest({
       body: mockUserDTO,
     });

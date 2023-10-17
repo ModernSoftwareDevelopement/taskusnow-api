@@ -7,7 +7,7 @@ export class CreateUserUseCase {
   constructor(private readonly userRepository: ICreateUserRepository) {}
 
   async execute(userDTO: CreateUserDTO): Promise<CreateUserResponse> {
-    const user = new User(userDTO.getEmail());
+    const user = new User(userDTO.email);
 
     await this.userRepository.createUser(user);
 

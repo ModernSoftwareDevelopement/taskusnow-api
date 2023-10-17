@@ -7,7 +7,9 @@ export class CreateUserController {
 
   async execute(request: Request, response: Response): Promise<void> {
     const { email } = request.body;
-    const userDTO = new CreateUserDTO(email);
+    const userDTO: CreateUserDTO = {
+      email,
+    };
 
     try {
       const userResponse = await this.createUserUseCase.execute(userDTO);
