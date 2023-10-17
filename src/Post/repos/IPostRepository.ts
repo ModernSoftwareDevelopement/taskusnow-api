@@ -1,9 +1,9 @@
-import {Post} from "../domain/entity/Post";
+import { Post } from '../domain/entity/Post';
 
-export interface IPostRepository
-{
-    createPost (post: Post): Promise<Post |null>;
-    getPostByID (id: string): Promise<Post | null>;
-    searchPost (post: Post): Promise<Post[] | null>;
-    removePost (post: Post): Promise<boolean>;    
+export interface IPostRepository {
+  getAllPosts(): Promise<Post[]>;
+  createPost(post: Post): Promise<Post>;
+  getPostByID(id: string): Promise<Post>;
+  searchPost(post: Post): Promise<Post[]>;
+  removePost(id: string): Promise<boolean>;
 }

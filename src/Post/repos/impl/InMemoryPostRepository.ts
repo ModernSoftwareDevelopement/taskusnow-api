@@ -1,38 +1,44 @@
-import {Post} from "../../domain/entity/Post";
-import {IPostRepository} from "../IPostRepository";
-import {posts} from "../../database/InMemoryDatabase"
+import { Post } from '../../domain/entity/Post';
+import { IPostRepository } from '../IPostRepository';
+import { posts } from '../../database/InMemoryDatabase';
+import { v4 as uuidv4 } from 'uuid';
+import { error } from 'console';
 
-export class InMemoryPostRepository implements IPostRepository
-{
-    async createPost(post: Post): Promise<Post | null> {
-        if(post.isValidObject())
-        {
-            posts.push(post);
-            return post;
-        }
-        else
-        {
-            return null;
-        }
+export class InMemoryPostRepository implements IPostRepository {
+  async getAllPosts(): Promise<Post[]> {
+    return posts;
+  }
+  async createPost(post: Post): Promise<Post> {
+    try {
+      const newID: string = uuidv4();
+      post.Id = newID;
+      posts.push(post);
+      return post;
+    } catch (error) {
+      throw error;
     }
+  }
 
-    async getPostByID(id: string): Promise<Post | null> {
-        const post = posts.find((p) => p.ID === id);
-        if (post)
-        {
-            return post;
-        }
-        else   
-        {
-            return null;
-        }
+  async getPostByID(id: string): Promise<Post> {
+    const post = posts.find((p) => p.Id === id);
+    if (post) {
+      return post;
+    } else {
+      throw new Error('Unable to create Post!');
     }
-    
-    async searchPost(post: Post): Promise<Post[] | null> {
-        throw new Error("Method not implemented.");
-    }
-    async removePost(post: Post): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
+  }
 
+  async searchPost(post: Post): Promise<Post[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  async removePost(id: string): Promise<boolean> {
+    const index: number = posts.findIndex((p) => p.Id === id);
+    if (index) {
+      posts.splice(index, 1);
+      return true;
+    } else {
+      throw new Error('Unable to remove Post');
+    }
+  }
 }
