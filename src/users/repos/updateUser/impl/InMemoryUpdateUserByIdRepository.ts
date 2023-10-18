@@ -12,6 +12,7 @@ export class InMemoryUpdateUserByIdRepository implements IUpdateUserRepository {
     }
 
     user.setImageUrl(data.imageUrl ?? user.getImageUrl());
+    user.setFullName(data.fullName ?? user.getFullName());
 
     return user;
   }
