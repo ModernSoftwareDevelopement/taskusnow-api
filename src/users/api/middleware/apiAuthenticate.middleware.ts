@@ -14,8 +14,8 @@ const apiAuthenticateMiddleware = (
   }
 
   const token = authorization;
-  const username = process.env.API_USERNAME ?? '';
-  const password = process.env.API_PASSWORD ?? '';
+  const username = process.env.API_USERNAME;
+  const password = process.env.API_PASSWORD;
 
   const authHeader =
     'Basic ' + Buffer.from(username + ':' + password).toString('base64');
