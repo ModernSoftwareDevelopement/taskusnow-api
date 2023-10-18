@@ -34,6 +34,7 @@ describe('Update User Profile Usecase', () => {
     const userId = 'random_id';
     const mockUpdateUserDTO = {
       imageUrl: 'new_url',
+      fullName: 'new_full_name',
     };
 
     const user = new User('liucuxiu@gmail.com');
@@ -43,6 +44,7 @@ describe('Update User Profile Usecase', () => {
     });
 
     user.setImageUrl(mockUpdateUserDTO.imageUrl);
+    user.setFullName(mockUpdateUserDTO.fullName);
     updateUserMock.mockResolvedValue(user);
 
     const result = await useCase.execute(userId, mockUpdateUserDTO);
@@ -57,6 +59,7 @@ describe('Update User Profile Usecase', () => {
         id: user.getId(),
         email: user.getEmail(),
         imageUrl: mockUpdateUserDTO.imageUrl,
+        fullName: mockUpdateUserDTO.fullName,
       }),
     );
   });
