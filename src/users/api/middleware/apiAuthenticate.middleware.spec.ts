@@ -49,8 +49,8 @@ describe('apiAuthenticateMiddleware', () => {
   });
 
   it('should call next() if the provided token is correct', () => {
-    const username = process.env.API_USERNAME || '';
-    const password = process.env.API_PASSWORD || '';
+    const username = 'your_username';
+    const password = 'your_password';
     const authHeader =
       'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
