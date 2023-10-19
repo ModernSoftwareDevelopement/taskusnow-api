@@ -24,15 +24,23 @@ export class UploadProfileImageController {
     }
 
     const { originalname, buffer } = req.file;
+    try {
+      const imageUrl = await this.imageUploader.uploadImage(
+        originalname,
+        buffer,
+      );
 
-    const imageUrl = await this.imageUploader.uploadImage(originalname, buffer);
+      const result = await this.updateUseProfileUseCase.execute(userId, {
+        imageUrl,
+      });
 
-    const result = await this.updateUseProfileUseCase.execute(userId, {
-      imageUrl,
-    });
-
-    return res.status(201).json({
-      message: result,
-    });
+      return res.status(201).json({
+        message: result,
+      });
+    } catch (error: unknown) {
+      return res.status(500).json({
+        message: (error as Error).message,
+      });
+    }
   }
 }
