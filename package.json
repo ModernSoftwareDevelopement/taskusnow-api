@@ -4,7 +4,7 @@
   "description": "taskusnowAPI",
   "main": "index.js",
   "scripts": {
-    "test": "DOTENV_CONFIG_PATH=.env.test jest --runInBand --setupFiles=dotenv/config",
+    "test": "DOTENV_CONFIG_PATH=.env.test jest --runInBand --setupFiles=dotenv/config --coverage",
     "test:watch": "jest --runInBand --watchAll",
     "build": "npx tsc",
     "start": "node dist/src/server.js",
