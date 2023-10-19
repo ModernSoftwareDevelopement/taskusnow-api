@@ -10,11 +10,13 @@ describe('User Router', () => {
     dotenv.config();
     process.env.API_USERNAME = 'your_username';
     process.env.API_PASSWORD = 'your_password';
+    process.env.AUTH0_AUDIENCE = 'your_audience';
   });
 
   afterAll(() => {
     delete process.env.API_USERNAME;
     delete process.env.API_PASSWORD;
+    delete process.env.AUTH0_AUDIENCE;
   });
 
   it('should define a route', async () => {
