@@ -15,11 +15,15 @@ export class UploadProfileImageController {
       });
     }
 
-    const userId = req.params.userId || '';
+    const userId = req.auth?.payload.my_api_user_id as string;
+
+    if (!userId) {
+      return res.status(400).json({
+        message: 'Invalid user id',
+      });
+    }
 
     const { originalname, buffer } = req.file;
-
-    console.log('payload', req.auth);
 
     const imageUrl = await this.imageUploader.uploadImage(originalname, buffer);
 
