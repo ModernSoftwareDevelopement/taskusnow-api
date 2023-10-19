@@ -30,7 +30,8 @@ export class UpdateProfileInfoController {
         message: result,
       });
     } catch (error: unknown) {
-      return res.status(400).json({
+      // need to handle specific error
+      return res.status(500).json({
         message: (error as Error).message,
       });
     }
