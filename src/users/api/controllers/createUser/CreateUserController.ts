@@ -5,17 +5,17 @@ import { CreateUserDTO } from '../../dtos/CreateUserDTO';
 export class CreateUserController {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 
-  async execute(request: Request, response: Response): Promise<void> {
-    const { email } = request.body;
+  async execute(req: Request, res: Response): Promise<void> {
+    const { email } = req.body;
     const userDTO: CreateUserDTO = {
       email,
     };
 
     try {
       const userResponse = await this.createUserUseCase.execute(userDTO);
-      response.status(201).json(userResponse);
+      res.status(201).json(userResponse);
     } catch (err: unknown) {
-      response.status(500).json({
+      res.status(500).json({
         message: (err as Error).message,
       });
     }
