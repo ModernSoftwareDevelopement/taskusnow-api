@@ -1,4 +1,3 @@
-import { getErrorMessage } from '../../middleware/error';
 import { Post } from '../domain/entity/Post';
 import { IPostRepository } from '../repos/IPostRepository';
 
@@ -15,7 +14,6 @@ export class GetPostByIDUseCase {
         return post;
       }
     } catch (err) {
-      //const errMsg: string = getErrorMessage(err);
       const errMsg: string = (err as Error).message;
       throw new Error(`Something went wrong. Return Message: ${errMsg}`);
     }

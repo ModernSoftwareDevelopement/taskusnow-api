@@ -2,7 +2,6 @@ import { Post } from '../../domain/entity/Post';
 import { IPostRepository } from '../IPostRepository';
 import { posts } from '../../database/InMemoryDatabase';
 import { v4 as uuidv4 } from 'uuid';
-import { error } from 'console';
 
 export class InMemoryPostRepository implements IPostRepository {
   async getAllPosts(): Promise<Post[]> {
@@ -15,7 +14,7 @@ export class InMemoryPostRepository implements IPostRepository {
       posts.push(post);
       return post;
     } catch (error) {
-      throw error;
+      throw new Error((error as Error).message);
     }
   }
 
@@ -28,8 +27,18 @@ export class InMemoryPostRepository implements IPostRepository {
     }
   }
 
-  async searchPost(post: Post): Promise<Post[]> {
-    throw new Error('Method not implemented.');
+  async searchPost(searchString: string): Promise<Post[]> {
+    let fountPosts = posts.filter(
+      (p) =>
+        p.category === searchString ||
+        p.content === searchString ||
+        p.userName === searchString,
+    );
+    if (fountPosts) {
+      return fountPosts;
+    } else {
+      throw new Error('Unable to create Post!');
+    }
   }
 
   async removePost(id: string): Promise<boolean> {

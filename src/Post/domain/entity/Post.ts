@@ -17,8 +17,7 @@ export class Post {
   }
 
   get Id() {
-    if (this.id) return this.id;
-    else return '';
+    return this.id ? this.id : '';
   }
 
   set Id(value: string) {

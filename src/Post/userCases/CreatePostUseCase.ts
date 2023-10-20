@@ -1,5 +1,4 @@
 import { ValidationError } from '../../middleware/ValdationError';
-import { errorHandler, getErrorMessage } from '../../middleware/error';
 import { CreatePostDTO } from '../api/dtos/CreatePostDTO';
 import { Post } from '../domain/entity/Post';
 import { IPostRepository } from '../repos/IPostRepository';

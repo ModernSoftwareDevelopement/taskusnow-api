@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { CreatePostUseCase } from '../../userCases/CreatePostUseCase';
 import { CreatePostDTO } from '../dtos/CreatePostDTO';
-import { create } from 'domain';
 
 export class CreatePostController {
   constructor(private readonly createPostUseCase: CreatePostUseCase) {}
@@ -12,7 +11,7 @@ export class CreatePostController {
     const postDTO = new CreatePostDTO(post);
 
     try {
-      const createdPost = await this.createPostUseCase.execute(post);
+      const createdPost = await this.createPostUseCase.execute(postDTO);
       res.status(201).json(createdPost);
     } catch (error) {
       const message = (error as Error).message;
