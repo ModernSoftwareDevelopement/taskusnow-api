@@ -9,8 +9,9 @@ class UserRepositoryImpl implements UserRepository {
     return users.find((user) => user.id === id)
   }
 
-  async create(user: User): Promise<void> {
+  async create(user: User): Promise<User | undefined> {
     users.push(user)
+    return user
   }
 }
 

@@ -1,12 +1,16 @@
+import { CreateReviewDTO } from './../repos/dtos/CreateReviewDTO'
 // src/usecases/CreateUserReview.ts
-import Review from '../entity/Review'
-import ReviewRepository from '../interface/ReviewRepository'
 
+import ReviewRepositoryInterface from '../interface/ReviewRepositoryInterface'
 class CreateUserReview {
-  constructor(private reviewRepository: ReviewRepository) {}
+  constructor(private reviewRepository: ReviewRepositoryInterface) {}
 
-  async execute(userId: string, text: string): Promise<void> {
-    const review = new Review(Date.now().toString(), userId, text)
+  async execute(userid: string, userreview: string): Promise<void> {
+    const review = new CreateReviewDTO(
+      Date.now().toString(),
+      userId,
+      userreview,
+    )
     await this.reviewRepository.create(review)
   }
 }

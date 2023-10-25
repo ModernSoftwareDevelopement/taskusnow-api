@@ -7,11 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Debug TypeScript",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\modules\\reviews\\ReviewController.ts",
+            "program": "${workspaceFolder}\\src\\server.ts",
+            "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register" ],
+            "console": "integratedTerminal",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

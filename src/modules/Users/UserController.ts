@@ -1,14 +1,9 @@
 // src/controllers/UserController.ts
 import express from 'express'
-import User from './User'
-import UserRepository from './interface/UserRepository'
 import CreateUser from './usecases/CreateUser'
 
 class UserController {
-  constructor(
-    private userRepository: UserRepository,
-    private createNewUser: CreateUser,
-  ) {}
+  constructor(private createNewUser: CreateUser) {}
 
   async createUser(req: express.Request, res: express.Response) {
     const { id, name } = req.body
