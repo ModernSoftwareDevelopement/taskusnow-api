@@ -35,6 +35,10 @@ describe('Update User Profile Use case', () => {
     const mockUpdateUserDTO = {
       imageUrl: 'new_url',
       fullName: 'new_full_name',
+      email_2: 'new_email_2',
+      address: 'new_address',
+      address_2: 'new_address_2',
+      phone: '0123456789',
     };
 
     const user = new User('liucuxiu@gmail.com');
@@ -45,6 +49,11 @@ describe('Update User Profile Use case', () => {
 
     user.setImageUrl(mockUpdateUserDTO.imageUrl);
     user.setFullName(mockUpdateUserDTO.fullName);
+    user.setEmail_2(mockUpdateUserDTO.email_2);
+    user.setAddress(mockUpdateUserDTO.address);
+    user.setAddress_2(mockUpdateUserDTO.address_2);
+    user.setPhone(mockUpdateUserDTO.phone);
+
     updateUserMock.mockResolvedValue(user);
 
     const result = await useCase.execute(userId, mockUpdateUserDTO);
@@ -60,6 +69,10 @@ describe('Update User Profile Use case', () => {
         email: user.getEmail(),
         imageUrl: mockUpdateUserDTO.imageUrl,
         fullName: mockUpdateUserDTO.fullName,
+        email_2: mockUpdateUserDTO.email_2,
+        address: mockUpdateUserDTO.address,
+        address_2: mockUpdateUserDTO.address_2,
+        phone: mockUpdateUserDTO.phone,
       }),
     );
   });
