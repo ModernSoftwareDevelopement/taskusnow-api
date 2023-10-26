@@ -34,9 +34,7 @@ export class UploadProfileImageController {
         imageUrl,
       });
 
-      return res.status(201).json({
-        message: result,
-      });
+      return res.status(201).json(result);
     } catch (error: unknown) {
       return res.status(500).json({
         message: (error as Error).message,

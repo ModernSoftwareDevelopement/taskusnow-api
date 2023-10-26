@@ -26,6 +26,10 @@ export class UpdateUserProfileUseCase {
       email: updatedUser.getEmail(),
       imageUrl: updatedUser.getImageUrl(),
       fullName: updatedUser.getFullName(),
+      email_2: updatedUser.getEmail_2(),
+      address: updatedUser.getAddress(),
+      address_2: updatedUser.getAddress_2(),
+      phone: updatedUser.getPhone(),
     };
 
     return userResponse;

@@ -26,9 +26,7 @@ export class UpdateProfileInfoController {
         updateUserDTO,
       );
 
-      return res.status(201).json({
-        message: result,
-      });
+      return res.status(201).json(result);
     } catch (error: unknown) {
       // need to handle specific error
       return res.status(500).json({
