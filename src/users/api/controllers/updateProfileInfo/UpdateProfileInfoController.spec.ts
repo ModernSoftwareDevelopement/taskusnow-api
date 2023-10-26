@@ -133,10 +133,8 @@ describe('UpdateProfileInfoController', () => {
     );
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData()).toEqual({
-      message: {
-        id: '123',
-        fullName: 'Minh Tu Phan',
-      },
+      id: '123',
+      fullName: 'Minh Tu Phan',
     });
   });
 });

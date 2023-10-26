@@ -161,10 +161,8 @@ describe('UploadProfileImageController', () => {
     });
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData()).toEqual({
-      message: {
-        id: '123',
-        imageUrl: 'https://test.com/test.jpg',
-      },
+      id: '123',
+      imageUrl: 'https://test.com/test.jpg',
     });
   });
 });
