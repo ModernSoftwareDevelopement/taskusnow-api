@@ -62,16 +62,13 @@ describe('GetTaskbyTaskIDController Testing', () => {
       },
     });
 
-    getTaskByTaskIDModck.mockRejectedValue(
-      new Error('Something went wrong. Try again!'),
-    );
+    getTaskByTaskIDModck.mockRejectedValue({
+      status: 500,
+      message: 'Internal Server Error: Something went wrong. Try again!',
+    });
 
-    try {
-      await getTaskbyTaskIDController.execute(mockRequest, mockResponse);
-    } catch (error) {
-      const typedError = error as Error;
-      expect(typedError.message).toBe('Something went wrong. Try again!');
-      expect(mockGetTaskByTaskIDRepo.getTaskByTaskID).toHaveBeenCalled();
-    }
+    await getTaskbyTaskIDController.execute(mockRequest, mockResponse);
+
+    expect(mockResponse.statusCode).toBe(500);
   });
 });
