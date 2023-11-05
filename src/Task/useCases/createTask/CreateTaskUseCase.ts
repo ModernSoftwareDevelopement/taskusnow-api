@@ -9,10 +9,13 @@ export class CreateTaskUseCase {
 
   async execute(taskDTO: CreateTaskDTO): Promise<CreateTaskResponse> {
     const task = new Task(taskDTO);
-    const validation = task.taskIsValid();
 
-    if (!validation.valid) {
-      throw new ValidationError(validation.error);
+    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
+      const validation = task.taskIsValid();
+
+      if (!validation.valid) {
+        throw new ValidationError(validation.error);
+      }
     }
 
     try {

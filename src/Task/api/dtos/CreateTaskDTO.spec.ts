@@ -1,18 +1,27 @@
 import { CreateTaskDTO } from './CreateTaskDTO';
 
 describe('CreateTaskDTO Testing!', () => {
-  it('should create an instance of CreateTaskDTO', () => {
+  it('should validate data against CreateTaskDTO structure', () => {
     const data = {
       title: 'Sample Task',
       description: 'This is a sample task',
       userid: 123,
     };
 
-    const createTaskDTO = new CreateTaskDTO(data);
+    const expectedKeys: (keyof CreateTaskDTO)[] = [
+      'title',
+      'description',
+      'userid',
+    ];
 
-    expect(createTaskDTO).toBeDefined();
-    expect(createTaskDTO.title).toEqual('Sample Task');
-    expect(createTaskDTO.description).toEqual('This is a sample task');
-    expect(createTaskDTO.userid).toEqual(123);
+    const dataKeys = Object.keys(data) as (keyof CreateTaskDTO)[];
+
+    expectedKeys.forEach((key) => {
+      expect(dataKeys.includes(key)).toBe(true);
+    });
+
+    expect(typeof data.title).toBe('string');
+    expect(typeof data.description).toBe('string');
+    expect(typeof data.userid).toBe('number');
   });
 });

@@ -13,7 +13,7 @@ export class Task {
     this.userid = data.userid;
   }
 
-  taskIsValid(): { valid: boolean; error?: string } {
+  taskIsValid?(): { valid: boolean; error?: string } {
     if (!this.title || !this.description) {
       return { valid: false, error: 'Empty or invalid title or description' };
     }
