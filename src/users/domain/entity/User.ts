@@ -1,5 +1,15 @@
 import { randomUUID } from 'crypto';
 
+interface IUserProperties {
+  email: string;
+  imageUrl?: string;
+  fullName?: string;
+  email_2?: string;
+  address?: string;
+  address_2?: string;
+  phone?: string;
+}
+
 export class User {
   private readonly id: string;
   private readonly email: string;
@@ -11,8 +21,8 @@ export class User {
   private address_2?: string;
   private phone?: string;
 
-  constructor(email: string) {
-    this.id = randomUUID();
+  private constructor(email: string, id?: string) {
+    this.id = id || randomUUID();
     this.email = email;
   }
 
@@ -70,5 +80,18 @@ export class User {
 
   setPhone(phone: string | undefined): void {
     this.phone = phone;
+  }
+
+  public static create(props: IUserProperties, id?: string): User {
+    const user = new User(props.email, id);
+
+    user.setImageUrl(props.imageUrl);
+    user.setFullName(props.fullName);
+    user.setEmail_2(props.email_2);
+    user.setAddress(props.address);
+    user.setAddress_2(props.address_2);
+    user.setPhone(props.phone);
+
+    return user;
   }
 }
