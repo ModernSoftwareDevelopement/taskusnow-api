@@ -47,16 +47,13 @@ describe('GetTasksController Testing', () => {
   it('should throw an error when something went wrong!', async () => {
     const mockRequest = httpMocks.createRequest();
 
-    getTasksMock.mockRejectedValue(
-      new Error('Something went wrong. Try again!'),
-    );
+    getTasksMock.mockRejectedValue({
+      status: 500,
+      message: 'Internal Server Error: Something went wrong. Try again!',
+    });
 
-    try {
-      await getTasksController.execute(mockRequest, mockResponse);
-    } catch (error) {
-      const typedError = error as Error;
-      expect(typedError.message).toBe('Something went wrong. Try again!');
-      expect(mockGetTasksRepo.getTasks).toHaveBeenCalled();
-    }
+    await getTasksController.execute(mockRequest, mockResponse);
+
+    expect(mockResponse.statusCode).toBe(500);
   });
 });

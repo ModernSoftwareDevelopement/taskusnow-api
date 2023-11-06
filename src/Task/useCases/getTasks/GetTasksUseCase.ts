@@ -11,7 +11,7 @@ export class GetTasksUseCase {
         tasks: resultTask,
       };
     } catch (error) {
-      throw new Error('Something went wrong. Try again!');
+      throw error;
     }
   }
 }

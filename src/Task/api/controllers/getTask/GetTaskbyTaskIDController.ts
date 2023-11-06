@@ -7,7 +7,7 @@ export class GetTaskbyTaskIDController {
   ) {}
 
   async execute(request: Request, response: Response): Promise<void> {
-    const taskID = request.query.taskId as string;
+    const taskID = request.params.taskId as string;
 
     try {
       const task = await this.getTaskByTaskIDUseCase.execute(taskID);

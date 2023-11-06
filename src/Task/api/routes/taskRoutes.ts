@@ -16,7 +16,7 @@ export const setupTaskRoutes = () => {
     createTaskController.execute(req, res).catch();
   });
 
-  router.get('/task/taskId', (req: Request, res: Response) => {
+  router.get('/task/:taskId', (req: Request, res: Response) => {
     getTaskbyTaskIDController.execute(req, res).catch();
   });
   return router;

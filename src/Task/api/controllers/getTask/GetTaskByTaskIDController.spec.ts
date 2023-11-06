@@ -8,7 +8,7 @@ const mockGetTaskByTaskIDRepo: GetTaskByTaskIDRepoInterface = {
   getTaskByTaskID: jest.fn(),
 };
 
-const getTaskByTaskIDModck =
+const getTaskByTaskIDMock =
   mockGetTaskByTaskIDRepo.getTaskByTaskID as jest.Mock;
 
 const mockGetTaskByTaskIDUseCase: GetTaskByTaskIDUseCase =
@@ -34,7 +34,7 @@ describe('GetTaskbyTaskIDController Testing', () => {
       },
     });
 
-    getTaskByTaskIDModck.mockResolvedValue({
+    getTaskByTaskIDMock.mockResolvedValue({
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',
@@ -62,7 +62,7 @@ describe('GetTaskbyTaskIDController Testing', () => {
       },
     });
 
-    getTaskByTaskIDModck.mockRejectedValue({
+    getTaskByTaskIDMock.mockRejectedValue({
       status: 500,
       message: 'Internal Server Error: Something went wrong. Try again!',
     });

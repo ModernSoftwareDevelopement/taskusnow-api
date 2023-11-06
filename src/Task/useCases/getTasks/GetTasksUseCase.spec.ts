@@ -26,12 +26,11 @@ describe('GetTasksUseCase Testing', () => {
   it('should throw an error when the repository call fails', async () => {
     getTasksMock.mockRejectedValue(new Error('Repository error'));
 
-    // Execute the use case and catch the error
     try {
       await getTasksUseCase.execute();
     } catch (error) {
-      const typedError = error as Error;
-      expect(typedError.message).toBe('Something went wrong. Try again!');
+      const thrownError = error as Error;
+      expect(thrownError.message).toBe('Repository error');
       expect(mockGetTasksRepo.getTasks).toHaveBeenCalledTimes(1);
     }
   });
