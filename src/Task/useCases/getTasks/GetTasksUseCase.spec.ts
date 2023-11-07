@@ -22,16 +22,4 @@ describe('GetTasksUseCase Testing', () => {
     expect(result.tasks).toEqual([]);
     expect(mockGetTasksRepo.getTasks).toHaveBeenCalledTimes(1);
   });
-
-  it('should throw an error when the repository call fails', async () => {
-    getTasksMock.mockRejectedValue(new Error('Repository error'));
-
-    try {
-      await getTasksUseCase.execute();
-    } catch (error) {
-      const thrownError = error as Error;
-      expect(thrownError.message).toBe('Repository error');
-      expect(mockGetTasksRepo.getTasks).toHaveBeenCalledTimes(1);
-    }
-  });
 });

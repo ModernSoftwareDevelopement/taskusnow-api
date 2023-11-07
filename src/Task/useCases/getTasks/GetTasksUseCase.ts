@@ -5,13 +5,9 @@ export class GetTasksUseCase {
   constructor(private readonly taskRepo: GetTasksRepoInterface) {}
 
   async execute(): Promise<GetTasksResponse> {
-    try {
-      const resultTask = await this.taskRepo.getTasks();
-      return {
-        tasks: resultTask,
-      };
-    } catch (error) {
-      throw error;
-    }
+    const resultTask = await this.taskRepo.getTasks();
+    return {
+      tasks: resultTask,
+    };
   }
 }
