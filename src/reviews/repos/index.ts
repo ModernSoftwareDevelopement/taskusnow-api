@@ -1,6 +1,6 @@
-import { InMemoryCreateReviewRepository } from './createReview/impl/InMemoryCreateReviewRepository'
-import { InMemoryCreateReviewRepositoryInterface } from './createReview/InMemoryCreateReviewRepositoryInterface'
+import { InMemoryCreateReviewRepositoryImpl } from './createReview/impl/InMemoryCreateReviewRepositoryImpl';
+import { InMemoryGetReviewByUserIdRepositoryImpl } from './getReviewByUserId/impl/InMemoryGetReviewByUserIdRepositoryImpl';
+const createReviewRepository = new InMemoryCreateReviewRepositoryImpl();
+const getReviewByUserIdRepository = new InMemoryGetReviewByUserIdRepositoryImpl();
 
-const createReviewRepository = new InMemoryCreateReviewRepository()
-
-export { createReviewRepository }
+export { createReviewRepository, getReviewByUserIdRepository };
