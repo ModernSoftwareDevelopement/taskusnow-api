@@ -1,5 +1,6 @@
 import { Post } from './Post';
 describe('Post Entity', () => {
+  const id: string = new Date().getTime().toString();
   let category: string;
   let content: string;
   let userid: string;
@@ -7,6 +8,7 @@ describe('Post Entity', () => {
 
   const init = () => {
     return new Post({
+      id,
       category,
       content,
       userid,
