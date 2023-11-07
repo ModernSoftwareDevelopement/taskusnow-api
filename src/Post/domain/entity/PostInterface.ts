@@ -1,5 +1,5 @@
 export interface PostInterface {
-  id?: string;
+  id: string;
   category?: string;
   content: string;
   userid: string;

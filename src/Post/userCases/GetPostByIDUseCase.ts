@@ -6,7 +6,7 @@ export class GetPostByIDUseCase {
 
   async execute(id: string): Promise<Post | undefined> {
     try {
-      const post = await this.postRepository.getPostByID(id);
+      const post = await this.postRepository.getByID(id);
 
       if (!post) {
         throw new Error('Post not found!');

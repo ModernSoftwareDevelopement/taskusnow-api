@@ -4,10 +4,10 @@ import { posts } from '../../database/InMemoryDatabase';
 import { v4 as uuidv4 } from 'uuid';
 
 export class InMemoryPostRepository implements IPostRepository {
-  async getAllPosts(): Promise<Post[]> {
+  async getAll(): Promise<Post[]> {
     return posts;
   }
-  async createPost(post: Post): Promise<Post> {
+  async add(post: Post): Promise<Post> {
     try {
       const newID: string = uuidv4();
       post.Id = newID;
@@ -18,7 +18,18 @@ export class InMemoryPostRepository implements IPostRepository {
     }
   }
 
-  async getPostByID(id: string): Promise<Post> {
+  async update(post: Post): Promise<Post> {
+    try {
+      const id = post.Id;
+      const postIndex = posts.findIndex((p) => p.Id === id);
+      posts[postIndex] = post;
+      return post;
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
+  async getByID(id: string): Promise<Post> {
     const post = posts.find((p) => p.Id === id);
     if (post) {
       return post;
@@ -27,21 +38,21 @@ export class InMemoryPostRepository implements IPostRepository {
     }
   }
 
-  async searchPost(searchString: string): Promise<Post[]> {
-    let fountPosts = posts.filter(
+  async search(searchString: string): Promise<Post[]> {
+    const foundPosts = posts.filter(
       (p) =>
         p.category === searchString ||
         p.content === searchString ||
         p.userName === searchString,
     );
-    if (fountPosts) {
-      return fountPosts;
+    if (foundPosts) {
+      return foundPosts;
     } else {
       throw new Error('Unable to create Post!');
     }
   }
 
-  async removePost(id: string): Promise<boolean> {
+  async remove(id: string): Promise<boolean> {
     const index: number = posts.findIndex((p) => p.Id === id);
     if (index) {
       posts.splice(index, 1);

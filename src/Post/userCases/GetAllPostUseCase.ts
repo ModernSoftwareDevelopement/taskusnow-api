@@ -5,6 +5,6 @@ export class GetAllPostUseCase {
   constructor(private readonly postRepository: IPostRepository) {}
 
   async execute(): Promise<Post[]> {
-    return await this.postRepository.getAllPosts();
+    return await this.postRepository.getAll();
   }
 }

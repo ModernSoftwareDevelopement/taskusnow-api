@@ -16,7 +16,7 @@ export class CreatePostUseCase {
         throw new ValidationError(validation.error);
       }
 
-      return await this.postRepository.createPost(post);
+      return await this.postRepository.add(post);
     } catch (err) {
       //const errMsg: string = getErrorMessage(err);
       const errMsg: string = (err as Error).message;

@@ -1,8 +1,7 @@
-import { get } from 'http';
 import { PostInterface } from './PostInterface';
 
 export class Post {
-  private id?: string;
+  private id: string;
   public category?: string;
   public content: string;
   public userid: string;
@@ -17,7 +16,7 @@ export class Post {
   }
 
   get Id() {
-    return this.id ? this.id : '';
+    return this.id;
   }
 
   set Id(value: string) {

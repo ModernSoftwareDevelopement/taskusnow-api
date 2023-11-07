@@ -1,9 +1,10 @@
 import { Post } from '../domain/entity/Post';
 
 export interface IPostRepository {
-  getAllPosts(): Promise<Post[]>;
-  createPost(post: Post): Promise<Post>;
-  getPostByID(id: string): Promise<Post>;
-  searchPost(searchString: string): Promise<Post[]>;
-  removePost(id: string): Promise<boolean>;
+  getAll(): Promise<Post[]>;
+  add(post: Post): Promise<Post>;
+  update(post: Post): Promise<Post>;
+  getByID(id: string): Promise<Post>;
+  search(searchString: string): Promise<Post[]>;
+  remove(id: string): Promise<boolean>;
 }
