@@ -14,7 +14,7 @@ describe('GetUserByIdUseCase', () => {
     jest.clearAllMocks();
   });
 
-  it('should throw exception when there is unexpected exception in database test', async () => {
+  it('should throw exception when there is unexpected exception in database test1', async () => {
     getUserByIdMock.mockRejectedValue(new Error('Unexpected error'));
 
     const result = useCase.execute('invalid_id');
