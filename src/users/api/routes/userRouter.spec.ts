@@ -9,21 +9,21 @@ describe('User Router', () => {
     expect(userRouter).toBeDefined();
   });
 
-  // it('should call create user controller when call POST /users', async () => {
-  //   const mockExecute = jest.spyOn(createUserController, 'execute');
+  it('should call create user controller when call POST /users', async () => {
+    const mockExecute = jest.spyOn(createUserController, 'execute');
 
-  //   await request(app).post('/').send({
-  //     email: 'liucuxiu@gmail.com',
-  //   });
+    await request(app).post('/api/user/').send({
+      email: 'liucuxiu@gmail.com',
+    });
 
-  //   expect(mockExecute).toBeCalledTimes(1);
-  // });
+    expect(mockExecute).toBeCalledTimes(1);
+  });
 
-  // it('should call get user by id controller when call GET /users/:id', async () => {
-  //   const mockExecute = jest.spyOn(getUserByIdController, 'execute');
+  it('should call get user by id controller when call GET /users/:id', async () => {
+    const mockExecute = jest.spyOn(getUserByIdController, 'execute');
 
-  //   await request(app).get('/id');
+    await request(app).get('/api/user/id');
 
-  //   expect(mockExecute).toBeCalledTimes(1);
-  // });
+    expect(mockExecute).toBeCalledTimes(1);
+  });
 });
