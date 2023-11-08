@@ -32,7 +32,7 @@ describe('Update User Profile Use case', () => {
 
   it('should update user profile', async () => {
     const userId = 'random_id';
-    const mockUpdateUserDTO = {
+    const mockUpdateUserDto = {
       imageUrl: 'new_url',
       fullName: 'new_full_name',
       email_2: 'new_email_2',
@@ -47,39 +47,39 @@ describe('Update User Profile Use case', () => {
       user,
     });
 
-    user.setImageUrl(mockUpdateUserDTO.imageUrl);
-    user.setFullName(mockUpdateUserDTO.fullName);
-    user.setEmail_2(mockUpdateUserDTO.email_2);
-    user.setAddress(mockUpdateUserDTO.address);
-    user.setAddress_2(mockUpdateUserDTO.address_2);
-    user.setPhone(mockUpdateUserDTO.phone);
+    user.setImageUrl(mockUpdateUserDto.imageUrl);
+    user.setFullName(mockUpdateUserDto.fullName);
+    user.setEmail_2(mockUpdateUserDto.email_2);
+    user.setAddress(mockUpdateUserDto.address);
+    user.setAddress_2(mockUpdateUserDto.address_2);
+    user.setPhone(mockUpdateUserDto.phone);
 
     updateUserMock.mockResolvedValue(user);
 
-    const result = await useCase.execute(userId, mockUpdateUserDTO);
+    const result = await useCase.execute(userId, mockUpdateUserDto);
 
     expect(getUserByIdRepositoryMock.getUserById).toHaveBeenCalledWith(userId);
     expect(updateUserRepositoryMock.updateUser).toHaveBeenCalledWith(
       userId,
-      mockUpdateUserDTO,
+      mockUpdateUserDto,
     );
     expect(result).toEqual(
       expect.objectContaining({
         id: user.getId(),
         email: user.getEmail(),
-        imageUrl: mockUpdateUserDTO.imageUrl,
-        fullName: mockUpdateUserDTO.fullName,
-        email_2: mockUpdateUserDTO.email_2,
-        address: mockUpdateUserDTO.address,
-        address_2: mockUpdateUserDTO.address_2,
-        phone: mockUpdateUserDTO.phone,
+        imageUrl: mockUpdateUserDto.imageUrl,
+        fullName: mockUpdateUserDto.fullName,
+        email_2: mockUpdateUserDto.email_2,
+        address: mockUpdateUserDto.address,
+        address_2: mockUpdateUserDto.address_2,
+        phone: mockUpdateUserDto.phone,
       }),
     );
   });
 
   it('should throw exception when it can not update user', async () => {
     const userId = 'random_id';
-    const mockUpdateUserDTO = {
+    const mockUpdateUserDto = {
       imageUrl: 'new_url',
     };
 
@@ -90,7 +90,7 @@ describe('Update User Profile Use case', () => {
 
     updateUserMock.mockRejectedValue(new Error('Update user error'));
 
-    await expect(useCase.execute(userId, mockUpdateUserDTO)).rejects.toThrow(
+    await expect(useCase.execute(userId, mockUpdateUserDto)).rejects.toThrow(
       'Update user error',
     );
   });

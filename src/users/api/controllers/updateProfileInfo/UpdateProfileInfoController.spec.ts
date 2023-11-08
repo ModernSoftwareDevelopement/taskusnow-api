@@ -39,11 +39,11 @@ describe('UpdateProfileInfoController', () => {
   });
 
   it('should response Invalid user id when there is no user id', async () => {
-    const mockUserUpdateDTO = {
+    const mockUserUpdateDto = {
       fullName: 'Minh Tu Phan',
     };
     const mockRequest = httpMocks.createRequest({
-      body: mockUserUpdateDTO,
+      body: mockUserUpdateDto,
     });
     const mockResponse = httpMocks.createResponse();
 
@@ -54,11 +54,11 @@ describe('UpdateProfileInfoController', () => {
   });
 
   it('should response Invalid user id when there is no user found', async () => {
-    const mockUserUpdateDTO = {
+    const mockUserUpdateDto = {
       fullName: 'Minh Tu Phan',
     };
     const mockRequest = httpMocks.createRequest({
-      body: mockUserUpdateDTO,
+      body: mockUserUpdateDto,
       auth: {
         payload: {
           my_api_user_id: '123',
@@ -72,7 +72,7 @@ describe('UpdateProfileInfoController', () => {
 
     expect(updateUserProfileUseCase.execute).toHaveBeenCalledWith(
       '123',
-      mockUserUpdateDTO,
+      mockUserUpdateDto,
     );
     expect(mockResponse.statusCode).toBe(500);
     expect(mockResponse._getJSONData()).toEqual({
@@ -81,11 +81,11 @@ describe('UpdateProfileInfoController', () => {
   });
 
   it('should response Unexpected error when there is an error ', async () => {
-    const mockUserUpdateDTO = {
+    const mockUserUpdateDto = {
       fullName: 'Minh Tu Phan',
     };
     const mockRequest = httpMocks.createRequest({
-      body: mockUserUpdateDTO,
+      body: mockUserUpdateDto,
       auth: {
         payload: {
           my_api_user_id: '123',
@@ -99,7 +99,7 @@ describe('UpdateProfileInfoController', () => {
 
     expect(updateUserProfileUseCase.execute).toHaveBeenCalledWith(
       '123',
-      mockUserUpdateDTO,
+      mockUserUpdateDto,
     );
     expect(mockResponse.statusCode).toBe(500);
     expect(mockResponse._getJSONData()).toEqual({
@@ -108,11 +108,11 @@ describe('UpdateProfileInfoController', () => {
   });
 
   it('should update a user successfully', async () => {
-    const mockUserUpdateDTO = {
+    const mockUserUpdateDto = {
       fullName: 'Minh Tu Phan',
     };
     const mockRequest = httpMocks.createRequest({
-      body: mockUserUpdateDTO,
+      body: mockUserUpdateDto,
       auth: {
         payload: {
           my_api_user_id: '123',
@@ -129,7 +129,7 @@ describe('UpdateProfileInfoController', () => {
 
     expect(updateUserProfileUseCase.execute).toHaveBeenCalledWith(
       '123',
-      mockUserUpdateDTO,
+      mockUserUpdateDto,
     );
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData()).toEqual({

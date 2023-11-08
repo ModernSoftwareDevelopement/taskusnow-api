@@ -32,7 +32,7 @@ describe('apiAuthenticateMiddleware', () => {
 
   it('should return a 401 response if the provided token is incorrect', () => {
     const req = {
-      headers: { authorization: 'InvalidToken' },
+      headers: { authorization: 'InvaliDtoken' },
     } as Request;
 
     const res = {

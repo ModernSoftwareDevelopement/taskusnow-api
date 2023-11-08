@@ -1,5 +1,5 @@
 import { IGetUserByIdRepository } from '../../repos/getUserById/IGetUserByIdRepository';
-import { UpdateUserDTO } from '../../api/dtos/UpdateUserDTO';
+import { UpdateUserDto } from '../../api/dtos/UpdateUserDto';
 import { IUpdateUserRepository } from '../../repos/updateUser/IUpdateUserRepository';
 import { UpdateUserResponse } from './UpdateUserResponse';
 
@@ -9,7 +9,7 @@ export class UpdateUserProfileUseCase {
     private readonly updateUserRepository: IUpdateUserRepository,
   ) {}
 
-  async execute(userId: string, updateUserDTO: UpdateUserDTO) {
+  async execute(userId: string, updateUserDto: UpdateUserDto) {
     const user = await this.getUserByIdRepository.getUserById(userId);
 
     if (!user) {
@@ -18,7 +18,7 @@ export class UpdateUserProfileUseCase {
 
     const updatedUser = await this.updateUserRepository.updateUser(
       userId,
-      updateUserDTO,
+      updateUserDto,
     );
 
     const userResponse: UpdateUserResponse = {

@@ -11,7 +11,7 @@ const useCase = new CreateUserUseCase(userRepositoryMock);
 
 describe('CreateUserUseCase', () => {
   it('should create user', async () => {
-    const mockUserDTO = {
+    const mockUserDto = {
       email: 'liucuxiu@gmail.com',
     };
 
@@ -20,7 +20,7 @@ describe('CreateUserUseCase', () => {
       email: 'liucuxiu@gmail.com',
     });
 
-    const result: CreateUserResponse = await useCase.execute(mockUserDTO);
+    const result: CreateUserResponse = await useCase.execute(mockUserDto);
 
     expect(userRepositoryMock.createUser).toHaveBeenCalledWith(
       expect.objectContaining({

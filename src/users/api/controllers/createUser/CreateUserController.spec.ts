@@ -27,11 +27,11 @@ describe('CreateUserController', () => {
   });
 
   it('should create a user successfully', async () => {
-    const mockUserDTO = {
+    const mockUserDto = {
       email: 'liucuxiu@gmail.com',
     };
     const mockRequest = httpMocks.createRequest({
-      body: mockUserDTO,
+      body: mockUserDto,
     });
     const mockResponse = httpMocks.createResponse();
     executeMock.mockResolvedValue({
@@ -41,7 +41,7 @@ describe('CreateUserController', () => {
 
     await createUserController.execute(mockRequest, mockResponse);
 
-    expect(createUserUseCase.execute).toHaveBeenCalledWith(mockUserDTO);
+    expect(createUserUseCase.execute).toHaveBeenCalledWith(mockUserDto);
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData()).toEqual({
       id: '123',
@@ -50,18 +50,18 @@ describe('CreateUserController', () => {
   });
 
   it('should response Unexpected error when there is an error ', async () => {
-    const mockUserDTO = {
+    const mockUserDto = {
       email: 'liucuxiu@gmail.com',
     };
     const mockRequest = httpMocks.createRequest({
-      body: mockUserDTO,
+      body: mockUserDto,
     });
     const mockResponse = httpMocks.createResponse();
     executeMock.mockRejectedValue(new Error('Unexpected error'));
 
     await createUserController.execute(mockRequest, mockResponse);
 
-    expect(createUserUseCase.execute).toHaveBeenCalledWith(mockUserDTO);
+    expect(createUserUseCase.execute).toHaveBeenCalledWith(mockUserDto);
     expect(mockResponse.statusCode).toBe(500);
     expect(mockResponse._getJSONData()).toEqual({
       message: 'Unexpected error',

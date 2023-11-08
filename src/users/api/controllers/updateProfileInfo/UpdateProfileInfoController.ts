@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UpdateUserProfileUseCase } from '../../../useCases/uploadUserProfile/UpdateUserProfileUseCase';
-import { UpdateUserDTO } from '../../dtos/UpdateUserDTO';
+import { UpdateUserDto } from '../../dtos/UpdateUserDto';
 
 export class UpdateProfileInfoController {
   constructor(
@@ -16,14 +16,14 @@ export class UpdateProfileInfoController {
       });
     }
 
-    const updateUserDTO: UpdateUserDTO = {
+    const updateUserDto: UpdateUserDto = {
       ...req.body,
     };
 
     try {
       const result = await this.updateUseProfileUseCase.execute(
         userId,
-        updateUserDTO,
+        updateUserDto,
       );
 
       return res.status(201).json(result);

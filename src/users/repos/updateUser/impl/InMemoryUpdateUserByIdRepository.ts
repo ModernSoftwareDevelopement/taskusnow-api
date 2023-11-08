@@ -1,10 +1,10 @@
 import { IUpdateUserRepository } from '../IUpdateUserRepository';
-import { UpdateUserDTO } from '../../../api/dtos/UpdateUserDTO';
+import { UpdateUserDto } from '../../../api/dtos/UpdateUserDto';
 import { User } from '../../../domain/entity/User';
 import { users } from '../../../database/inMemoryDatabase';
 
 export class InMemoryUpdateUserByIdRepository implements IUpdateUserRepository {
-  async updateUser(userId: string, data: UpdateUserDTO): Promise<User> {
+  async updateUser(userId: string, data: UpdateUserDto): Promise<User> {
     const user = users.find((user) => user.getId() === userId);
 
     if (!user) {
