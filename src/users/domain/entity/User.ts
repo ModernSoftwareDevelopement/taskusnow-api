@@ -22,7 +22,7 @@ export class User {
   private phone?: string;
 
   private constructor(email: string, id?: string) {
-    this.id = id || randomUUID();
+    this.id = id ?? randomUUID();
     this.email = email;
   }
 
