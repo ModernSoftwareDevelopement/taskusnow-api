@@ -14,7 +14,7 @@ describe('GetUserByIdUseCase', () => {
     jest.clearAllMocks();
   });
 
-  it('should throw exception when there is unexpected exception in database', async () => {
+  it('should throw exception when there is unexpected exception in database test', async () => {
     getUserByIdMock.mockRejectedValue(new Error('Unexpected error'));
 
     const result = useCase.execute('invalid_id');
@@ -33,7 +33,7 @@ describe('GetUserByIdUseCase', () => {
   });
 
   it('should return user when id is valid', async () => {
-    const mockUser = new User('liu@gmail.com');
+    const mockUser = User.create({ email: 'liu@gmail.com' });
 
     getUserByIdMock.mockResolvedValue(mockUser);
 
