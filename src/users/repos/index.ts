@@ -1,5 +1,3 @@
-import { InMemoryCreateUserRepository } from './createUser/impl/InMemoryCreateUserRepository';
-import { InMemoryGetUserByIdRepository } from './getUserById/impl/InMemoryGetUserByIdRepository';
 import { InMemoryUpdateUserByIdRepository } from './updateUser/impl/InMemoryUpdateUserByIdRepository';
 import { MongoCreateUserRepository } from './createUser/impl/MongoCreateUserRepository';
 import { MongoGetUserByIdRepository } from './getUserById/impl/MongoGetUserByIdRepository';
