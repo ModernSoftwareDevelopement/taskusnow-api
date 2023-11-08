@@ -41,7 +41,7 @@ describe('Update User Profile Use case', () => {
       phone: '0123456789',
     };
 
-    const user = new User('liucuxiu@gmail.com');
+    const user = User.create({ email: 'liucuxiu@gmail.com' });
 
     getUserByIdMock.mockResolvedValue({
       user,
@@ -83,7 +83,7 @@ describe('Update User Profile Use case', () => {
       imageUrl: 'new_url',
     };
 
-    const user = new User('liucuxiu@gmail.com');
+    const user = User.create({ email: 'liucuxiu@gmail.com' });
     getUserByIdMock.mockResolvedValue({
       user,
     });
