@@ -27,7 +27,10 @@ describe('CreateTaskController Testing', () => {
     const taskDTO: CreateTaskDTO = {
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
 
     const mockRequest = httpMocks.createRequest({
@@ -47,7 +50,10 @@ describe('CreateTaskController Testing', () => {
     const taskDTO: CreateTaskDTO = {
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
 
     const mockRequest = httpMocks.createRequest({

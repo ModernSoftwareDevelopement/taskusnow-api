@@ -38,7 +38,10 @@ describe('GetTaskbyTaskIDController Testing', () => {
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     } as GetTaskDTO);
 
     await getTaskbyTaskIDController.execute(mockRequest, mockResponse);
@@ -49,7 +52,10 @@ describe('GetTaskbyTaskIDController Testing', () => {
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
   });
 

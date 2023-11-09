@@ -11,7 +11,10 @@ export class GetTaskByTaskIDUseCase {
       taskId: resultTask.taskId as string,
       title: resultTask.title,
       description: resultTask.description,
-      userid: resultTask.userid,
+      user: {
+        userId: resultTask.user.userId,
+        fullName: resultTask.user.fullName,
+      },
     };
   }
 }

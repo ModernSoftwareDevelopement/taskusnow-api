@@ -15,7 +15,10 @@ describe('InMemoryGetTaskByTaskIDRepository Testing', () => {
       taskId: 'generatedTaskID',
       title: 'sample title',
       description: 'sample description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
   });
 

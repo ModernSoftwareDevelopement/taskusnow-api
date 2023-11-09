@@ -5,7 +5,10 @@ describe('Task Entity', () => {
     const task = new Task({
       title: 'Sample Title',
       description: 'Sample Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
 
     if (task.taskIsValid && typeof task.taskIsValid === 'function') {
@@ -19,7 +22,10 @@ describe('Task Entity', () => {
     const task = new Task({
       title: '',
       description: 'Sample Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
 
     if (task.taskIsValid && typeof task.taskIsValid === 'function') {
@@ -36,7 +42,10 @@ describe('Task Entity', () => {
     const task = new Task({
       title: 'Sample Title',
       description: '',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
 
     if (task.taskIsValid && typeof task.taskIsValid === 'function') {
@@ -53,7 +62,10 @@ describe('Task Entity', () => {
     const task = new Task({
       title: 'Sample Title',
       description: 'Sample Description',
-      userid: -1,
+      user: {
+        userId: '',
+        fullName: 'John Doe',
+      },
     });
 
     if (task.taskIsValid && typeof task.taskIsValid === 'function') {

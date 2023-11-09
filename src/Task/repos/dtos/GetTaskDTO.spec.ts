@@ -6,13 +6,16 @@ describe('GetTaskDTO Testing!', () => {
       taskId: 'task123',
       title: 'Sample Task',
       description: 'This is a sample task',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
 
     expect(validData).toBeDefined();
     expect(typeof validData.title).toBe('string');
     expect(typeof validData.description).toBe('string');
-    expect(typeof validData.userid).toBe('number');
+    expect(typeof validData.user.userId).toBe('string');
     if (validData.taskId) {
       expect(typeof validData.taskId).toBe('string');
     }
@@ -26,7 +29,7 @@ describe('GetTaskDTO Testing!', () => {
 
     expect(incompleteData.title).toBeDefined();
     expect(incompleteData.description).toBeDefined();
-    expect(incompleteData.userid).toBeUndefined();
+    expect(incompleteData.user?.userId).toBeUndefined();
   });
 
   it('should handle empty object', () => {
@@ -35,7 +38,7 @@ describe('GetTaskDTO Testing!', () => {
     expect(emptyData).toBeDefined();
     expect(emptyData.title).toBeUndefined();
     expect(emptyData.description).toBeUndefined();
-    expect(emptyData.userid).toBeUndefined();
+    expect(emptyData.user).toBeUndefined();
     expect(emptyData.taskId).toBeUndefined();
   });
 });

@@ -4,13 +4,16 @@ export class Task {
   taskId?: string;
   title: string;
   description: string;
-  userid: number;
+  user: {
+    userId: string;
+    fullName: string;
+  };
 
   constructor(data: TaskInterface) {
     this.taskId = data.taskid;
     this.title = data.title;
     this.description = data.description;
-    this.userid = data.userid;
+    this.user = data.user;
   }
 
   taskIsValid?(): { valid: boolean; error?: string } {
@@ -18,7 +21,7 @@ export class Task {
       return { valid: false, error: 'Empty or invalid title or description' };
     }
 
-    if (!this.userid || this.userid <= 0) {
+    if (!this.user.userId || this.user.userId.length <= 0) {
       return { valid: false, error: 'Invalid userid' };
     }
 

@@ -5,13 +5,16 @@ describe('CreateTaskDTO Testing!', () => {
     const data = {
       title: 'Sample Task',
       description: 'This is a sample task',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
 
     const expectedKeys: (keyof CreateTaskDTO)[] = [
       'title',
       'description',
-      'userid',
+      'user',
     ];
 
     const dataKeys = Object.keys(data) as (keyof CreateTaskDTO)[];
@@ -22,6 +25,6 @@ describe('CreateTaskDTO Testing!', () => {
 
     expect(typeof data.title).toBe('string');
     expect(typeof data.description).toBe('string');
-    expect(typeof data.userid).toBe('number');
+    expect(typeof data.user.userId).toBe('string');
   });
 });

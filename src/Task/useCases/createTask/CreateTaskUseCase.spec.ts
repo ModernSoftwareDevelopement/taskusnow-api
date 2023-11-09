@@ -20,7 +20,10 @@ describe('CreateTaskUseCase Testing', () => {
     const validCreateTaskDTO: CreateTaskDTO = {
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
     createTaskMock.mockResolvedValue('generatedTaskID');
 
@@ -34,7 +37,10 @@ describe('CreateTaskUseCase Testing', () => {
     const invalidCreateTaskDTO: CreateTaskDTO = {
       title: '',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
     createTaskMock.mockRejectedValue('Empty or invalid title or description');
 
@@ -52,7 +58,10 @@ describe('CreateTaskUseCase Testing', () => {
     const invalidCreateTaskDTO: CreateTaskDTO = {
       title: 'Task Title',
       description: 'Task Description',
-      userid: 0,
+      user: {
+        userId: '',
+        fullName: 'John Doe',
+      },
     };
     createTaskMock.mockRejectedValue('Invalid userid');
 
@@ -70,7 +79,10 @@ describe('CreateTaskUseCase Testing', () => {
     const validCreateTaskDTO: CreateTaskDTO = {
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
     createTaskMock.mockRejectedValue(
       new Error('Something went wrong. Try again!'),

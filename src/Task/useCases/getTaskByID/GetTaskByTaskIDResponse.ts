@@ -2,5 +2,8 @@ export interface GetTaskByTaskIDResponse {
   taskId: string;
   title: string;
   description: string;
-  userid: number;
+  user: {
+    userId: string;
+    fullName: string;
+  };
 }

@@ -12,7 +12,10 @@ export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
       taskId: taskID,
       title: taskData.title,
       description: taskData.description,
-      userid: taskData.userid,
+      user: {
+        userId: taskData.user.userId,
+        fullName: taskData.user.fullName,
+      },
     };
 
     InMemoryTasks.push(newTask);

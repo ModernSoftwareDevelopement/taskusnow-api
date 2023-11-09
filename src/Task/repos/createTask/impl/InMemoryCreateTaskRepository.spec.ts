@@ -7,7 +7,10 @@ describe('InMemoryCreateTaskRepository Testing', () => {
     const newTaskData = new Task({
       title: 'Sample Title',
       description: 'Sample Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
 
     const createdTaskID = await repo.createTask(newTaskData);

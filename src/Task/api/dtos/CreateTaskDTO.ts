@@ -1,5 +1,8 @@
 export interface CreateTaskDTO {
   title: string;
   description: string;
-  userid: number;
+  user: {
+    userId: string;
+    fullName: string;
+  };
 }

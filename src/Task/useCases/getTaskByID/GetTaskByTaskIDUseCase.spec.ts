@@ -24,7 +24,10 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     };
     getTaskbyTaskIDMock.mockResolvedValue(mockTask);
 
@@ -34,7 +37,10 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',
-      userid: 123,
+      user: {
+        userId: 'user123',
+        fullName: 'John Doe',
+      },
     });
     expect(mockGetTaskByTaskIDRepo.getTaskByTaskID).toHaveBeenCalledWith(
       taskId,
