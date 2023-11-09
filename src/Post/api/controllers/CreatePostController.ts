@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CreatePostUseCase } from '../../userCases/CreatePostUseCase';
+import { CreatePostUseCase } from '../../useCases/CreatePostUseCase';
 import { CreatePostDTO } from '../dtos/CreatePostDTO';
 
 export class CreatePostController {

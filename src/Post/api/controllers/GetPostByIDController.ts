@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { GetPostByIDUseCase } from '../../userCases/GetPostByIDUseCase';
+import { GetPostByIDUseCase } from '../../useCases/GetPostByIDUseCase';
 
 export class GetPostByIDController {
   constructor(private readonly getPostByIDUseCase: GetPostByIDUseCase) {}

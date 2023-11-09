@@ -1,7 +1,15 @@
 import { Router, Request, Response } from 'express';
-import { createPostController, getPostByIDController } from '../controllers';
+import {
+  createPostController,
+  getPostByIDController,
+  getAllPostsController,
+} from '../controllers';
 
 const postRouter = Router();
+
+postRouter.get('/', (res: Response) => {
+  getAllPostsController.execute(res).catch();
+});
 
 postRouter.post('/', (req: Request, res: Response) => {
   createPostController.execute(req, res).catch();

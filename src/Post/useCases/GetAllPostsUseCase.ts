@@ -1,7 +1,7 @@
 import { Post } from '../domain/entity/Post';
 import { IPostRepository } from '../repos/IPostRepository';
 
-export class GetAllPostUseCase {
+export class GetAllPostsUseCase {
   constructor(private readonly postRepository: IPostRepository) {}
 
   async execute(): Promise<Post[]> {

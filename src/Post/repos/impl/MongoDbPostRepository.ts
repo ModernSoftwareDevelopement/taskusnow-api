@@ -21,21 +21,18 @@ export class MongoDbPostRepository implements IPostRepository {
 
   async update(post: Post): Promise<Post> {
     const id = post.Id;
-
     const postDoc = new PostModel(post);
-
     const updatedPost = await PostModel.findByIdAndUpdate<Post>(id, postDoc, {
       new: true,
     });
 
-    if (postDoc) {
-      return postDoc.toObject();
+    if (updatedPost) {
+      return updatedPost;
     } else {
       throw Error(`Post not found for the Id: ${id}`);
     }
-
-    throw new Error('Method not implemented.');
   }
+
   async getByID(id: string): Promise<Post> {
     const postDoc = await PostModel.findById(id);
     if (postDoc) {
@@ -45,10 +42,24 @@ export class MongoDbPostRepository implements IPostRepository {
     }
   }
 
-  search(searchString: string): Promise<Post[]> {
-    throw new Error('Method not implemented.');
+  async search(searchString: string): Promise<Post[]> {
+    // const result = PostModel.find({$or [
+    //   {content: {$regex: searchString}}
+    // ]});
+
+    const result = await PostModel.find({
+      $or: [
+        { content: /searchString/ },
+        { category: /searchString/ },
+        { userName: /searchString/ },
+      ],
+    });
+    const posts: Post[] = result.map((post) => post.toObject());
+    return posts;
   }
-  remove(id: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+
+  async remove(id: string): Promise<boolean> {
+    const result = await PostModel.findByIdAndDelete(id);
+    return result ? true : false;
   }
 }
