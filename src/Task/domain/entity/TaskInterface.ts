@@ -1,5 +1,5 @@
 export interface TaskInterface {
-  taskid?: string;
+  taskId?: string;
   title: string;
   description: string;
   user: {

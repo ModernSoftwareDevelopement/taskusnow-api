@@ -10,7 +10,7 @@ export class Task {
   };
 
   constructor(data: TaskInterface) {
-    this.taskId = data.taskid;
+    this.taskId = data.taskId;
     this.title = data.title;
     this.description = data.description;
     this.user = data.user;
