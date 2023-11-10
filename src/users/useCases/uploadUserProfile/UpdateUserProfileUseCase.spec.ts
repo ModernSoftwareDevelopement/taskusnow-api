@@ -17,7 +17,7 @@ const useCase = new UpdateUserProfileUseCase(
   updateUserRepositoryMock,
 );
 
-describe('Update User Profile Use case', () => {
+describe('Update User Profile Usecase', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
