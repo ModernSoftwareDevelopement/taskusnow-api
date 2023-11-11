@@ -22,7 +22,5 @@ export class CreatePostUseCase {
       const errMsg: string = (err as Error).message;
       throw new Error(`Something went wrong. Return Message: ${errMsg}`);
     }
-
-    return undefined;
   }
 }
