@@ -1,19 +1,21 @@
 import { CreateUserUseCase } from '../../../useCases/createUser/CreateUserUseCase';
 import { Request, Response } from 'express';
-import { CreateUserDTO } from '../../dtos/CreateUserDTO';
+import { CreateUserDto } from '../../dtos/CreateUserDto';
 
 export class CreateUserController {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 
-  async execute(request: Request, response: Response): Promise<void> {
-    const { email } = request.body;
-    const userDTO = new CreateUserDTO(email);
+  async execute(req: Request, res: Response): Promise<void> {
+    const { email } = req.body;
+    const userDto: CreateUserDto = {
+      email,
+    };
 
     try {
-      const userResponse = await this.createUserUseCase.execute(userDTO);
-      response.status(201).json(userResponse);
+      const userResponse = await this.createUserUseCase.execute(userDto);
+      res.status(201).json(userResponse);
     } catch (err: unknown) {
-      response.status(500).json({
+      res.status(500).json({
         message: (err as Error).message,
       });
     }

@@ -1,20 +1,13 @@
 import { Request, Response } from 'express';
-import { ImageUploader } from '../../../../imageService/ImageUploader';
 import { UpdateUserProfileUseCase } from '../../../useCases/uploadUserProfile/UpdateUserProfileUseCase';
+import { UpdateUserDto } from '../../dtos/UpdateUserDto';
 
-export class UploadProfileImageController {
+export class UpdateProfileInfoController {
   constructor(
-    private readonly imageUploader: ImageUploader,
     private readonly updateUseProfileUseCase: UpdateUserProfileUseCase,
   ) {}
 
   async execute(req: Request, res: Response): Promise<Response> {
-    if (!req.file) {
-      return res.status(400).json({
-        message: 'Please upload a file',
-      });
-    }
-
     const userId = req.auth?.payload.my_api_user_id as string;
 
     if (!userId) {
@@ -23,19 +16,19 @@ export class UploadProfileImageController {
       });
     }
 
-    const { originalname, buffer } = req.file;
-    try {
-      const imageUrl = await this.imageUploader.uploadImage(
-        originalname,
-        buffer,
-      );
+    const updateUserDto: UpdateUserDto = {
+      ...req.body,
+    };
 
-      const result = await this.updateUseProfileUseCase.execute(userId, {
-        imageUrl,
-      });
+    try {
+      const result = await this.updateUseProfileUseCase.execute(
+        userId,
+        updateUserDto,
+      );
 
       return res.status(201).json(result);
     } catch (error: unknown) {
+      // need to handle specific error
       return res.status(500).json({
         message: (error as Error).message,
       });
