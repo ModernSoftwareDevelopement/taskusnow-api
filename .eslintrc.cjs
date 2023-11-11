@@ -10,5 +10,6 @@ module.exports = {
   root: true,
   rules: {
     'no-console': 'warn',
+    quotes: ['error', 'single'],
   },
 };

@@ -11,6 +11,12 @@ export class GetUserByIdUseCase {
     return {
       id: user.getId(),
       email: user.getEmail(),
+      imageUrl: user.getImageUrl(),
+      fullName: user.getFullName(),
+      email_2: user.getEmail_2(),
+      address: user.getAddress(),
+      address_2: user.getAddress_2(),
+      phone: user.getPhone(),
     };
   }
 }

@@ -1,6 +1,5 @@
 import { ICreateUserRepository } from '../../repos/createUser/ICreateUserRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { CreateUserDTO } from '../../api/dtos/CreateUserDTO';
 import { CreateUserResponse } from './CreateUserResponse';
 
 const userRepositoryMock: ICreateUserRepository = {
@@ -12,14 +11,16 @@ const useCase = new CreateUserUseCase(userRepositoryMock);
 
 describe('CreateUserUseCase', () => {
   it('should create user', async () => {
-    const mockUserDTO = new CreateUserDTO('liucuxiu@gmail.com');
+    const mockUserDto = {
+      email: 'liucuxiu@gmail.com',
+    };
 
     createUserMock.mockResolvedValue({
       id: 'random_id',
       email: 'liucuxiu@gmail.com',
     });
 
-    const result: CreateUserResponse = await useCase.execute(mockUserDTO);
+    const result: CreateUserResponse = await useCase.execute(mockUserDto);
 
     expect(userRepositoryMock.createUser).toHaveBeenCalledWith(
       expect.objectContaining({
