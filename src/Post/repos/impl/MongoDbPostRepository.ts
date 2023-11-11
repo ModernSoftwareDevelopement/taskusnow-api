@@ -1,6 +1,6 @@
 import { Post } from '../../domain/entity/Post';
 import { IPostRepository } from '../IPostRepository';
-import mongoose, { Document } from 'mongoose';
+import mongoose from 'mongoose';
 import { PostModel } from './MongoObjects';
 
 export class MongoDbPostRepository implements IPostRepository {
@@ -43,15 +43,11 @@ export class MongoDbPostRepository implements IPostRepository {
   }
 
   async search(searchString: string): Promise<Post[]> {
-    // const result = PostModel.find({$or [
-    //   {content: {$regex: searchString}}
-    // ]});
-
     const result = await PostModel.find({
       $or: [
-        { content: /searchString/ },
-        { category: /searchString/ },
-        { userName: /searchString/ },
+        { content: searchString },
+        { category: searchString },
+        { userName: searchString },
       ],
     });
     const posts: Post[] = result.map((post) => post.toObject());
