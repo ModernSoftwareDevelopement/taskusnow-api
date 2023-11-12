@@ -63,6 +63,6 @@
     "winston": "^3.10.0"
   },
   "lint-staged": {
-    "*": "npx prettier --write"
+    "/src": "npx prettier --write"
   }
 }

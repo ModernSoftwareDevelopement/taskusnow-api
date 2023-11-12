@@ -1,16 +1,13 @@
 import { ImageUploader } from './ImageUploader';
 import { UploadApiResponse, v2 as cloudinary } from 'cloudinary';
-import dotenv from 'dotenv';
 import config from 'config';
-
-dotenv.config();
 
 export class CloudinaryImageUploader implements ImageUploader {
   constructor() {
     cloudinary.config({
       cloud_name: config.get('cloudinary.cloudName'),
       api_key: config.get('cloudinary.apiKey'),
-      api_secret: config.get('cloudinary.apiSecret'),
+      api_secret: config.get('cloudinary.apiSecret')
     });
   }
 
