@@ -7,7 +7,7 @@
     "test": "DOTENV_CONFIG_PATH=config/.env.test jest --runInBand --setupFiles=dotenv/config --coverage",
     "test:watch": "jest --runInBand --watchAll",
     "build": "npx tsc",
-    "start": "nodd -r dotenv/config dist/src/server.js dotenv_config_path=config/.env",
+    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=config/.env",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -r dotenv/config -q dist/src/server.js dotenv_config_path=config/.env.dev\"",
     "lint": "eslint src",
     "jest": "jest",
