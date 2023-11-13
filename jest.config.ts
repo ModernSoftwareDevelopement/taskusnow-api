@@ -10,5 +10,6 @@ const config: Config.InitialOptions = {
   collectCoverage: true,
   coverageReporters: ['clover', 'json', 'lcov', ['text', { skipFull: true }]],
   coverageDirectory: 'coverage',
+  setupFiles: ['dotenv/config'],
 };
 export default config;
