@@ -7,8 +7,9 @@
     "test": "cross-env DOTENV_CONFIG_PATH=config/.env.test jest --runInBand --setupFiles=dotenv/config --coverage",
     "test:watch": "jest --runInBand --watchAll",
     "build": "npx tsc",
-    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=config/.env",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -r dotenv/config -q dist/src/server.js dotenv_config_path=config/.env.dev\"",
+    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=config/.env",    
+    "dev": "concurrently \"cross-env NODE_ENV=development npx tsc --watch\" \"nodemon -r dotenv/config -q dist/src/server.js dotenv_config_path=config/.env.dev\"",
+
     "lint": "eslint src",
     "jest": "jest",
     "format": "prettier --write .",
