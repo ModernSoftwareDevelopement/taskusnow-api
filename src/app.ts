@@ -4,10 +4,11 @@ import { userRouter } from './users/api/routes/userRouter';
 import { profileRouter } from './users/api/routes/profileRouter';
 import mongoose from 'mongoose';
 import { setupTaskRoutes } from './Task/api/routes/taskRoutes';
+import config from 'config';
 
 const app: Express = express();
 
-const mongoUri: string = 'mongodb://localhost:27017/taskusnow';
+const mongoUri: string = config.get('database.mongo.uri');
 mongoose.connect(mongoUri).then(() => {
   console.log('connected Mongo!');
 });

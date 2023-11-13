@@ -1,18 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { apiAuthenticateMiddleware } from './apiAuthenticate.middleware';
-import dotenv from 'dotenv';
 
 describe('apiAuthenticateMiddleware', () => {
-  beforeAll(() => {
-    dotenv.config();
-    process.env.API_USERNAME = 'your_username';
-    process.env.API_PASSWORD = 'your_password';
-  });
-
-  afterAll(() => {
-    delete process.env.API_USERNAME;
-    delete process.env.API_PASSWORD;
-  });
   it('should return a 401 response if the "authorization" header is missing', () => {
     const req = {
       headers: {},
@@ -49,8 +38,8 @@ describe('apiAuthenticateMiddleware', () => {
   });
 
   it('should call next() if the provided token is correct', () => {
-    const username = 'your_username';
-    const password = 'your_password';
+    const username = 'liucuxiu_username';
+    const password = 'liucuxiu_password';
     const authHeader =
       'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
