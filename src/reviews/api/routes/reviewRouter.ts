@@ -1,6 +1,6 @@
 import { Response, Router, Request } from 'express';
-import { createReviewController } from '../controllers';
-import { getReviewByUserIdController } from '../controllers';
+import { createReviewController, getReviewByUserIdController } from '../controllers';
+
 const reviewRouter = Router();
 
 reviewRouter.post('/reviews', (req: Request, res: Response) => {
