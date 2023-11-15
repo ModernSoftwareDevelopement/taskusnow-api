@@ -55,9 +55,8 @@ describe('MongoGetUserByIdRepository', () => {
 
     findByIdMock.mockResolvedValue(null);
 
-    const result = await getUserByIdRepository.getUserById(nonExistentUserId);
-
-    expect(result).toBeUndefined();
+    await expect(getUserByIdRepository.getUserById(nonExistentUserId)).rejects.toThrow('User not found');
     expect(UserModel.findById).toHaveBeenCalledWith(nonExistentUserId);
+
   });
 });

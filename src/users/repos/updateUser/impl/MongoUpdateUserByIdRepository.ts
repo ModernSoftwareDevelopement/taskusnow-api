@@ -4,8 +4,10 @@ import { UpdateUserDto } from '../../../api/dtos/UpdateUserDto';
 
 export class MongoUpdateUserByIdRepository implements IUpdateUserRepository {
   async updateUser(id: string, data: UpdateUserDto): Promise<string> {
-    await UserModel.findByIdAndUpdate(id, data);
+    const result = await UserModel.findByIdAndUpdate(id, data);
 
-    return id;
+    if (!result) throw new Error('User not found');
+
+    return result._id;
   }
 }

@@ -35,4 +35,20 @@ describe('MongoUpdateUserByIdRepository', () => {
     expect(result).toEqual(mockUserId);
     expect(UserModel.findByIdAndUpdate).toHaveBeenCalledWith(mockUserId, mockUpdateData);
   });
+
+  it('should throw an error if user is not found', async () => {
+    const mockUserId = 'someUserId';
+    const mockUpdateData: UpdateUserDto = {
+      fullName: 'Updated Name',
+      imageUrl: 'https://example.com/updated-image.jpg',
+      address: '456 New St',
+      address_2: 'Apt 789',
+      phone: '987-654-3210',
+    };
+
+    findByIdAndUpdateMock.mockResolvedValue(null);
+
+    await expect(updateUserRepository.updateUser(mockUserId, mockUpdateData)).rejects.toThrow('User not found');
+    expect(UserModel.findByIdAndUpdate).toHaveBeenCalledWith(mockUserId, mockUpdateData);
+  });
 });
