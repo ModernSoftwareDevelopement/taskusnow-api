@@ -1,6 +1,7 @@
 export default {
   app: {
     port: process.env.PORT,
+    origin: process.env.ORIGIN_URL,
   },
   database: {
     mongo: {

@@ -5,6 +5,7 @@ import { profileRouter } from './users/api/routes/profileRouter';
 import mongoose from 'mongoose';
 import { setupTaskRoutes } from './Task/api/routes/taskRoutes';
 import config from 'config';
+import cors from 'cors';
 
 const app: Express = express();
 
@@ -12,6 +13,10 @@ const mongoUri: string = config.get('database.mongo.uri');
 mongoose.connect(mongoUri).then(() => {
   console.log('connected Mongo!');
 });
+
+app.use(cors({
+  origin: config.get('app.origin'),
+}));
 
 app.use(helmet());
 
