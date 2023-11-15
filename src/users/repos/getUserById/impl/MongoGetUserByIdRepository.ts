@@ -5,9 +5,11 @@ import { User } from '../../../domain/entity/User';
 export class MongoGetUserByIdRepository implements IGetUserByIdRepository {
   async getUserById(id: string): Promise<User | undefined> {
     const result = await UserModel.findById(id);
+
     if (!result) return undefined;
 
-    const user = User.create(
+    // need to enhance this
+    return User.create(
       {
         email: result.email,
         fullName: result.fullName,
@@ -18,7 +20,5 @@ export class MongoGetUserByIdRepository implements IGetUserByIdRepository {
       },
       result._id,
     );
-
-    return user;
   }
 }

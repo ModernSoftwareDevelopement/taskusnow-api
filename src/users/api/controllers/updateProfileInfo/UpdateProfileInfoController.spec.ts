@@ -122,7 +122,6 @@ describe('UpdateProfileInfoController', () => {
     const mockResponse = httpMocks.createResponse();
     executeMock.mockResolvedValue({
       id: '123',
-      fullName: 'Minh Tu Phan',
     });
 
     await updateUserProfileController.execute(mockRequest, mockResponse);
@@ -134,7 +133,6 @@ describe('UpdateProfileInfoController', () => {
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData()).toEqual({
       id: '123',
-      fullName: 'Minh Tu Phan',
     });
   });
 });

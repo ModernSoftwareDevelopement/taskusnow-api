@@ -47,14 +47,7 @@ describe('Update User Profile Usecase', () => {
       user,
     });
 
-    user.setImageUrl(mockUpdateUserDto.imageUrl);
-    user.setFullName(mockUpdateUserDto.fullName);
-    user.setEmail_2(mockUpdateUserDto.email_2);
-    user.setAddress(mockUpdateUserDto.address);
-    user.setAddress_2(mockUpdateUserDto.address_2);
-    user.setPhone(mockUpdateUserDto.phone);
-
-    updateUserMock.mockResolvedValue(user);
+    updateUserMock.mockResolvedValue(user.getId());
 
     const result = await useCase.execute(userId, mockUpdateUserDto);
 
@@ -63,18 +56,9 @@ describe('Update User Profile Usecase', () => {
       userId,
       mockUpdateUserDto,
     );
-    expect(result).toEqual(
-      expect.objectContaining({
-        id: user.getId(),
-        email: user.getEmail(),
-        imageUrl: mockUpdateUserDto.imageUrl,
-        fullName: mockUpdateUserDto.fullName,
-        email_2: mockUpdateUserDto.email_2,
-        address: mockUpdateUserDto.address,
-        address_2: mockUpdateUserDto.address_2,
-        phone: mockUpdateUserDto.phone,
-      }),
-    );
+    expect(result).toEqual({
+      userId: user.getId(),
+    });
   });
 
   it('should throw exception when it can not update user', async () => {

@@ -8,7 +8,9 @@ export class UpdateProfileInfoController {
   ) {}
 
   async execute(req: Request, res: Response): Promise<Response> {
+    console.log('req.auth', req.auth)
     const userId = req.auth?.payload.my_api_user_id as string;
+    console.log('userId', userId)
 
     if (!userId) {
       return res.status(400).json({

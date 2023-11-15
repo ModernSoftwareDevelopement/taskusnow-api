@@ -9,7 +9,7 @@ export class UpdateUserProfileUseCase {
     private readonly updateUserRepository: IUpdateUserRepository,
   ) {}
 
-  async execute(userId: string, updateUserDto: UpdateUserDto) {
+  async execute(userId: string, updateUserDto: UpdateUserDto): Promise<UpdateUserResponse> {
     const user = await this.getUserByIdRepository.getUserById(userId);
 
     if (!user) {
@@ -21,17 +21,11 @@ export class UpdateUserProfileUseCase {
       updateUserDto,
     );
 
-    const userResponse: UpdateUserResponse = {
-      id: updatedUser.getId(),
-      email: updatedUser.getEmail(),
-      imageUrl: updatedUser.getImageUrl(),
-      fullName: updatedUser.getFullName(),
-      email_2: updatedUser.getEmail_2(),
-      address: updatedUser.getAddress(),
-      address_2: updatedUser.getAddress_2(),
-      phone: updatedUser.getPhone(),
+    if (!updatedUser) {
+      throw new Error('User not updated');
+    }
+    return {
+      userId: updatedUser,
     };
-
-    return userResponse;
   }
 }
