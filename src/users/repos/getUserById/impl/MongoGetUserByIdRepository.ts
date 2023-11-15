@@ -12,6 +12,7 @@ export class MongoGetUserByIdRepository implements IGetUserByIdRepository {
     return User.create(
       {
         email: result.email,
+        email_2: result.email_2,
         fullName: result.fullName,
         imageUrl: result.imageUrl,
         address: result.address,
