@@ -9,7 +9,7 @@ export class CreateReviewUseCase {
   ) {}
 
   async execute(reviewDTO: CreateReviewDTO): Promise<CreateReviewResponse> {
-    const review = new Review(reviewDTO.getUserId(), reviewDTO.getUserReview());
+    const review = new Review(reviewDTO.userId, reviewDTO.userReview);
     await this.reviewRepository.createReview(review);
     return {
       id: review.getId(),

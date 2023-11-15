@@ -10,15 +10,12 @@ export class GetReviewByUserIdUseCase {
     const retrieveReview = await this.reviewRepository.getReviewByUserId(
       userId
     );
-    try {
-      if (retrieveReview == undefined) throw new Error('Review not found');
-      return {
-        id: retrieveReview.getId(),
-        userId: retrieveReview?.getUserId(),
-        userReview: retrieveReview?.getUserReview(),
-      };
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+
+    if (retrieveReview == undefined) throw new Error('Review not found');
+    return {
+      id: retrieveReview.getId(),
+      userId: retrieveReview?.getUserId(),
+      userReview: retrieveReview?.getUserReview(),
+    };
   }
 }
