@@ -1,2 +1,2 @@
-import {Post} from "../domain/entity/Post"
+import { Post } from '../domain/entity/Post';
 export const posts: Post[] = [];
