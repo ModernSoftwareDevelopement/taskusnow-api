@@ -17,9 +17,9 @@ mongoose.connect(mongoUri).then(() => {
 app.use(helmet());
 app.use(express.json());
 
-//app.use('/api/user/profile', postRouter);
-app.use('/api/user', userRouter);
-app.use('/api/task', setupTaskRoutes());
+app.use(userRouter);
+app.use(profileRouter);
+app.use('/api', setupTaskRoutes());
 app.use('/api/posts', postRouter);
 
 app.get('/', (req: Request, res: Response) => {
