@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import config from 'config';
 
 const apiAuthenticateMiddleware = (
   req: Request,
@@ -14,8 +15,8 @@ const apiAuthenticateMiddleware = (
   }
 
   const token = authorization;
-  const username = process.env.API_USERNAME;
-  const password = process.env.API_PASSWORD;
+  const username = config.get('apiAuth.username');
+  const password = config.get('apiAuth.password');
 
   const authHeader =
     'Basic ' + Buffer.from(username + ':' + password).toString('base64');
