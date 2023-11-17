@@ -15,6 +15,12 @@ export class GetTaskByTaskIDUseCase {
         userId: resultTask.user.userId,
         fullName: resultTask.user.fullName,
       },
+      category: resultTask.category,
+      location: resultTask.location,
+      budget: resultTask.budget,
+      scheduling: resultTask.scheduling,
+      timeslot: resultTask.timeslot,
+      createdon: resultTask.createdon
     };
   }
 }

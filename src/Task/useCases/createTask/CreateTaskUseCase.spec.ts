@@ -2,6 +2,7 @@ import { CreateTaskUseCase } from './CreateTaskUseCase';
 import { CreateTaskDTO } from '../../api/dtos/CreateTaskDTO';
 import { CreateTaskRepoInterface } from './../../repos/createTask/ICreateTaskRepository';
 import { ValidationError } from '../../../middleware/ValdationError';
+import { SchedulingOption } from '../../domain/entity/TaskInterface';
 
 const mockCreateTaskRepo: CreateTaskRepoInterface = {
   createTask: jest.fn(),
@@ -24,6 +25,14 @@ describe('CreateTaskUseCase Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },      
     };
     createTaskMock.mockResolvedValue('generatedTaskID');
 
@@ -41,20 +50,32 @@ describe('CreateTaskUseCase Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },     
     };
-    createTaskMock.mockRejectedValue('Empty or invalid title or description');
+    createTaskMock.mockRejectedValue([
+      { field: 'general', error: 'One or more required fields are empty or invalid.' }
+    ]);
 
     try {
       await createTaskUseCase.execute(invalidCreateTaskDTO);
     } catch (error) {
       const typedError = error as Error;
-      expect(error).toBeInstanceOf(ValidationError);
-      expect(typedError.message).toBe('Empty or invalid title or description');
+      expect(error).toBeInstanceOf(ValidationError);    
+      expect(JSON.parse(typedError.message)).toEqual([
+        { field: 'general', error: 'One or more required fields are empty or invalid.' }
+      ]);  
       expect(mockCreateTaskRepo.createTask).not.toHaveBeenCalled();
     }
   });
 
-  it('should throw a ValidationError when task data is invalid for useid', async () => {
+  it('should throw a ValidationError when task data is invalid for userId', async () => {
     const invalidCreateTaskDTO: CreateTaskDTO = {
       title: 'Task Title',
       description: 'Task Description',
@@ -62,15 +83,27 @@ describe('CreateTaskUseCase Testing', () => {
         userId: '',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },  
     };
-    createTaskMock.mockRejectedValue('Invalid userid');
+    createTaskMock.mockRejectedValue([
+      { field: 'general', error: 'One or more required fields are empty or invalid.' }
+    ]);
 
     try {
       await createTaskUseCase.execute(invalidCreateTaskDTO);
     } catch (error) {
       const typedError = error as Error;
       expect(error).toBeInstanceOf(ValidationError);
-      expect(typedError.message).toBe('Invalid userid');
+      expect(JSON.parse(typedError.message)).toEqual([
+        { field: 'general', error: 'One or more required fields are empty or invalid.' }
+      ]);
       expect(mockCreateTaskRepo.createTask).not.toHaveBeenCalled();
     }
   });
@@ -83,6 +116,14 @@ describe('CreateTaskUseCase Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },  
     };
     createTaskMock.mockRejectedValue(
       new Error('Something went wrong. Try again!'),

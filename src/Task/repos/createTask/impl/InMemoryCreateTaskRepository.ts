@@ -16,6 +16,13 @@ export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
         userId: taskData.user.userId,
         fullName: taskData.user.fullName,
       },
+      category: taskData.category,
+      location: taskData.location,
+      budget: taskData.budget,
+      scheduling: taskData.scheduling,
+      specificDate: taskData.specificDate,
+      timeslot: taskData.timeslot,
+      createdon: new Date(),
     };
 
     InMemoryTasks.push(newTask);

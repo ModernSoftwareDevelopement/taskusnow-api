@@ -14,7 +14,11 @@ export class CreateTaskUseCase {
       const validation = task.taskIsValid();
 
       if (!validation.valid) {
-        throw new ValidationError(validation.error);
+        throw new ValidationError(
+          validation.errors
+            ? JSON.stringify(validation.errors)
+            : 'Validation failed.'
+        );
       }
     }
 

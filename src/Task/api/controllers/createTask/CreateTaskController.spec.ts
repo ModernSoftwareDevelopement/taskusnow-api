@@ -2,6 +2,7 @@ import { CreateTaskUseCase } from '../../../useCases/createTask/CreateTaskUseCas
 import { CreateTaskDTO } from '../../dtos/CreateTaskDTO';
 import { CreateTaskController } from './CreateTaskController';
 import { CreateTaskRepoInterface } from '../../../repos/createTask/ICreateTaskRepository';
+import { SchedulingOption } from '../../../domain/entity/TaskInterface';
 import httpMocks from 'node-mocks-http';
 
 const mockCreateTaskRepo: CreateTaskRepoInterface = {
@@ -31,6 +32,14 @@ describe('CreateTaskController Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },      
     };
 
     const mockRequest = httpMocks.createRequest({
@@ -54,6 +63,14 @@ describe('CreateTaskController Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },  
     };
 
     const mockRequest = httpMocks.createRequest({

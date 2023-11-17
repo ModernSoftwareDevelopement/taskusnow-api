@@ -1,7 +1,12 @@
 import { GetTaskDTO } from './GetTaskDTO';
+import { SchedulingOption } from '../../domain/entity/TaskInterface'
 
 describe('GetTaskDTO Testing!', () => {
   it('should validate a valid GetTaskDTO object', () => {
+    const timeslot = {
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
+    };
     const validData: GetTaskDTO = {
       taskId: 'task123',
       title: 'Sample Task',
@@ -10,12 +15,25 @@ describe('GetTaskDTO Testing!', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.Flexible,
+      timeslot,
+      createdon: new Date(),
     };
 
     expect(validData).toBeDefined();
     expect(typeof validData.title).toBe('string');
     expect(typeof validData.description).toBe('string');
     expect(typeof validData.user.userId).toBe('string');
+    expect(typeof validData.category).toBe('string');
+    expect(typeof validData.location).toBe('string');
+    expect(typeof validData.budget).toBe('number');
+    expect(typeof validData.scheduling).toBe('string');
+    expect(typeof validData.timeslot?.startTime).toBe('string');
+    expect(typeof validData.timeslot?.endTime).toBe('string');
+    expect(typeof validData.createdon).toBe('object');
     if (validData.taskId) {
       expect(typeof validData.taskId).toBe('string');
     }
@@ -30,6 +48,11 @@ describe('GetTaskDTO Testing!', () => {
     expect(incompleteData.title).toBeDefined();
     expect(incompleteData.description).toBeDefined();
     expect(incompleteData.user?.userId).toBeUndefined();
+    expect(incompleteData.category).toBeUndefined();
+    expect(incompleteData.location).toBeUndefined();
+    expect(incompleteData.budget).toBeUndefined();
+    expect(incompleteData.scheduling).toBeUndefined();
+    expect(incompleteData.createdon).toBeUndefined();
   });
 
   it('should handle empty object', () => {
@@ -40,5 +63,10 @@ describe('GetTaskDTO Testing!', () => {
     expect(emptyData.description).toBeUndefined();
     expect(emptyData.user).toBeUndefined();
     expect(emptyData.taskId).toBeUndefined();
+    expect(emptyData.category).toBeUndefined();
+    expect(emptyData.location).toBeUndefined();
+    expect(emptyData.budget).toBeUndefined();
+    expect(emptyData.scheduling).toBeUndefined();
+    expect(emptyData.createdon).toBeUndefined();
   });
 });
