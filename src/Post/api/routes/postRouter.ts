@@ -7,8 +7,8 @@ import {
 
 const postRouter = Router();
 
-postRouter.get('/', (res: Response) => {
-  getAllPostsController.execute(res).catch();
+postRouter.get('/', (req: Request, res: Response) => {
+  getAllPostsController.execute(req, res).catch();
 });
 
 postRouter.post('/', (req: Request, res: Response) => {
