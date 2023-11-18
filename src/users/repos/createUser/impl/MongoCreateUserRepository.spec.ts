@@ -10,7 +10,6 @@ describe('MongoCreateUserRepository', () => {
   });
 
   it('should create a user in the database', async () => {
-    // Arrange
     const userRepository = new MongoCreateUserRepository();
     const mockUser = User.create({
       email: '',

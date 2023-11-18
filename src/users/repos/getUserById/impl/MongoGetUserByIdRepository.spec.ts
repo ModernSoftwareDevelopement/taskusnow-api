@@ -19,7 +19,6 @@ describe('MongoGetUserByIdRepository', () => {
   });
 
   it('should get user by ID from the database', async () => {
-    // Arrange
     const mockUserId = 'someUserId';
     const mockUserDocument = {
       _id: mockUserId,
@@ -57,6 +56,5 @@ describe('MongoGetUserByIdRepository', () => {
 
     await expect(getUserByIdRepository.getUserById(nonExistentUserId)).rejects.toThrow('User not found');
     expect(UserModel.findById).toHaveBeenCalledWith(nonExistentUserId);
-
   });
 });
