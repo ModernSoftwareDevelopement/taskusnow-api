@@ -1,29 +1,41 @@
 import { CreateReviewRepositoryInterface } from './../../repos/createReview/CreateReviewRepositoryInterface';
-import { CreateReviewDTO } from './../../api/dtos/CreateReviewDTO';
 import { CreateReviewUseCase } from './CreateReviewUseCase';
+import { CreateReviewResponse } from './CreateReviewResponse';
 
-const mockCreateReviewRepo: CreateReviewRepositoryInterface = {
+const reviewRepoMock: CreateReviewRepositoryInterface = {
   createReview: jest.fn(),
 };
 
-const createReviewMock = mockCreateReviewRepo.createReview as jest.Mock;
-const createReivewUseCase = new CreateReviewUseCase(mockCreateReviewRepo);
+const createReviewMock = reviewRepoMock.createReview as jest.Mock;
+const useCase = new CreateReviewUseCase(reviewRepoMock);
 
-describe('CreateReviewUseCase Testing', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
-  it('should create a task with valid task data', async () => {
-    const validCreateReivewDTO: CreateReviewDTO = {
-      userId: 'user2234',
-      userReview: 'Review Description',
+describe('CreateReviewUseCase', () => {
+  it('should create review', async () => {
+    const mockReviewDto = {
+      userId: 'user1234',
+      userReview: 'This is a new review',
     };
-    createReviewMock.mockResolvedValue('generatedID');
 
-    const result = await createReivewUseCase.execute(validCreateReivewDTO);
+    createReviewMock.mockResolvedValue({
+      userId: 'user1234',
+      userReview: 'This is a new review',
+    });
 
-    expect(result.id).toEqual('generatedID');
-    expect(mockCreateReviewRepo.createReview).toHaveBeenCalledTimes(1);
+    const result: CreateReviewResponse = await useCase.execute(mockReviewDto);
+
+    expect(reviewRepoMock.createReview).toHaveBeenCalledWith(
+      expect.objectContaining({
+        id: expect.any(String),
+        userId: 'user1234',
+        userReview: 'This is a new review',
+      })
+    );
+    expect(result).toEqual(
+      expect.objectContaining({
+        id: expect.any(String),
+        userId: 'user1234',
+        userReview: 'This is a new review',
+      })
+    );
   });
 });
