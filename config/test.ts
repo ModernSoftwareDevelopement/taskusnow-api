@@ -11,6 +11,7 @@ export default {
   auth0: {
     domain: process.env.AUTH0_DOMAIN,
     audience: process.env.AUTH0_AUDIENCE,
+    jwksUri: process.env.AUTH0_JWKS_URI,
   },
   cloudinary: {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,

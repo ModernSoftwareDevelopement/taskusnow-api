@@ -94,4 +94,16 @@ export class User {
 
     return user;
   }
+
+  public serialize(): IUserProperties {
+    return {
+      email: this.email,
+      imageUrl: this.imageUrl,
+      fullName: this.fullName,
+      email_2: this.email_2,
+      address: this.address,
+      address_2: this.address_2,
+      phone: this.phone,
+    };
+  }
 }
