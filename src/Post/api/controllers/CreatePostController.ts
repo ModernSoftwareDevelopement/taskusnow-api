@@ -8,7 +8,7 @@ export class CreatePostController {
   async execute(req: Request, res: Response): Promise<void> {
     const { post } = req.body;
 
-    const postDTO = new CreatePostDTO(post);
+    const postDTO: CreatePostDTO = { ...post };
 
     try {
       const createdPost = await this.createPostUseCase.execute(postDTO);
