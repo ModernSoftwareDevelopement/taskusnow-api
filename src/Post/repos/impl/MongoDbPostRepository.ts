@@ -2,6 +2,7 @@ import { Post } from '../../domain/entity/Post';
 import { IPostRepository } from '../IPostRepository';
 import mongoose from 'mongoose';
 import { PostModel } from './MongoObjects';
+import { bool } from 'aws-sdk/clients/signer';
 
 export class MongoDbPostRepository implements IPostRepository {
   constructor() {
@@ -56,6 +57,7 @@ export class MongoDbPostRepository implements IPostRepository {
 
   async remove(id: string): Promise<boolean> {
     const result = await PostModel.findByIdAndDelete(id);
-    return result ? true : false;
+    if (result) return true;
+    else return false;
   }
 }

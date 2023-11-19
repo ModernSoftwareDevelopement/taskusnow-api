@@ -34,8 +34,6 @@ describe('Post Entity', () => {
     const post = init();
 
     expect(post.validate()).toMatchObject({ valid: false });
-    //Altrenative way to test
-    //expect(post.isValidObject()).toHaveProperty("valid", false);
   });
 
   it('should detect empty category', () => {

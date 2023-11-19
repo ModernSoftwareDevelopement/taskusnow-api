@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class InMemoryPostRepository implements IPostRepository {
   async getAll(): Promise<Post[]> {
-    //if (posts) return posts;
-
     const post: Post = new Post({
       id: 'string',
       category: 'string',

@@ -5,7 +5,6 @@ export class GetPostByIDController {
   constructor(private readonly getPostByIDUseCase: GetPostByIDUseCase) {}
 
   async execute(req: Request, res: Response): Promise<void> {
-    //this.getPostByIDUseCase.execute(res, req).catch();
     const { id } = req.body;
     try {
       const post = await this.getPostByIDUseCase.execute(id);
