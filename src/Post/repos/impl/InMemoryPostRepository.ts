@@ -11,9 +11,7 @@ export class InMemoryPostRepository implements IPostRepository {
   async add(postDTO: CreatePostDTO): Promise<Post> {
     try {
       const newID: string = uuidv4();
-
       const post = new Post({ id: newID, ...postDTO });
-
       posts.push(post);
       return post;
     } catch (error) {
@@ -37,7 +35,7 @@ export class InMemoryPostRepository implements IPostRepository {
     if (post) {
       return post;
     } else {
-      throw new Error('Unable to create Post!');
+      throw new Error('Unable to get the Post by ID!');
     }
   }
 
@@ -51,7 +49,7 @@ export class InMemoryPostRepository implements IPostRepository {
     if (foundPosts) {
       return foundPosts;
     } else {
-      throw new Error('Unable to create Post!');
+      throw new Error('No post found!');
     }
   }
 

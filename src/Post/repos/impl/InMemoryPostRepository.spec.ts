@@ -61,13 +61,15 @@ describe('InMemoryPostRepository function tests', () => {
     expect(foundPost.content).toBe(post.content);
   });
 
-  //   it('should remove Post', async () => {
-  //     const repo = new InMemoryPostRepository();
-  //     const post = await addPost();
-  //     const result = await repo.remove(post.Id);
-  //     expect(result).toBe(true);
-  //     expect(await repo.getByID(post.Id)).toThrow();
-  //   });
+  it('should remove Post', async () => {
+    const repo = new InMemoryPostRepository();
+    const post = await addPost();
+    const result = await repo.remove(post.Id);
+    expect(result).toBe(true);
+    expect(async () => {
+      await repo.getByID(post.Id);
+    }).rejects.toThrow();
+  });
 
   it('should be able to search Post', async () => {
     const repo = new InMemoryPostRepository();
