@@ -25,7 +25,6 @@ describe('Post Entity', () => {
 
   it('should create valid post', () => {
     const post = init();
-
     expect(post.validate()).toMatchObject({ valid: true });
   });
 

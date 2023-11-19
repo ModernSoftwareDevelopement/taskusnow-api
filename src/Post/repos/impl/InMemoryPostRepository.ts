@@ -2,22 +2,18 @@ import { Post } from '../../domain/entity/Post';
 import { IPostRepository } from '../IPostRepository';
 import { posts } from '../../database/InMemoryDatabase';
 import { v4 as uuidv4 } from 'uuid';
+import { CreatePostDTO } from '../../api/dtos/CreatePostDTO';
 
 export class InMemoryPostRepository implements IPostRepository {
   async getAll(): Promise<Post[]> {
-    const post: Post = new Post({
-      id: 'string',
-      category: 'string',
-      content: 'string',
-      userid: 'string',
-      userName: 'string',
-    });
-    return [post];
+    return posts;
   }
-  async add(post: Post): Promise<Post> {
+  async add(postDTO: CreatePostDTO): Promise<Post> {
     try {
       const newID: string = uuidv4();
-      post.Id = newID;
+
+      const post = new Post({ id: newID, ...postDTO });
+
       posts.push(post);
       return post;
     } catch (error) {

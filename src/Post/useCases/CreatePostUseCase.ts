@@ -8,17 +8,15 @@ export class CreatePostUseCase {
 
   async execute(postDTO: CreatePostDTO): Promise<Post | undefined> {
     try {
-      const post = new Post(postDTO);
-
+      const post = new Post({ id: '', ...postDTO });
       const validation = post.validate();
 
       if (!validation.valid) {
         throw new ValidationError(validation.error);
       }
 
-      return await this.postRepository.add(post);
+      return await this.postRepository.add(postDTO);
     } catch (err) {
-      //const errMsg: string = getErrorMessage(err);
       const errMsg: string = (err as Error).message;
       throw new Error(`Something went wrong. Return Message: ${errMsg}`);
     }

@@ -1,8 +1,8 @@
 import { Post } from '../../domain/entity/Post';
 import { IPostRepository } from '../IPostRepository';
 import mongoose from 'mongoose';
-import { PostModel } from './MongoObjects';
-import { bool } from 'aws-sdk/clients/signer';
+import { PostModel } from '../../database/MongoObjects';
+import { CreatePostDTO } from '../../api/dtos/CreatePostDTO';
 
 export class MongoDbPostRepository implements IPostRepository {
   constructor() {
@@ -14,7 +14,7 @@ export class MongoDbPostRepository implements IPostRepository {
     return posts;
   }
 
-  async add(post: Post): Promise<Post> {
+  async add(post: CreatePostDTO): Promise<Post> {
     const postDoc = new PostModel(post);
     const savedPost = await postDoc.save();
     return savedPost.toObject();
