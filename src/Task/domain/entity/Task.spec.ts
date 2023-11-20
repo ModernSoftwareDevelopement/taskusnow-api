@@ -2,7 +2,7 @@ import { Task } from './Task';
 import { SchedulingOption } from './TaskInterface';
 
 describe('Task Entity', () => {
-  it('should create a valid task with flexible scheduling and timeslot', () => {
+  it('should return valid result when taskIsValid method is called', () => {
     const timeslot = {
       startTime: '10:00 AM',
       endTime: '12:00 PM',
@@ -22,11 +22,11 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      expect(task.taskIsValid()).toEqual({ valid: true });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing timeslot for flexible scheduling', () => {
@@ -44,14 +44,19 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      expect(task.taskIsValid()).toEqual({
-        valid: false,
-        errors: [{ field: 'timeslot', error: 'Time period is required for this scheduling option.' }],
-      });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({
+      valid: false,
+      errors: [
+        {
+          field: 'timeslot',
+          error: 'Time period is required for this scheduling option.',
+        },
+      ],
+    });
   });
 
   it('should create a valid task with specificDate scheduling and a date', () => {
@@ -71,11 +76,11 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      expect(task.taskIsValid()).toEqual({ valid: true });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for specificDate scheduling', () => {
@@ -93,14 +98,19 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      expect(task.taskIsValid()).toEqual({
-        valid: false,
-        errors: [{ field: 'specificDate', error: 'Date is required for this scheduling option.' }],
-      });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({
+      valid: false,
+      errors: [
+        {
+          field: 'specificDate',
+          error: 'Date is required for this scheduling option.',
+        },
+      ],
+    });
   });
 
   it('should create a valid task with beforeDate scheduling and a date', () => {
@@ -120,11 +130,11 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      expect(task.taskIsValid()).toEqual({ valid: true });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for beforeDate scheduling', () => {
@@ -142,14 +152,19 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      expect(task.taskIsValid()).toEqual({
-        valid: false,
-        errors: [{ field: 'specificDate', error: 'Date is required for this scheduling option.' }],
-      });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({
+      valid: false,
+      errors: [
+        {
+          field: 'specificDate',
+          error: 'Date is required for this scheduling option.',
+        },
+      ],
+    });
   });
 
   it('should return an error for an invalid budget (less than 5)', () => {
@@ -172,17 +187,16 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      const validationResult = task.taskIsValid();
-
-      expect(validationResult.valid).toBe(false);
-      expect(validationResult.errors).toContainEqual({
-        field: 'budget',
-        error: 'Budget must be between 5 and 9999.',
-      });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({
+      valid: false,
+      errors: [
+        { field: 'budget', error: 'Budget must be between 5 and 9999.' },
+      ],
+    });
   });
 
   it('should return an error for an invalid budget (greater than 9999)', () => {
@@ -205,17 +219,16 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      const validationResult = task.taskIsValid();
-
-      expect(validationResult.valid).toBe(false);
-      expect(validationResult.errors).toContainEqual({
-        field: 'budget',
-        error: 'Budget must be between 5 and 9999.',
-      });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({
+      valid: false,
+      errors: [
+        { field: 'budget', error: 'Budget must be between 5 and 9999.' },
+      ],
+    });
   });
 
   it('should return an error for one or more required fields', () => {
@@ -238,16 +251,18 @@ describe('Task Entity', () => {
       createdon: new Date(),
     });
 
-    if (task.taskIsValid && typeof task.taskIsValid === 'function') {
-      const validationResult = task.taskIsValid();
-
-      expect(validationResult.valid).toBe(false);
-      expect(validationResult.errors).toContainEqual({
-        field: 'general',
-        error: 'One or more required fields are empty or invalid.',
-      });
-    } else {
-      pending('taskIsValid method is optional');
-    }
+    const result =
+      task.taskIsValid && typeof task.taskIsValid === 'function'
+        ? task.taskIsValid()
+        : null;
+    expect(result).toEqual({
+      valid: false,
+      errors: [
+        {
+          field: 'general',
+          error: 'One or more required fields are empty or invalid.',
+        },
+      ],
+    });
   });
 });
