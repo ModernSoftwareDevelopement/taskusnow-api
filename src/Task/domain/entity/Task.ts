@@ -76,8 +76,8 @@ export class Task {
     }
 
     if (
-      (this.scheduling === SchedulingOption.SpecificDate ||
-        this.scheduling === SchedulingOption.BeforeDate) &&
+      (this.scheduling === SchedulingOption.SEPCIFICDATE ||
+        this.scheduling === SchedulingOption.BEFOREDATE) &&
       (!this.specificDate || isNaN(this.specificDate.getTime()))
     ) {
       errors.push(
@@ -93,7 +93,7 @@ export class Task {
       );
     }
 
-    if (this.scheduling === SchedulingOption.Flexible && !this.timeslot) {
+    if (this.scheduling === SchedulingOption.FLEXIBLE && !this.timeslot) {
       errors.push(
         this.errorObject
           ? this.errorObject(

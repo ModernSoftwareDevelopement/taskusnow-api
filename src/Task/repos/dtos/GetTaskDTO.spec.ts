@@ -18,7 +18,7 @@ describe('GetTaskDTO Testing!', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
       createdon: new Date(),
     };

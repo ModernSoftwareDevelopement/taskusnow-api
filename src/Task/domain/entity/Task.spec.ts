@@ -17,7 +17,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
       createdon: new Date(),
     });
@@ -40,7 +40,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       createdon: new Date(),
     });
 
@@ -71,7 +71,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.SpecificDate,
+      scheduling: SchedulingOption.SEPCIFICDATE,
       specificDate,
       createdon: new Date(),
     });
@@ -94,7 +94,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.SpecificDate,
+      scheduling: SchedulingOption.SEPCIFICDATE,
       createdon: new Date(),
     });
 
@@ -125,7 +125,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.BeforeDate,
+      scheduling: SchedulingOption.BEFOREDATE,
       specificDate: beforeDate,
       createdon: new Date(),
     });
@@ -148,7 +148,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.BeforeDate,
+      scheduling: SchedulingOption.BEFOREDATE,
       createdon: new Date(),
     });
 
@@ -182,7 +182,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 2,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
       createdon: new Date(),
     });
@@ -214,7 +214,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 10000,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
       createdon: new Date(),
     });
@@ -246,7 +246,7 @@ describe('Task Entity', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
       createdon: new Date(),
     });

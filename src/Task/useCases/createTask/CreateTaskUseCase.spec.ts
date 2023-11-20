@@ -28,7 +28,7 @@ describe('CreateTaskUseCase Testing', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot: {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
@@ -53,7 +53,7 @@ describe('CreateTaskUseCase Testing', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot: {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
@@ -86,7 +86,7 @@ describe('CreateTaskUseCase Testing', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot: {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
@@ -119,7 +119,7 @@ describe('CreateTaskUseCase Testing', () => {
       category: 'Sample Category',
       location: 'Sample Location',
       budget: 100,
-      scheduling: SchedulingOption.Flexible,
+      scheduling: SchedulingOption.FLEXIBLE,
       timeslot: {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
