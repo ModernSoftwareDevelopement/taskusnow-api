@@ -1,6 +1,6 @@
 import { GetTaskByTaskIDUseCase } from './GetTaskByTaskIDUseCase';
 import { GetTaskByTaskIDRepoInterface } from '../../repos/getTask/IGetTaskByTaskIDRepository';
-import { GetTaskDTO } from '../../repos/dtos/GetTaskDTO';
+import { GetTaskDto } from '../../repos/dtos/GetTaskDTO';
 import { SchedulingOption } from '../../domain/entity/TaskInterface';
 
 const mockGetTaskByTaskIDRepo: GetTaskByTaskIDRepoInterface = {
@@ -21,7 +21,7 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
 
   it('should return a task by task ID from the repository', async () => {
     const taskId: string = 'generatedTaskID';
-    const mockTask: GetTaskDTO = {
+    const mockTask: GetTaskDto = {
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',

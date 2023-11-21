@@ -1,5 +1,5 @@
 import { CreateTaskUseCase } from '../../../useCases/createTask/CreateTaskUseCase';
-import { CreateTaskDTO } from '../../dtos/CreateTaskDTO';
+import { CreateTaskDto } from '../../dtos/CreateTaskDTO';
 import { CreateTaskController } from './CreateTaskController';
 import { CreateTaskRepoInterface } from '../../../repos/createTask/ICreateTaskRepository';
 import { SchedulingOption } from '../../../domain/entity/TaskInterface';
@@ -25,7 +25,7 @@ describe('CreateTaskController Testing', () => {
   });
 
   it('should create a task and return its ID', async () => {
-    const taskDTO: CreateTaskDTO = {
+    const taskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {
@@ -58,7 +58,7 @@ describe('CreateTaskController Testing', () => {
   });
 
   it('should throw an error when something went wrong!', async () => {
-    const taskDTO: CreateTaskDTO = {
+    const taskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {

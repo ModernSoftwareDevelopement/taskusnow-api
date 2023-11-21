@@ -1,4 +1,4 @@
-import { CreateTaskDTO } from './CreateTaskDTO';
+import { CreateTaskDto } from './CreateTaskDTO';
 import { SchedulingOption } from '../../domain/entity/TaskInterface';
 
 describe('CreateTaskDTO Testing!', () => {
@@ -21,7 +21,7 @@ describe('CreateTaskDTO Testing!', () => {
       timeslot,      
     };
 
-    const expectedKeys: (keyof CreateTaskDTO)[] = [
+    const expectedKeys: (keyof CreateTaskDto)[] = [
       'title',
       'description',
       'user',
@@ -32,7 +32,7 @@ describe('CreateTaskDTO Testing!', () => {
       'timeslot',      
     ];
 
-    const dataKeys = Object.keys(data) as (keyof CreateTaskDTO)[];
+    const dataKeys = Object.keys(data) as (keyof CreateTaskDto)[];
 
     expectedKeys.forEach((key) => {
       expect(dataKeys.includes(key)).toBe(true);

@@ -1,5 +1,5 @@
 import { CreateTaskUseCase } from './CreateTaskUseCase';
-import { CreateTaskDTO } from '../../api/dtos/CreateTaskDTO';
+import { CreateTaskDto } from '../../api/dtos/CreateTaskDTO';
 import { CreateTaskRepoInterface } from './../../repos/createTask/ICreateTaskRepository';
 import { ValidationError } from '../../../middleware/ValdationError';
 import { SchedulingOption } from '../../domain/entity/TaskInterface';
@@ -18,7 +18,7 @@ describe('CreateTaskUseCase Testing', () => {
   });
 
   it('should create a task with valid task data', async () => {
-    const validCreateTaskDTO: CreateTaskDTO = {
+    const validCreateTaskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {
@@ -43,7 +43,7 @@ describe('CreateTaskUseCase Testing', () => {
   });
 
   it('should throw a ValidationError when task data is invalid for title or description', async () => {
-    const invalidCreateTaskDTO: CreateTaskDTO = {
+    const invalidCreateTaskDTO: CreateTaskDto = {
       title: '',
       description: 'Task Description',
       user: {
@@ -76,7 +76,7 @@ describe('CreateTaskUseCase Testing', () => {
   });
 
   it('should throw a ValidationError when task data is invalid for userId', async () => {
-    const invalidCreateTaskDTO: CreateTaskDTO = {
+    const invalidCreateTaskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {
@@ -109,7 +109,7 @@ describe('CreateTaskUseCase Testing', () => {
   });
 
   it('should throw an Error when the repository call fails', async () => {
-    const validCreateTaskDTO: CreateTaskDTO = {
+    const validCreateTaskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {

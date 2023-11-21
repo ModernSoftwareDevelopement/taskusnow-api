@@ -1,7 +1,7 @@
-import { GetTaskDTO } from './../dtos/GetTaskDTO';
+import { GetTaskDto } from './../dtos/GetTaskDTO';
 import { SchedulingOption } from '../../domain/entity/TaskInterface';
 
-export const InMemoryTasks: GetTaskDTO[] = [
+export const InMemoryTasks: GetTaskDto[] = [
   {
     taskId: 'generatedTaskID',
     title: 'sample title',

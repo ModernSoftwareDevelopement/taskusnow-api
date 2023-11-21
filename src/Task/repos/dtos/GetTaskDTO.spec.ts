@@ -1,4 +1,4 @@
-import { GetTaskDTO } from './GetTaskDTO';
+import { GetTaskDto } from './GetTaskDTO';
 import { SchedulingOption } from '../../domain/entity/TaskInterface'
 
 describe('GetTaskDTO Testing!', () => {
@@ -7,7 +7,7 @@ describe('GetTaskDTO Testing!', () => {
       startTime: '10:00 AM',
       endTime: '12:00 PM',
     };
-    const validData: GetTaskDTO = {
+    const validData: GetTaskDto = {
       taskId: 'task123',
       title: 'Sample Task',
       description: 'This is a sample task',
@@ -40,7 +40,7 @@ describe('GetTaskDTO Testing!', () => {
   });
 
   it('should handle incomplete GetTaskDTO object', () => {
-    const incompleteData: Partial<GetTaskDTO> = {
+    const incompleteData: Partial<GetTaskDto> = {
       title: 'Incomplete Task',
       description: 'This task lacks a user ID',
     };
@@ -56,7 +56,7 @@ describe('GetTaskDTO Testing!', () => {
   });
 
   it('should handle empty object', () => {
-    const emptyData: GetTaskDTO = {} as GetTaskDTO;
+    const emptyData: GetTaskDto = {} as GetTaskDto;
 
     expect(emptyData).toBeDefined();
     expect(emptyData.title).toBeUndefined();

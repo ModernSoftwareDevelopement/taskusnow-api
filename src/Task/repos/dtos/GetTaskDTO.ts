@@ -1,5 +1,5 @@
 import { User, SchedulingOption,TimeSlot } from '../../domain/entity/TaskInterface'
-export interface GetTaskDTO {
+export interface GetTaskDto {
   taskId?: string;
   title: string;
   description: string;
