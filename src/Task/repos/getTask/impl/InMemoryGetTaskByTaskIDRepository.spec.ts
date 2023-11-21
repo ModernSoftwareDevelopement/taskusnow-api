@@ -28,7 +28,7 @@ describe('InMemoryGetTaskByTaskIDRepository Testing', () => {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
       },
-      createdon: new Date(2023-11-10),
+      createdon: new Date('2023-11-10'),
     });
   });
 

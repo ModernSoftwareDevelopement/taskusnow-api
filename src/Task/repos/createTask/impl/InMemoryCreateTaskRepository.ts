@@ -8,7 +8,7 @@ export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
   async createTask(taskData: CreateTaskDTO): Promise<string> {
     const taskID: string = uuidv4();
 
-    const newTask: Task = {
+    const newTask: Task = new Task({
       taskId: taskID,
       title: taskData.title,
       description: taskData.description,
@@ -22,8 +22,8 @@ export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
       scheduling: taskData.scheduling,
       specificDate: taskData.specificDate,
       timeslot: taskData.timeslot,
-      createdon: new Date(),
-    };
+      createdon: new Date(),  
+    });
 
     InMemoryTasks.push(newTask);
 

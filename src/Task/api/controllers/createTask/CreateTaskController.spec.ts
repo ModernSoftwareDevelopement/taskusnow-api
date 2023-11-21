@@ -52,7 +52,9 @@ describe('CreateTaskController Testing', () => {
 
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData().taskId).toEqual('generatedTaskID');
-    expect(mockCreateTaskRepo.createTask).toHaveBeenCalledWith(taskDTO);
+    expect(mockCreateTaskRepo.createTask).toHaveBeenCalledWith(
+      expect.objectContaining(taskDTO)
+    );
   });
 
   it('should throw an error when something went wrong!', async () => {

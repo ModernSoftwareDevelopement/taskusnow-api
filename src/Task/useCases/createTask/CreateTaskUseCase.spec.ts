@@ -60,7 +60,7 @@ describe('CreateTaskUseCase Testing', () => {
       },     
     };
     createTaskMock.mockRejectedValue([
-      { field: 'general', error: 'One or more required fields are empty or invalid.' }
+      { field: 'title', error: 'Title is required.' },
     ]);
 
     try {
@@ -69,7 +69,7 @@ describe('CreateTaskUseCase Testing', () => {
       const typedError = error as Error;
       expect(error).toBeInstanceOf(ValidationError);    
       expect(JSON.parse(typedError.message)).toEqual([
-        { field: 'general', error: 'One or more required fields are empty or invalid.' }
+        { field: 'title', error: 'Title is required.' },
       ]);  
       expect(mockCreateTaskRepo.createTask).not.toHaveBeenCalled();
     }
@@ -93,7 +93,7 @@ describe('CreateTaskUseCase Testing', () => {
       },  
     };
     createTaskMock.mockRejectedValue([
-      { field: 'general', error: 'One or more required fields are empty or invalid.' }
+      { field: 'userId', error: 'User ID is required.' },
     ]);
 
     try {
@@ -102,7 +102,7 @@ describe('CreateTaskUseCase Testing', () => {
       const typedError = error as Error;
       expect(error).toBeInstanceOf(ValidationError);
       expect(JSON.parse(typedError.message)).toEqual([
-        { field: 'general', error: 'One or more required fields are empty or invalid.' }
+        { field: 'userId', error: 'User ID is required.' },
       ]);
       expect(mockCreateTaskRepo.createTask).not.toHaveBeenCalled();
     }

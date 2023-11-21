@@ -18,6 +18,8 @@ export class Task {
   timeslot?: TimeSlot;
   createdon?: Date;
 
+  private errors: { field: string; error: string }[] = [];
+
   constructor(data: TaskInterface) {
     this.taskId = data.taskId;
     this.title = data.title;
@@ -32,84 +34,56 @@ export class Task {
     this.createdon = data.createdon;
   }
 
-  private errorObject?(
-    field: string,
-    error: string,
-  ): { field: string; error: string } {
+  private errorObject(field: string, error: string): { field: string; error: string } {
     return { field, error };
   }
 
-  taskIsValid?(): {
-    valid: boolean;
-    errors?: { field: string; error: string }[];
-  } {
-    const errors: { field: string; error: string }[] = [];
-
-    if (
-      !this.title ||
-      !this.description ||
-      !this.category ||
-      !this.location ||
-      !this.budget ||
-      !this.user?.userId ||
-      !this.scheduling
-    ) {
-      errors.push(
-        this.errorObject
-          ? this.errorObject(
-              'general',
-              'One or more required fields are empty or invalid.',
-            )
-          : {
-              field: 'general',
-              error: 'One or more required fields are empty or invalid.',
-            },
-      );
+  private addErrorIf(condition: boolean, field: string, error: string): void {
+    if (condition) {
+      this.errors.push(this.errorObject(field, error));
     }
+  }
 
-    if (this.budget < 5 || this.budget > 9999) {
-      errors.push(
-        this.errorObject
-          ? this.errorObject('budget', 'Budget must be between 5 and 9999.')
-          : { field: 'budget', error: 'Budget must be between 5 and 9999.' },
-      );
-    }
+  private validateRequiredFields(): void {
+    this.addErrorIf(!this.title, 'title', 'Title is required.');
+    this.addErrorIf(!this.description, 'description', 'Description is required.');
+    this.addErrorIf(!this.category, 'category', 'Category is required.');
+    this.addErrorIf(!this.location, 'location', 'Location is required.');
+    this.addErrorIf(!this.budget, 'budget', 'Budget is required.');
+    this.addErrorIf(!this.user?.userId, 'userId', 'User ID is required.');
+    this.addErrorIf(!this.scheduling, 'scheduling', 'Scheduling option is required.');
+  }
 
+  private validateBudget(): void {
+    this.addErrorIf(this.budget < 5 || this.budget > 9999, 'budget', 'Budget must be between 5 and 9999.');
+  }
+
+  private validateSpecificDate(): void {
     if (
       (this.scheduling === SchedulingOption.SEPCIFICDATE ||
         this.scheduling === SchedulingOption.BEFOREDATE) &&
       (!this.specificDate || isNaN(this.specificDate.getTime()))
     ) {
-      errors.push(
-        this.errorObject
-          ? this.errorObject(
-              'specificDate',
-              'Date is required for this scheduling option.',
-            )
-          : {
-              field: 'specificDate',
-              error: 'Date is required for this scheduling option.',
-            },
-      );
+      this.addErrorIf(true, 'specificDate', 'Date is required for this scheduling option.');
     }
+  }
 
-    if (this.scheduling === SchedulingOption.FLEXIBLE && !this.timeslot) {
-      errors.push(
-        this.errorObject
-          ? this.errorObject(
-              'timeslot',
-              'Time period is required for this scheduling option.',
-            )
-          : {
-              field: 'timeslot',
-              error: 'Time period is required for this scheduling option.',
-            },
-      );
-    }
+  private validateTimeslot(): void {
+    this.addErrorIf(this.scheduling === SchedulingOption.FLEXIBLE && !this.timeslot, 'timeslot', 'Time period is required for this scheduling option.');
+  }
+
+  taskIsValid(): {
+    valid: boolean;
+    errors?: { field: string; error: string }[];
+  } {
+    this.validateRequiredFields();
+    this.validateBudget();
+    this.validateSpecificDate();
+    this.validateTimeslot();
 
     return {
-      valid: errors.length === 0,
-      errors: errors.length > 0 ? errors : undefined,
+      valid: this.errors.length === 0,
+      errors: this.errors.length > 0 ? this.errors : undefined,
     };
   }
 }

@@ -2,52 +2,34 @@ import { Task } from './Task';
 import { SchedulingOption } from './TaskInterface';
 
 describe('Task Entity', () => {
-  it('should return valid result when taskIsValid method is called', () => {
-    const timeslot = {
+  const defaultTaskData = {
+    title: 'Sample Title',
+    description: 'Sample Description',
+    user: {
+      userId: 'user123',
+      fullName: 'John Doe',
+    },
+    category: 'Sample Category',
+    location: 'Sample Location',
+    budget: 100,
+    scheduling: SchedulingOption.FLEXIBLE,
+    timeslot: {
       startTime: '10:00 AM',
       endTime: '12:00 PM',
-    };
-    const task = new Task({
-      title: 'Sample Title',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.FLEXIBLE,
-      timeslot,
-      createdon: new Date(),
-    });
+    },
+    createdon: new Date(),
+  };
 
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+  it('should return valid result when taskIsValid method is called', () => {
+    const task = new Task(defaultTaskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing timeslot for flexible scheduling', () => {
-    const task = new Task({
-      title: 'Sample Title',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.FLEXIBLE,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.FLEXIBLE, timeslot: undefined };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
       errors: [
@@ -61,47 +43,16 @@ describe('Task Entity', () => {
 
   it('should create a valid task with specificDate scheduling and a date', () => {
     const specificDate = new Date('2023-12-10');
-    const task = new Task({
-      title: 'Sample Title',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.SEPCIFICDATE,
-      specificDate,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFICDATE, specificDate };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for specificDate scheduling', () => {
-    const task = new Task({
-      title: 'Sample Title',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.SEPCIFICDATE,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFICDATE, specificDate: undefined };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
       errors: [
@@ -115,47 +66,16 @@ describe('Task Entity', () => {
 
   it('should create a valid task with beforeDate scheduling and a date', () => {
     const beforeDate = new Date('2023-12-09');
-    const task = new Task({
-      title: 'Sample Title',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.BEFOREDATE,
-      specificDate: beforeDate,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFOREDATE, specificDate: beforeDate };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for beforeDate scheduling', () => {
-    const task = new Task({
-      title: 'Sample Title',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.BEFOREDATE,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFOREDATE, specificDate: undefined };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
       errors: [
@@ -168,29 +88,9 @@ describe('Task Entity', () => {
   });
 
   it('should return an error for an invalid budget (less than 5)', () => {
-    const timeslot = {
-      startTime: '10:00 AM',
-      endTime: '12:00 PM',
-    };
-    const task = new Task({
-      title: 'Invalid Budget Task',
-      description: 'Task with an invalid budget',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 2,
-      scheduling: SchedulingOption.FLEXIBLE,
-      timeslot,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, budget: 2 };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
       errors: [
@@ -200,29 +100,9 @@ describe('Task Entity', () => {
   });
 
   it('should return an error for an invalid budget (greater than 9999)', () => {
-    const timeslot = {
-      startTime: '10:00 AM',
-      endTime: '12:00 PM',
-    };
-    const task = new Task({
-      title: 'Invalid Budget Task',
-      description: 'Task with an invalid budget',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 10000,
-      scheduling: SchedulingOption.FLEXIBLE,
-      timeslot,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+    const taskData = { ...defaultTaskData, budget: 10000 };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
       errors: [
@@ -231,37 +111,14 @@ describe('Task Entity', () => {
     });
   });
 
-  it('should return an error for one or more required fields', () => {
-    const timeslot = {
-      startTime: '10:00 AM',
-      endTime: '12:00 PM',
-    };
-    const task = new Task({
-      title: '',
-      description: 'Sample Description',
-      user: {
-        userId: 'user123',
-        fullName: 'John Doe',
-      },
-      category: 'Sample Category',
-      location: 'Sample Location',
-      budget: 100,
-      scheduling: SchedulingOption.FLEXIBLE,
-      timeslot,
-      createdon: new Date(),
-    });
-
-    const result =
-      task.taskIsValid && typeof task.taskIsValid === 'function'
-        ? task.taskIsValid()
-        : null;
+  it('should return errors for empty title', () => {
+    const taskData = { ...defaultTaskData, title: '' };
+    const task = new Task(taskData);
+    const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
       errors: [
-        {
-          field: 'general',
-          error: 'One or more required fields are empty or invalid.',
-        },
+        { field: 'title', error: 'Title is required.' },        
       ],
     });
   });
