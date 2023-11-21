@@ -43,14 +43,14 @@ describe('Task Entity', () => {
 
   it('should create a valid task with specificDate scheduling and a date', () => {
     const specificDate = new Date('2023-12-10');
-    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFICDATE, specificDate };
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFIC_DATE, specificDate };
     const task = new Task(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for specificDate scheduling', () => {
-    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFICDATE, specificDate: undefined };
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFIC_DATE, specificDate: undefined };
     const task = new Task(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
@@ -64,16 +64,16 @@ describe('Task Entity', () => {
     });
   });
 
-  it('should create a valid task with beforeDate scheduling and a date', () => {
-    const beforeDate = new Date('2023-12-09');
-    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFOREDATE, specificDate: beforeDate };
+  it('should create a valid task with BEFORE_DATE scheduling and a date', () => {
+    const BEFORE_DATE = new Date('2023-12-09');
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFORE_DATE, specificDate: BEFORE_DATE };
     const task = new Task(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
-  it('should detect missing specificDate for beforeDate scheduling', () => {
-    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFOREDATE, specificDate: undefined };
+  it('should detect missing specificDate for BEFORE_DATE scheduling', () => {
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFORE_DATE, specificDate: undefined };
     const task = new Task(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({

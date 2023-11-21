@@ -60,8 +60,8 @@ export class Task {
 
   private validateSpecificDate(): void {
     if (
-      (this.scheduling === SchedulingOption.SEPCIFICDATE ||
-        this.scheduling === SchedulingOption.BEFOREDATE) &&
+      (this.scheduling === SchedulingOption.SEPCIFIC_DATE ||
+        this.scheduling === SchedulingOption.BEFORE_DATE) &&
       (!this.specificDate || isNaN(this.specificDate.getTime()))
     ) {
       this.addErrorIf(true, 'specificDate', 'Date is required for this scheduling option.');
