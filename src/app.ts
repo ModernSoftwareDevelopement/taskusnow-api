@@ -13,6 +13,7 @@ const app: Express = express();
 const mongoUri: string = config.get('database.mongo.uri');
 mongoose.connect(mongoUri).then(() => {
   console.log('connected Mongo!');
+  console.log('test')
 });
 
 app.use(cors({
