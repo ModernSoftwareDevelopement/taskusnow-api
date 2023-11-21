@@ -1,14 +1,10 @@
 import { UpdateUserProfileUseCase } from '../../../useCases/uploadUserProfile/UpdateUserProfileUseCase';
 import { IUpdateUserRepository } from '../../../repos/updateUser/IUpdateUserRepository';
-import { IGetUserByIdRepository } from '../../../repos/getUserById/IGetUserByIdRepository';
 import { UpdateProfileInfoController } from './UpdateProfileInfoController';
 import httpMocks from 'node-mocks-http';
 
 const updateUserRepositoryMock: IUpdateUserRepository = {
   updateUser: jest.fn(),
-};
-const getUserByIdRepositoryMock: IGetUserByIdRepository = {
-  getUserById: jest.fn(),
 };
 
 jest.mock(
@@ -24,7 +20,6 @@ jest.mock(
 );
 
 const updateUserProfileUseCase = new UpdateUserProfileUseCase(
-  getUserByIdRepositoryMock,
   updateUserRepositoryMock,
 );
 const updateUserProfileController = new UpdateProfileInfoController(
@@ -122,7 +117,6 @@ describe('UpdateProfileInfoController', () => {
     const mockResponse = httpMocks.createResponse();
     executeMock.mockResolvedValue({
       id: '123',
-      fullName: 'Minh Tu Phan',
     });
 
     await updateUserProfileController.execute(mockRequest, mockResponse);
@@ -134,7 +128,6 @@ describe('UpdateProfileInfoController', () => {
     expect(mockResponse.statusCode).toBe(201);
     expect(mockResponse._getJSONData()).toEqual({
       id: '123',
-      fullName: 'Minh Tu Phan',
     });
   });
 });

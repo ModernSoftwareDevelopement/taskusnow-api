@@ -1,4 +1,4 @@
-import { CreateReviewRepositoryInterface } from './../../repos/createReview/CreateReviewRepositoryInterface';
+import { CreateReviewRepositoryInterface } from '../../repos/createReview/CreateReviewRepositoryInterface';
 import { CreateReviewUseCase } from './CreateReviewUseCase';
 import { CreateReviewResponse } from './CreateReviewResponse';
 

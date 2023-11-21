@@ -1,5 +1,5 @@
 import { Review } from '../../domain/entity/review';
-import { GetReviewByUserIdRepositoryInterface } from './../../repos/getReviewByUserId/GetReviewByUserIdRepositoryInterface';
+import { GetReviewByUserIdRepositoryInterface } from '../../repos/getReviewByUserId/GetReviewByUserIdRepositoryInterface';
 import { GetReviewByUserIdUseCase } from './GetReviewByUserIdUseCase';
 
 const reviewRepoMock: GetReviewByUserIdRepositoryInterface = {

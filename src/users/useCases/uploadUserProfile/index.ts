@@ -1,8 +1,7 @@
 import { UpdateUserProfileUseCase } from './UpdateUserProfileUseCase';
-import { getUserByIdRepository, updateUserRepository } from '../../repos';
+import { updateUserRepository } from '../../repos';
 
 const updateUserProfileUseCase = new UpdateUserProfileUseCase(
-  getUserByIdRepository,
   updateUserRepository,
 );
 
