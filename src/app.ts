@@ -7,6 +7,7 @@ import cors from 'cors';
 import { userRouter } from './users/api/routes/userRouter';
 import { profileRouter } from './users/api/routes/profileRouter';
 import { reviewRouter } from './reviews/api/routes/reviewRouter';
+import { reviewRouter } from './reviews/api/routes/reviewRouter';
 
 const app: Express = express();
 
