@@ -21,7 +21,7 @@ describe('InMemoryCreateTaskRepository Testing', () => {
       budget: 100,
       scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
-      createdon: new Date(),
+      createdAt: new Date(),
     });
 
     const createdTaskID = await repo.createTask(newTaskData);

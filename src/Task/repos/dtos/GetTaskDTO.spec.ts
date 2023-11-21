@@ -20,7 +20,7 @@ describe('GetTaskDTO Testing!', () => {
       budget: 100,
       scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
-      createdon: new Date(),
+      createdAt: new Date(),
     };
 
     expect(validData).toBeDefined();
@@ -33,7 +33,7 @@ describe('GetTaskDTO Testing!', () => {
     expect(typeof validData.scheduling).toBe('string');
     expect(typeof validData.timeslot?.startTime).toBe('string');
     expect(typeof validData.timeslot?.endTime).toBe('string');
-    expect(typeof validData.createdon).toBe('object');
+    expect(typeof validData.createdAt).toBe('object');
     if (validData.taskId) {
       expect(typeof validData.taskId).toBe('string');
     }
@@ -52,7 +52,7 @@ describe('GetTaskDTO Testing!', () => {
     expect(incompleteData.location).toBeUndefined();
     expect(incompleteData.budget).toBeUndefined();
     expect(incompleteData.scheduling).toBeUndefined();
-    expect(incompleteData.createdon).toBeUndefined();
+    expect(incompleteData.createdAt).toBeUndefined();
   });
 
   it('should handle empty object', () => {
@@ -67,6 +67,6 @@ describe('GetTaskDTO Testing!', () => {
     expect(emptyData.location).toBeUndefined();
     expect(emptyData.budget).toBeUndefined();
     expect(emptyData.scheduling).toBeUndefined();
-    expect(emptyData.createdon).toBeUndefined();
+    expect(emptyData.createdAt).toBeUndefined();
   });
 });

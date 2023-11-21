@@ -37,7 +37,7 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
       },
-      createdon: new Date('2023-11-10')
+      createdAt: new Date('2023-11-10')
     };
     getTaskbyTaskIDMock.mockResolvedValue(mockTask);
 
@@ -59,7 +59,7 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
         startTime: '10:00 AM',
         endTime: '12:00 PM',
       },
-      createdon: new Date('2023-11-10')
+      createdAt: new Date('2023-11-10')
     });
     expect(mockGetTaskByTaskIDRepo.getTaskByTaskID).toHaveBeenCalledWith(
       taskId,

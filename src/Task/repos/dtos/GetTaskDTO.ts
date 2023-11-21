@@ -10,5 +10,5 @@ export interface GetTaskDTO {
   scheduling: SchedulingOption;
   specificDate?: Date;
   timeslot?: TimeSlot;
-  createdon?: Date;
+  createdAt?: Date;
 }

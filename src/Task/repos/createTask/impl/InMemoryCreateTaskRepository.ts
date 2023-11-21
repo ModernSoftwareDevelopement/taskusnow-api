@@ -22,7 +22,7 @@ export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
       scheduling: taskData.scheduling,
       specificDate: taskData.specificDate,
       timeslot: taskData.timeslot,
-      createdon: new Date(),  
+      createdAt: new Date(),  
     });
 
     InMemoryTasks.push(newTask);

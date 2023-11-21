@@ -17,7 +17,7 @@ describe('Task Entity', () => {
       startTime: '10:00 AM',
       endTime: '12:00 PM',
     },
-    createdon: new Date(),
+    createdAt: new Date(),
   };
 
   it('should return valid result when taskIsValid method is called', () => {

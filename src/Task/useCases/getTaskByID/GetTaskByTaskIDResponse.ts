@@ -11,5 +11,5 @@ export interface GetTaskByTaskIDResponse {
   scheduling: SchedulingOption;
   specificDate?: Date;
   timeslot?: TimeSlot;
-  createdon?: Date;
+  createdAt?: Date;
 }

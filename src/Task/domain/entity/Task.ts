@@ -16,7 +16,7 @@ export class Task {
   scheduling: SchedulingOption;
   specificDate?: Date;
   timeslot?: TimeSlot;
-  createdon?: Date;
+  createdAt?: Date;
 
   private errors: { field: string; error: string }[] = [];
 
@@ -31,7 +31,7 @@ export class Task {
     this.scheduling = data.scheduling;
     this.specificDate = data.specificDate;
     this.timeslot = data.timeslot;
-    this.createdon = data.createdon;
+    this.createdAt = data.createdAt;
   }
 
   private errorObject(field: string, error: string): { field: string; error: string } {
