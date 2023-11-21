@@ -38,38 +38,61 @@ export class Task {
     return { field, error };
   }
 
-  private addErrorIf(condition: boolean, field: string, error: string): void {
+  private addErrorOnCondition(
+    condition: boolean,
+    field: string,
+    error: string,
+  ): void {
     if (condition) {
       this.errors.push(this.errorObject(field, error));
     }
   }
 
   private validateRequiredFields(): void {
-    this.addErrorIf(!this.title, 'title', 'Title is required.');
-    this.addErrorIf(!this.description, 'description', 'Description is required.');
-    this.addErrorIf(!this.category, 'category', 'Category is required.');
-    this.addErrorIf(!this.location, 'location', 'Location is required.');
-    this.addErrorIf(!this.budget, 'budget', 'Budget is required.');
-    this.addErrorIf(!this.user?.userId, 'userId', 'User ID is required.');
-    this.addErrorIf(!this.scheduling, 'scheduling', 'Scheduling option is required.');
+    this.addErrorOnCondition(!this.title, 'title', 'Title is required.');
+    this.addErrorOnCondition(!this.description,'description','Description is required.',);
+    this.addErrorOnCondition(!this.category,'category','Category is required.',);
+    this.addErrorOnCondition(!this.location,'location','Location is required.',);
+    this.addErrorOnCondition(!this.budget, 'budget', 'Budget is required.');
+    this.addErrorOnCondition(!this.user?.userId,'userId','User ID is required.',);
+    this.addErrorOnCondition(!this.scheduling,'scheduling','Scheduling option is required.',);
   }
 
   private validateBudget(): void {
-    this.addErrorIf(this.budget < 5 || this.budget > 9999, 'budget', 'Budget must be between 5 and 9999.');
+    this.addErrorOnCondition(
+      this.budget < 5 || this.budget > 9999,
+      'budget',
+      'Budget must be between 5 and 9999.',
+    );
   }
 
   private validateSpecificDate(): void {
     if (
-      (this.scheduling === SchedulingOption.SEPCIFIC_DATE ||
-        this.scheduling === SchedulingOption.BEFORE_DATE) &&
+      (this.isScheduleWithSpecificDate() || this.isScheduleWithBeforeDate()) &&
       (!this.specificDate || isNaN(this.specificDate.getTime()))
     ) {
-      this.addErrorIf(true, 'specificDate', 'Date is required for this scheduling option.');
+      this.addErrorOnCondition(
+        true,
+        'specificDate',
+        'Date is required for this scheduling option.',
+      );
     }
   }
 
+  private isScheduleWithSpecificDate(): boolean {
+    return this.scheduling === SchedulingOption.SEPCIFIC_DATE;
+  }
+
+  private isScheduleWithBeforeDate(): boolean {
+    return this.scheduling === SchedulingOption.BEFORE_DATE;
+  }
+
   private validateTimeslot(): void {
-    this.addErrorIf(this.scheduling === SchedulingOption.FLEXIBLE && !this.timeslot, 'timeslot', 'Time period is required for this scheduling option.');
+    this.addErrorOnCondition(
+      this.scheduling === SchedulingOption.FLEXIBLE && !this.timeslot,
+      'timeslot',
+      'Time period is required for this scheduling option.',
+    );
   }
 
   taskIsValid(): {
