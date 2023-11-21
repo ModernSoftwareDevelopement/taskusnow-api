@@ -7,11 +7,6 @@ import mongoose from 'mongoose';
 
 const app: Express = express();
 
-const mongoUri: string = 'mongodb://localhost:27017/taskusnow';
-mongoose.connect(mongoUri).then(() => {
-  console.log('connected Mongo!');
-});
-
 app.use(helmet());
 
 app.use(cors());
@@ -19,6 +14,7 @@ app.use(express.json());
 
 app.use(userRouter);
 app.use(profileRouter);
+app.use(userRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server!');
