@@ -1,5 +1,5 @@
 import { GetTaskByTaskIDUseCase } from '../../../useCases/getTaskByID/GetTaskByTaskIDUseCase';
-import { GetTaskDTO } from '../../../repos/dtos/GetTaskDTO';
+import { GetTaskDto } from '../../../repos/dtos/GetTaskDTO';
 import { GetTaskbyTaskIDController } from './GetTaskbyTaskIDController';
 import { GetTaskByTaskIDRepoInterface } from '../../../repos/getTask/IGetTaskByTaskIDRepository';
 import httpMocks from 'node-mocks-http';
@@ -42,7 +42,7 @@ describe('GetTaskbyTaskIDController Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
-    } as GetTaskDTO);
+    } as GetTaskDto);
 
     await getTaskbyTaskIDController.execute(mockRequest, mockResponse);
 

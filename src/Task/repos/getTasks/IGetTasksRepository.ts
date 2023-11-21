@@ -1,5 +1,5 @@
-import { GetTaskDTO } from '../dtos/GetTaskDTO';
+import { GetTaskDto } from '../dtos/GetTaskDTO';
 
 export interface GetTasksRepoInterface {
-  getTasks(): Promise<GetTaskDTO[]>;
+  getTasks(): Promise<GetTaskDto[]>;
 }
