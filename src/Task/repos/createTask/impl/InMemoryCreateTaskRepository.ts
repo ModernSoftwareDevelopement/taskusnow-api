@@ -2,13 +2,13 @@ import { CreateTaskRepoInterface } from '../ICreateTaskRepository';
 import { Task } from '../../../domain/entity/Task';
 import { v4 as uuidv4 } from 'uuid';
 import { InMemoryTasks } from '../../InMemoryDataSource/InMemorydb';
-import { CreateTaskDTO } from '../../dtos/CreateTaskDTO';
+import { CreateTaskDto } from '../../dtos/CreateTaskDTO';
 
 export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
-  async createTask(taskData: CreateTaskDTO): Promise<string> {
+  async createTask(taskData: CreateTaskDto): Promise<string> {
     const taskID: string = uuidv4();
 
-    const newTask: Task = {
+    const newTask: Task = new Task({
       taskId: taskID,
       title: taskData.title,
       description: taskData.description,
@@ -16,7 +16,14 @@ export class InMemoryCreateTaskRepository implements CreateTaskRepoInterface {
         userId: taskData.user.userId,
         fullName: taskData.user.fullName,
       },
-    };
+      category: taskData.category,
+      location: taskData.location,
+      budget: taskData.budget,
+      scheduling: taskData.scheduling,
+      specificDate: taskData.specificDate,
+      timeslot: taskData.timeslot,
+      createdAt: new Date(),  
+    });
 
     InMemoryTasks.push(newTask);
 

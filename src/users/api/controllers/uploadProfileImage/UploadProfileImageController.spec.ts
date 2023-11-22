@@ -1,5 +1,4 @@
 import { IUpdateUserRepository } from '../../../repos/updateUser/IUpdateUserRepository';
-import { IGetUserByIdRepository } from '../../../repos/getUserById/IGetUserByIdRepository';
 import { UpdateUserProfileUseCase } from '../../../useCases/uploadUserProfile/UpdateUserProfileUseCase';
 import { UploadProfileImageController } from './UploadProfileImageController';
 import { ImageUploader } from '../../../../imageService/ImageUploader';
@@ -7,9 +6,6 @@ import httpMocks from 'node-mocks-http';
 
 const updateUserRepositoryMock: IUpdateUserRepository = {
   updateUser: jest.fn(),
-};
-const getUserByIdRepositoryMock: IGetUserByIdRepository = {
-  getUserById: jest.fn(),
 };
 
 const imageUploaderMock: ImageUploader = {
@@ -31,7 +27,6 @@ jest.mock(
 );
 
 const updateUserProfileUseCase = new UpdateUserProfileUseCase(
-  getUserByIdRepositoryMock,
   updateUserRepositoryMock,
 );
 const uploadProfileImageController = new UploadProfileImageController(

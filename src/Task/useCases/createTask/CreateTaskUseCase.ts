@@ -1,5 +1,5 @@
 import { CreateTaskRepoInterface } from '../../repos/createTask/ICreateTaskRepository';
-import { CreateTaskDTO } from '../../api/dtos/CreateTaskDTO';
+import { CreateTaskDto } from '../../api/dtos/CreateTaskDTO';
 import { Task } from '../../domain/entity/Task';
 import { CreateTaskResponse } from './CreateTaskResponse';
 import { ValidationError } from '../../../middleware/ValdationError';
@@ -7,14 +7,18 @@ import { ValidationError } from '../../../middleware/ValdationError';
 export class CreateTaskUseCase {
   constructor(private readonly taskRepo: CreateTaskRepoInterface) {}
 
-  async execute(taskDTO: CreateTaskDTO): Promise<CreateTaskResponse> {
+  async execute(taskDTO: CreateTaskDto): Promise<CreateTaskResponse> {
     const task = new Task(taskDTO);
 
     if (task.taskIsValid && typeof task.taskIsValid === 'function') {
       const validation = task.taskIsValid();
 
       if (!validation.valid) {
-        throw new ValidationError(validation.error);
+        throw new ValidationError(
+          validation.errors
+            ? JSON.stringify(validation.errors)
+            : 'Validation failed.'
+        );
       }
     }
 

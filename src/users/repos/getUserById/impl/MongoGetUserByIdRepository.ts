@@ -3,13 +3,16 @@ import { UserModel } from '../../../database/mongo/models/User.model';
 import { User } from '../../../domain/entity/User';
 
 export class MongoGetUserByIdRepository implements IGetUserByIdRepository {
-  async getUserById(id: string): Promise<User | undefined> {
+  async getUserById(id: string): Promise<User> {
     const result = await UserModel.findById(id);
-    if (!result) return undefined;
 
-    const user = User.create(
+    if (!result) throw new Error('User not found');
+
+    //todo need to enhance this
+    return User.create(
       {
         email: result.email,
+        email_2: result.email_2,
         fullName: result.fullName,
         imageUrl: result.imageUrl,
         address: result.address,
@@ -18,7 +21,5 @@ export class MongoGetUserByIdRepository implements IGetUserByIdRepository {
       },
       result._id,
     );
-
-    return user;
   }
 }

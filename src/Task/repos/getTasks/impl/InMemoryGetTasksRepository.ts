@@ -1,9 +1,9 @@
 import { GetTasksRepoInterface } from '../IGetTasksRepository';
 import { InMemoryTasks } from '../../InMemoryDataSource/InMemorydb';
-import { GetTaskDTO } from './../../dtos/GetTaskDTO';
+import { GetTaskDto } from './../../dtos/GetTaskDTO';
 
 export class InMemoryGetTasksRepository implements GetTasksRepoInterface {
-  async getTasks(): Promise<GetTaskDTO[]> {
+  async getTasks(): Promise<GetTaskDto[]> {
     return InMemoryTasks;
   }
 }

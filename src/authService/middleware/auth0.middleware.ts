@@ -4,6 +4,7 @@ import config from 'config';
 const validateJwt = auth({
   issuerBaseURL: config.get('auth0.domain'),
   audience: config.get('auth0.audience'),
+  jwksUri: config.get('auth0.jwksUri'),
 });
 
 export { validateJwt };

@@ -1,6 +1,7 @@
 import { GetTaskByTaskIDUseCase } from './GetTaskByTaskIDUseCase';
 import { GetTaskByTaskIDRepoInterface } from '../../repos/getTask/IGetTaskByTaskIDRepository';
-import { GetTaskDTO } from '../../repos/dtos/GetTaskDTO';
+import { GetTaskDto } from '../../repos/dtos/GetTaskDTO';
+import { SchedulingOption } from '../../domain/entity/TaskInterface';
 
 const mockGetTaskByTaskIDRepo: GetTaskByTaskIDRepoInterface = {
   getTaskByTaskID: jest.fn(),
@@ -20,7 +21,7 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
 
   it('should return a task by task ID from the repository', async () => {
     const taskId: string = 'generatedTaskID';
-    const mockTask: GetTaskDTO = {
+    const mockTask: GetTaskDto = {
       taskId: 'generatedTaskID',
       title: 'Task Title',
       description: 'Task Description',
@@ -28,6 +29,15 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },
+      createdAt: new Date('2023-11-10')
     };
     getTaskbyTaskIDMock.mockResolvedValue(mockTask);
 
@@ -41,6 +51,15 @@ describe('GetTaskByTaskIDUseCase Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },
+      createdAt: new Date('2023-11-10')
     });
     expect(mockGetTaskByTaskIDRepo.getTaskByTaskID).toHaveBeenCalledWith(
       taskId,
