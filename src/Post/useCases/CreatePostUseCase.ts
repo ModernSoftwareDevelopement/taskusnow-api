@@ -14,7 +14,6 @@ export class CreatePostUseCase {
       if (!validation.valid) {
         throw new ValidationError(validation.error);
       }
-
       return await this.postRepository.add(postDTO);
     } catch (err) {
       const errMsg: string = (err as Error).message;

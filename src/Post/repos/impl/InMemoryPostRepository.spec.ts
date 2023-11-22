@@ -1,6 +1,5 @@
 import { CreatePostDTO } from '../../api/dtos/CreatePostDTO';
 import { Post } from '../../domain/entity/Post';
-import { v4 as uuidv4 } from 'uuid';
 import { InMemoryPostRepository } from './InMemoryPostRepository';
 
 let category: string;
