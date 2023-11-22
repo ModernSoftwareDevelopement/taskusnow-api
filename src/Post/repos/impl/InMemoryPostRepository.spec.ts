@@ -1,11 +1,8 @@
 import { CreatePostDTO } from '../../api/dtos/CreatePostDTO';
 import { Post } from '../../domain/entity/Post';
 import { v4 as uuidv4 } from 'uuid';
-
 import { InMemoryPostRepository } from './InMemoryPostRepository';
-import { add } from 'winston';
 
-const id: string = uuidv4();
 let category: string;
 let content: string;
 let userid: string;
@@ -37,7 +34,7 @@ beforeEach(() => {
 describe('InMemoryPostRepository function tests', () => {
   it('should list all posts', async () => {
     const repo = new InMemoryPostRepository();
-    const post = await addPost();
+    await addPost();
     expect((await repo.getAll()).length).toBeGreaterThan(0);
   });
 
@@ -73,8 +70,7 @@ describe('InMemoryPostRepository function tests', () => {
 
   it('should be able to search Post', async () => {
     const repo = new InMemoryPostRepository();
-    const post = await addPost();
-
+    await addPost();
     const foundPost = await repo.search(category);
     expect(foundPost).toBeDefined;
     expect(foundPost[0].category).toBe(category);
