@@ -1,23 +1,18 @@
 import { IUpdateUserRepository } from '../../repos/updateUser/IUpdateUserRepository';
-import { IGetUserByIdRepository } from '../../repos/getUserById/IGetUserByIdRepository';
 import { UpdateUserProfileUseCase } from './UpdateUserProfileUseCase';
 import { User } from '../../domain/entity/User';
 
 const updateUserRepositoryMock: IUpdateUserRepository = {
   updateUser: jest.fn(),
 };
-const getUserByIdRepositoryMock: IGetUserByIdRepository = {
-  getUserById: jest.fn(),
-};
+
 const updateUserMock = updateUserRepositoryMock.updateUser as jest.Mock;
-const getUserByIdMock = getUserByIdRepositoryMock.getUserById as jest.Mock;
 
 const useCase = new UpdateUserProfileUseCase(
-  getUserByIdRepositoryMock,
   updateUserRepositoryMock,
 );
 
-describe('Update User Profile Usecase', () => {
+describe('Update User Profile Use case', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -25,7 +20,7 @@ describe('Update User Profile Usecase', () => {
   it('should throw exception when it cannot find an user', async () => {
     const userId = 'random_id';
 
-    getUserByIdMock.mockResolvedValue(null);
+    updateUserMock.mockRejectedValue(new Error('User not found'));
 
     await expect(useCase.execute(userId, {})).rejects.toThrow('User not found');
   });
@@ -42,39 +37,17 @@ describe('Update User Profile Usecase', () => {
     };
 
     const user = User.create({ email: 'liucuxiu@gmail.com' });
-
-    getUserByIdMock.mockResolvedValue({
-      user,
-    });
-
-    user.setImageUrl(mockUpdateUserDto.imageUrl);
-    user.setFullName(mockUpdateUserDto.fullName);
-    user.setEmail_2(mockUpdateUserDto.email_2);
-    user.setAddress(mockUpdateUserDto.address);
-    user.setAddress_2(mockUpdateUserDto.address_2);
-    user.setPhone(mockUpdateUserDto.phone);
-
-    updateUserMock.mockResolvedValue(user);
+    updateUserMock.mockResolvedValue(user.getId());
 
     const result = await useCase.execute(userId, mockUpdateUserDto);
 
-    expect(getUserByIdRepositoryMock.getUserById).toHaveBeenCalledWith(userId);
     expect(updateUserRepositoryMock.updateUser).toHaveBeenCalledWith(
       userId,
       mockUpdateUserDto,
     );
-    expect(result).toEqual(
-      expect.objectContaining({
-        id: user.getId(),
-        email: user.getEmail(),
-        imageUrl: mockUpdateUserDto.imageUrl,
-        fullName: mockUpdateUserDto.fullName,
-        email_2: mockUpdateUserDto.email_2,
-        address: mockUpdateUserDto.address,
-        address_2: mockUpdateUserDto.address_2,
-        phone: mockUpdateUserDto.phone,
-      }),
-    );
+    expect(result).toEqual({
+      userId: user.getId(),
+    });
   });
 
   it('should throw exception when it can not update user', async () => {
@@ -82,11 +55,6 @@ describe('Update User Profile Usecase', () => {
     const mockUpdateUserDto = {
       imageUrl: 'new_url',
     };
-
-    const user = User.create({ email: 'liucuxiu@gmail.com' });
-    getUserByIdMock.mockResolvedValue({
-      user,
-    });
 
     updateUserMock.mockRejectedValue(new Error('Update user error'));
 

@@ -1,7 +1,8 @@
 import { CreateTaskUseCase } from './CreateTaskUseCase';
-import { CreateTaskDTO } from '../../api/dtos/CreateTaskDTO';
+import { CreateTaskDto } from '../../api/dtos/CreateTaskDTO';
 import { CreateTaskRepoInterface } from './../../repos/createTask/ICreateTaskRepository';
 import { ValidationError } from '../../../middleware/ValdationError';
+import { SchedulingOption } from '../../domain/entity/TaskInterface';
 
 const mockCreateTaskRepo: CreateTaskRepoInterface = {
   createTask: jest.fn(),
@@ -17,13 +18,21 @@ describe('CreateTaskUseCase Testing', () => {
   });
 
   it('should create a task with valid task data', async () => {
-    const validCreateTaskDTO: CreateTaskDTO = {
+    const validCreateTaskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },      
     };
     createTaskMock.mockResolvedValue('generatedTaskID');
 
@@ -34,55 +43,87 @@ describe('CreateTaskUseCase Testing', () => {
   });
 
   it('should throw a ValidationError when task data is invalid for title or description', async () => {
-    const invalidCreateTaskDTO: CreateTaskDTO = {
+    const invalidCreateTaskDTO: CreateTaskDto = {
       title: '',
       description: 'Task Description',
       user: {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },     
     };
-    createTaskMock.mockRejectedValue('Empty or invalid title or description');
+    createTaskMock.mockRejectedValue([
+      { field: 'title', error: 'Title is required.' },
+    ]);
 
     try {
       await createTaskUseCase.execute(invalidCreateTaskDTO);
     } catch (error) {
       const typedError = error as Error;
-      expect(error).toBeInstanceOf(ValidationError);
-      expect(typedError.message).toBe('Empty or invalid title or description');
+      expect(error).toBeInstanceOf(ValidationError);    
+      expect(JSON.parse(typedError.message)).toEqual([
+        { field: 'title', error: 'Title is required.' },
+      ]);  
       expect(mockCreateTaskRepo.createTask).not.toHaveBeenCalled();
     }
   });
 
-  it('should throw a ValidationError when task data is invalid for useid', async () => {
-    const invalidCreateTaskDTO: CreateTaskDTO = {
+  it('should throw a ValidationError when task data is invalid for userId', async () => {
+    const invalidCreateTaskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {
         userId: '',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },  
     };
-    createTaskMock.mockRejectedValue('Invalid userid');
+    createTaskMock.mockRejectedValue([
+      { field: 'userId', error: 'User ID is required.' },
+    ]);
 
     try {
       await createTaskUseCase.execute(invalidCreateTaskDTO);
     } catch (error) {
       const typedError = error as Error;
       expect(error).toBeInstanceOf(ValidationError);
-      expect(typedError.message).toBe('Invalid userid');
+      expect(JSON.parse(typedError.message)).toEqual([
+        { field: 'userId', error: 'User ID is required.' },
+      ]);
       expect(mockCreateTaskRepo.createTask).not.toHaveBeenCalled();
     }
   });
 
   it('should throw an Error when the repository call fails', async () => {
-    const validCreateTaskDTO: CreateTaskDTO = {
+    const validCreateTaskDTO: CreateTaskDto = {
       title: 'Task Title',
       description: 'Task Description',
       user: {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },  
     };
     createTaskMock.mockRejectedValue(
       new Error('Something went wrong. Try again!'),

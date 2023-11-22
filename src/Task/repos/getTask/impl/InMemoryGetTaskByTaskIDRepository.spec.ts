@@ -1,4 +1,5 @@
 import { InMemoryGetTaskByTaskIDRepository } from './InMemoryGetTaskByTaskIDRepository';
+import { SchedulingOption } from '../../../domain/entity/TaskInterface';
 
 describe('InMemoryGetTaskByTaskIDRepository Testing', () => {
   let repository: InMemoryGetTaskByTaskIDRepository;
@@ -19,6 +20,15 @@ describe('InMemoryGetTaskByTaskIDRepository Testing', () => {
         userId: 'user123',
         fullName: 'John Doe',
       },
+      category: 'Sample Category',
+      location: 'Sample Location',
+      budget: 100,
+      scheduling: SchedulingOption.FLEXIBLE,
+      timeslot: {
+        startTime: '10:00 AM',
+        endTime: '12:00 PM',
+      },
+      createdAt: new Date('2023-11-10'),
     });
   });
 
