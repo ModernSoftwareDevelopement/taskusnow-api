@@ -1,4 +1,3 @@
-import { Task } from '../../../domain/entity/Task';
 import { InMemoryCreateTaskRepository } from './InMemoryCreateTaskRepository';
 import { SchedulingOption } from '../../../domain/entity/TaskInterface';
 import { GetTaskDto } from '../../dtos/GetTaskDTO';

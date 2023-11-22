@@ -8,7 +8,7 @@ export class CreateTaskUseCase {
   constructor(private readonly taskRepo: CreateTaskRepoInterface) {}
 
   async execute(taskDTO: CreateTaskDto): Promise<CreateTaskResponse> {
-    const task = new Task(taskDTO);
+    const task = Task.create(taskDTO);
 
     if (task.taskIsValid && typeof task.taskIsValid === 'function') {
       const validation = task.taskIsValid();
@@ -23,7 +23,7 @@ export class CreateTaskUseCase {
     }
 
     try {
-      const createdTaskID = await this.taskRepo.createTask(task);
+      const createdTaskID = await this.taskRepo.createTask(taskDTO);
       return { taskId: createdTaskID };
     } catch (error) {
       throw new Error('Something went wrong. Try again!');

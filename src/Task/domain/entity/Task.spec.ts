@@ -28,7 +28,7 @@ describe('Task Entity', () => {
 
   it('should detect missing timeslot for flexible scheduling', () => {
     const taskData = { ...defaultTaskData, scheduling: SchedulingOption.FLEXIBLE, timeslot: undefined };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
@@ -44,14 +44,14 @@ describe('Task Entity', () => {
   it('should create a valid task with specificDate scheduling and a date', () => {
     const specificDate = new Date('2023-12-10');
     const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFIC_DATE, specificDate };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for specificDate scheduling', () => {
     const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFIC_DATE, specificDate: undefined };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
@@ -67,14 +67,14 @@ describe('Task Entity', () => {
   it('should create a valid task with BEFORE_DATE scheduling and a date', () => {
     const BEFORE_DATE = new Date('2023-12-09');
     const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFORE_DATE, specificDate: BEFORE_DATE };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({ valid: true });
   });
 
   it('should detect missing specificDate for BEFORE_DATE scheduling', () => {
     const taskData = { ...defaultTaskData, scheduling: SchedulingOption.BEFORE_DATE, specificDate: undefined };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
@@ -89,7 +89,7 @@ describe('Task Entity', () => {
 
   it('should return an error for an invalid budget (less than 5)', () => {
     const taskData = { ...defaultTaskData, budget: 2 };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
@@ -101,7 +101,7 @@ describe('Task Entity', () => {
 
   it('should return an error for an invalid budget (greater than 9999)', () => {
     const taskData = { ...defaultTaskData, budget: 10000 };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
@@ -113,7 +113,7 @@ describe('Task Entity', () => {
 
   it('should return errors for empty title', () => {
     const taskData = { ...defaultTaskData, title: '' };
-    const task = Task.create(defaultTaskData);
+    const task = Task.create(taskData);
     const result = task.taskIsValid();
     expect(result).toEqual({
       valid: false,
