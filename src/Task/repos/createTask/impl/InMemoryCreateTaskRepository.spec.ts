@@ -1,6 +1,7 @@
 import { Task } from '../../../domain/entity/Task';
 import { InMemoryCreateTaskRepository } from './InMemoryCreateTaskRepository';
 import { SchedulingOption } from '../../../domain/entity/TaskInterface';
+import { GetTaskDto } from '../../dtos/GetTaskDTO';
 
 describe('InMemoryCreateTaskRepository Testing', () => {
   it('should create a task', async () => {
@@ -9,7 +10,7 @@ describe('InMemoryCreateTaskRepository Testing', () => {
       startTime: '10:00 AM',
       endTime: '12:00 PM',
     };
-    const newTaskData = new Task({
+    const newTaskData: GetTaskDto = {
       title: 'Sample Title',
       description: 'Sample Description',
       user: {
@@ -22,7 +23,7 @@ describe('InMemoryCreateTaskRepository Testing', () => {
       scheduling: SchedulingOption.FLEXIBLE,
       timeslot,
       createdAt: new Date(),
-    });
+    };
 
     const createdTaskID = await repo.createTask(newTaskData);
 

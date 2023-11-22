@@ -1,5 +1,5 @@
-import { Task } from '../../domain/entity/Task';
+import { CreateTaskDto } from "../dtos/CreateTaskDTO";
 
 export interface CreateTaskRepoInterface {
-  createTask(taskData: Task): Promise<string>;
+  createTask(taskData: CreateTaskDto): Promise<string>;
 }
