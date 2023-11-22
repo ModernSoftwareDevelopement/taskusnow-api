@@ -122,4 +122,60 @@ describe('Task Entity', () => {
       ],
     });
   });
+
+  it('should serialize task to a plain object', () => {
+    const task = Task.create(defaultTaskData);
+    const serializedTask = task.serialize();
+    expect(serializedTask).toEqual(defaultTaskData);
+  });
+
+  it('should get and set values', () => {    
+    const taskData = { ...defaultTaskData, scheduling: SchedulingOption.SEPCIFIC_DATE, specificDate: undefined, taskId: undefined };
+    const task = Task.create(taskData);
+
+    expect(task.getTaskId()).toEqual(taskData.taskId);
+    expect(task.getTitle()).toEqual(taskData.title);
+    expect(task.getDescription()).toEqual(taskData.description);
+    expect(task.getUser()).toEqual(taskData.user);
+    expect(task.getCategory()).toEqual(taskData.category);
+    expect(task.getLocation()).toEqual(taskData.location);
+    expect(task.getBudget()).toEqual(taskData.budget);
+    expect(task.getScheduling()).toEqual(taskData.scheduling);
+    expect(task.getSpecificDate()).toEqual(taskData.specificDate);
+    expect(task.getTimeslot()).toEqual(taskData.timeslot);
+    expect(task.getCreatedAt()).toEqual(taskData.createdAt);
+  
+    const newTitle = 'New Title';
+    const newDescription = 'New Description';
+    const newUser = { userId: 'newUserId', fullName: 'New User' };
+    const newCategory = 'New Category';
+    const newLocation = 'New Location';
+    const newBudget = 200;
+    const newScheduling = SchedulingOption.BEFORE_DATE;
+    const newSpecificDate = new Date('2023-12-11');
+    const newTimeslot = { startTime: '1:00 PM', endTime: '3:00 PM' };
+    const newCreatedAt = new Date('2023-12-08');
+  
+    task.setTitle(newTitle);
+    task.setDescription(newDescription);
+    task.setUser(newUser);
+    task.setCategory(newCategory);
+    task.setLocation(newLocation);
+    task.setBudget(newBudget);
+    task.setScheduling(newScheduling);
+    task.setSpecificDate(newSpecificDate);
+    task.setTimeslot(newTimeslot);
+    task.setCreatedAt(newCreatedAt);
+  
+    expect(task.getTitle()).toEqual(newTitle);
+    expect(task.getDescription()).toEqual(newDescription);
+    expect(task.getUser()).toEqual(newUser);
+    expect(task.getCategory()).toEqual(newCategory);
+    expect(task.getLocation()).toEqual(newLocation);
+    expect(task.getBudget()).toEqual(newBudget);
+    expect(task.getScheduling()).toEqual(newScheduling);
+    expect(task.getSpecificDate()).toEqual(newSpecificDate);
+    expect(task.getTimeslot()).toEqual(newTimeslot);
+    expect(task.getCreatedAt()).toEqual(newCreatedAt);
+  });
 });
