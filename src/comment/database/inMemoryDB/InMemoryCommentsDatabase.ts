@@ -1,4 +1,4 @@
-import { GetCommentDTO } from '../../repos/dtos/GetCommentDTO';
+import { GetCommentDTO } from '../../repos/dtos/GetCommentDto';
 
 export const InMemoryComments: GetCommentDTO[] = [
     {
