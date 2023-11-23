@@ -1,11 +1,12 @@
 export interface IComment {
     id: number;
-    author: {
-        authorId: number;
-        avatar: string;
-        name: string;
-      };
-    insertedAt: string;
-    body: string;
+    user: User;
+    createdAt: string;
+    content: string;
   }
-  
+
+export interface User {
+  userId: string;
+  imageUrl?: string;
+  fullName?: string;
+}

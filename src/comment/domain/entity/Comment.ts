@@ -1,56 +1,53 @@
-import {IComment} from './IComment';
+import {IComment, User} from './IComment';
+
 export class Comment{
     private id: number;
-    private author: {
-        authorId?: number;
-        avatar: string;
-        name: string;
-    };
-    private insertedAt: string;
-    private body: string;
+    private user: User;
+    private createdAt: string;
+    private content: string;
 
     constructor(data: IComment) {
         this.id = data.id;
-        this.author = data.author;
-        this.insertedAt = data.insertedAt;
-        this.body = data.body;
+        this.user = data.user;
+        this.createdAt = data.createdAt;
+        this.content = data.content;
       }
     
     getId(): number {
         return this.id;
     }
 
-    getAuthor(): {
-        authorId?: number;
-        avatar: string;
-        name: string;
+    getUser(): {
+        userId: string;
+        imageUrl?: string;
+        fullName?: string;
     } {
-        return this.author;
+        return this.user;
     }
     
-    setAuthor(newAuthor: {
-    authorId?: number;
-    avatar: string;
-    name: string;
+    setUser(newUser: {
+        userId: string;
+        imageUrl: string;
+        fullName: string;
     }) {
     
-        this.author = newAuthor;
+        this.user = newUser;
     }
 
-    getInsertedAt(): string {
-        return this.insertedAt;
+    getCreatedAt(): string {
+        return this.createdAt;
     }
 
-    setInsertedAt(insertedAt: string): void {
-        this.insertedAt = insertedAt;
+    setCreatedAt(createdAt: string): void {
+        this.createdAt = createdAt;
     }
 
-    getBody(): string {
-        return this.body;
+    getContent(): string {
+        return this.content;
     }
 
-    setBody(body: string): void {
-        this.body = body;
+    setContent(content: string): void {
+        this.content = content;
     }
     
 }

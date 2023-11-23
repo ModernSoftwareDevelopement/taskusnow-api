@@ -1,10 +1,7 @@
-export interface GetCommentDTO{
+import {User} from '../../domain/entity/IComment'
+export interface GetCommentDto{
     id: number;
-    author: {
-        authorId: number;
-        avatar: string;
-        name: string;
-      };
-    insertedAt: string;
-    body: string;
+    user: User;
+    createdAt: string;
+    content: string;
 }

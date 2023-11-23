@@ -1,5 +1,5 @@
-import { GetCommentDTO } from '../../repos/dtos/GetCommentDto';
+import { GetCommentDto } from '../../repos/dtos/GetCommentDto';
 
 export interface GetCommentsResponse {
-  comments: GetCommentDTO[];
+  comments: GetCommentDto[];
 }

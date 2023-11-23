@@ -1,25 +1,25 @@
-import { GetCommentDTO } from '../../repos/dtos/GetCommentDto';
+import { GetCommentDto } from '../../repos/dtos/GetCommentDto';
 
-export const InMemoryComments: GetCommentDTO[] = [
+export const InMemoryComments: GetCommentDto[] = [
     {
         id: 1,
-        author: {
-          authorId: 1,
-          avatar: 'avatar-url-1',
-        name: 'EMP'
+        user: {
+          userId: '1',
+          imageUrl: 'avatar-url-1',
+          fullName: 'EMP'
         },
-        insertedAt: '2023-11-19T12:00:00',
-        body: 'This is a first comment.',
+        createdAt: new Date().toISOString(),
+        content: 'This is a first comment.',
       },
     {
         id: 2,
-        author: {
-          authorId: 2,
-          avatar: 'avatar-url-2',
-        name: 'TU'
+        user: {
+          userId: '2',
+          imageUrl: 'avatar-url-2',
+          fullName: 'TU'
         },
-        insertedAt: '2023-11-19T12:10:00',
-        body: 'This is a testing comment.',
+        createdAt: new Date().toISOString(),
+        content: 'This is a testing comment.',
       },
     
 ];
