@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import { setupTaskRoutes } from './Task/api/routes/taskRoutes';
+import { setupCommentRoutes } from './comment/api/routes/commentRoutes';
 import config from 'config';
 import cors from 'cors';
 import { userRouter } from './users/api/routes/userRouter';
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use(profileRouter);
 app.use('/api', setupTaskRoutes());
+app.use('/api', setupCommentRoutes());
 app.use(reviewRouter);
 
 app.get('/', (req: Request, res: Response) => {
