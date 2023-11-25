@@ -35,6 +35,9 @@ const userModel = new mongoose.Schema({
     type: String,
     required: false,
   },
+  skills: {
+    type: [String],
+  },
 });
 
 export const UserModel = mongoose.model('User', userModel);

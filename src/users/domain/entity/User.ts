@@ -8,18 +8,20 @@ interface IUserProperties {
   address?: string;
   address_2?: string;
   phone?: string;
+  skills?: string[];
 }
 
 export class User {
   private readonly id: string;
   private readonly email: string;
   private imageUrl?: string;
-
   private fullName?: string;
   private email_2?: string;
   private address?: string;
   private address_2?: string;
   private phone?: string;
+  private skills?: string[];
+
 
   private constructor(email: string, id?: string) {
     this.id = id ?? randomUUID();
@@ -82,6 +84,14 @@ export class User {
     this.phone = phone;
   }
 
+  getSkills(): string[] | undefined {
+    return this.skills;
+  }
+
+  setSkills(skills: string[] | undefined): void {
+    this.skills = skills;
+  }
+
   public static create(props: IUserProperties, id?: string): User {
     const user = new User(props.email, id);
 
@@ -91,6 +101,7 @@ export class User {
     user.setAddress(props.address);
     user.setAddress_2(props.address_2);
     user.setPhone(props.phone);
+    user.setSkills(props.skills);
 
     return user;
   }
@@ -104,6 +115,7 @@ export class User {
       address: this.address,
       address_2: this.address_2,
       phone: this.phone,
+      skills: this.skills,
     };
   }
 }
