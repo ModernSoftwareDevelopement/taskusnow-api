@@ -18,6 +18,7 @@ export class MongoGetUserByIdRepository implements IGetUserByIdRepository {
         address: result.address,
         address_2: result.address_2,
         phone: result.phone,
+        skills: result.skills,
       },
       result._id,
     );
