@@ -2,7 +2,7 @@
 
 # Known issues and solutions
 
-## Git Pull issue
+## Git Pull issue (Added by Ba Nyar)
 
 if there is any issue as folllowed happened when pulling latest request,
 
