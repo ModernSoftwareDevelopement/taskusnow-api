@@ -7,7 +7,7 @@ export class CloudinaryImageUploader implements ImageUploader {
     cloudinary.config({
       cloud_name: config.get('cloudinary.cloudName'),
       api_key: config.get('cloudinary.apiKey'),
-      api_secret: config.get('cloudinary.apiSecret')
+      api_secret: config.get('cloudinary.apiSecret'),
     });
   }
 
