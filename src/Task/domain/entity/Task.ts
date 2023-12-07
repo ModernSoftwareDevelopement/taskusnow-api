@@ -6,61 +6,161 @@ import {
 } from './TaskInterface';
 
 export class Task {
-  private _taskId?: string;
-  private _title: string;
-  private _description: string;
-  private _user: User;
-  private _category: string;
-  private _location?: string;
-  private _budget: number;
-  private _scheduling: SchedulingOption;
-  private _specificDate?: Date;
-  private _timeslot?: TimeSlot;
-  private _createdAt?: Date;
+  private taskId?: string;
+  private title: string;
+  private description: string;
+  private user: User;
+  private category: string;
+  private location?: string;
+  private budget: number;
+  private scheduling: SchedulingOption;
+  private specificDate?: Date;
+  private timeslot?: TimeSlot;
+  private createdAt?: Date;
 
-  private _errors: { field: string; error: string }[] = [];
+  private readonly errors: { field: string; error: string }[] = [];
 
-  constructor(data: TaskInterface) {
-    this._taskId = data.taskId;
-    this._title = data.title;
-    this._description = data.description;
-    this._user = data.user;
-    this._category = data.category;
-    this._location = data.location;
-    this._budget = data.budget;
-    this._scheduling = data.scheduling;
-    this._specificDate = data.specificDate;
-    this._timeslot = data.timeslot;
-    this._createdAt = data.createdAt;
+  private constructor(data: TaskInterface) {
+    this.taskId = data.taskId;
+    this.title = data.title;
+    this.description = data.description;
+    this.user = data.user;
+    this.category = data.category;
+    this.location = data.location;
+    this.budget = data.budget;
+    this.scheduling = data.scheduling;
+    this.specificDate = data.specificDate;
+    this.timeslot = data.timeslot;
+    this.createdAt = data.createdAt;
+  }
+
+  static create(data: TaskInterface): Task {
+    return new Task(data);
+  }
+
+  public serialize(): TaskInterface {
+    return {
+      taskId: this.taskId,
+      title: this.title,
+      description: this.description,
+      user: this.user,
+      category: this.category,
+      location: this.location,
+      budget: this.budget,
+      scheduling: this.scheduling,
+      specificDate: this.specificDate,
+      timeslot: this.timeslot,
+      createdAt: this.createdAt,
+    };
+  }  
+
+  getTaskId(): string | undefined {
+    return this.taskId;
+  }
+
+  getTitle(): string {
+    return this.title;
+  }
+
+  getDescription(): string {
+    return this.description;
+  }
+
+  getUser(): User {
+    return this.user;
+  }
+
+  getCategory(): string {
+    return this.category;
+  }
+
+  getLocation(): string | undefined {
+    return this.location;
+  }
+
+  getBudget(): number {
+    return this.budget;
+  }
+
+  getScheduling(): SchedulingOption {
+    return this.scheduling;
+  }
+
+  getSpecificDate(): Date | undefined {
+    return this.specificDate;
+  }
+
+  getTimeslot(): TimeSlot | undefined {
+    return this.timeslot;
+  }
+
+  getCreatedAt(): Date | undefined {
+    return this.createdAt;
+  }
+
+  setTitle(title: string): void {
+    this.title = title;
+  }
+
+  setDescription(description: string): void {
+    this.description = description;
+  }
+
+  setUser(user: User): void {
+    this.user = user;
+  }
+
+  setCategory(category: string): void {
+    this.category = category;
+  }
+
+  setLocation(location: string | undefined): void {
+    this.location = location;
+  }
+
+  setBudget(budget: number): void {
+    this.budget = budget;
+  }
+
+  setScheduling(scheduling: SchedulingOption): void {
+    this.scheduling = scheduling;
+  }
+
+  setSpecificDate(specificDate: Date | undefined): void {
+    this.specificDate = specificDate;
+  }
+
+  setTimeslot(timeslot: TimeSlot | undefined): void {
+    this.timeslot = timeslot;
+  }
+
+  setCreatedAt(createdAt: Date | undefined): void {
+    this.createdAt = createdAt;
   }
 
   private errorObject(field: string, error: string): { field: string; error: string } {
     return { field, error };
   }
 
-  private addErrorOnCondition(
-    condition: boolean,
-    field: string,
-    error: string,
-  ): void {
+  private addErrorOnCondition(condition: boolean, field: string, error: string): void {
     if (condition) {
-      this._errors.push(this.errorObject(field, error));
+      this.errors.push(this.errorObject(field, error));
     }
   }
 
   private validateRequiredFields(): void {
-    this.addErrorOnCondition(!this._title, 'title', 'Title is required.');
-    this.addErrorOnCondition(!this._description, 'description', 'Description is required.');
-    this.addErrorOnCondition(!this._category, 'category', 'Category is required.');
-    this.addErrorOnCondition(!this._location, 'location', 'Location is required.');
-    this.addErrorOnCondition(!this._budget, 'budget', 'Budget is required.');
-    this.addErrorOnCondition(!this._user?.userId, 'userId', 'User ID is required.');
-    this.addErrorOnCondition(!this._scheduling, 'scheduling', 'Scheduling option is required.');
+    this.addErrorOnCondition(!this.title, 'title', 'Title is required.');
+    this.addErrorOnCondition(!this.description, 'description', 'Description is required.');
+    this.addErrorOnCondition(!this.category, 'category', 'Category is required.');
+    this.addErrorOnCondition(!this.location, 'location', 'Location is required.');
+    this.addErrorOnCondition(!this.budget, 'budget', 'Budget is required.');
+    this.addErrorOnCondition(!this.user?.userId, 'userId', 'User ID is required.');
+    this.addErrorOnCondition(!this.scheduling, 'scheduling', 'Scheduling option is required.');
   }
 
   private validateBudget(): void {
     this.addErrorOnCondition(
-      this._budget < 5 || this._budget > 9999,
+      this.budget < 5 || this.budget > 9999,
       'budget',
       'Budget must be between 5 and 9999.',
     );
@@ -69,7 +169,7 @@ export class Task {
   private validateSpecificDate(): void {
     if (
       (this.isScheduleWithSpecificDate() || this.isScheduleWithBeforeDate()) &&
-      (!this._specificDate || isNaN(this._specificDate.getTime()))
+      (!this.specificDate || isNaN(this.specificDate.getTime()))
     ) {
       this.addErrorOnCondition(
         true,
@@ -80,16 +180,16 @@ export class Task {
   }
 
   private isScheduleWithSpecificDate(): boolean {
-    return this._scheduling === SchedulingOption.SEPCIFIC_DATE;
+    return this.scheduling === SchedulingOption.SEPCIFIC_DATE;
   }
 
   private isScheduleWithBeforeDate(): boolean {
-    return this._scheduling === SchedulingOption.BEFORE_DATE;
+    return this.scheduling === SchedulingOption.BEFORE_DATE;
   }
 
   private validateTimeslot(): void {
     this.addErrorOnCondition(
-      this._scheduling === SchedulingOption.FLEXIBLE && !this._timeslot,
+      this.scheduling === SchedulingOption.FLEXIBLE && !this.timeslot,
       'timeslot',
       'Time period is required for this scheduling option.',
     );
@@ -105,101 +205,8 @@ export class Task {
     this.validateTimeslot();
 
     return {
-      valid: this._errors.length === 0,
-      errors: this._errors.length > 0 ? this._errors : undefined,
+      valid: this.errors.length === 0,
+      errors: this.errors.length > 0 ? this.errors : undefined,
     };
-  }
-
-  // Getters and Setters
-  get taskId(): string | undefined {
-    return this._taskId;
-  }
-
-  set taskId(value: string | undefined) {
-    this._taskId = value;
-  }
-
-  get title(): string {
-    return this._title;
-  }
-
-  set title(value: string) {
-    this._title = value;
-  }
-
-  get description(): string {
-    return this._description;
-  }
-
-  set description(value: string) {
-    this._description = value;
-  }
-
-  get user(): User {
-    return this._user;
-  }
-
-  set user(value: User) {
-    this._user = value;
-  }
-
-  get category(): string {
-    return this._category;
-  }
-
-  set category(value: string) {
-    this._category = value;
-  }
-
-  get location(): string | undefined {
-    return this._location;
-  }
-
-  set location(value: string | undefined) {
-    this._location = value;
-  }
-
-  get budget(): number {
-    return this._budget;
-  }
-
-  set budget(value: number) {
-    this._budget = value;
-  }
-
-  get scheduling(): SchedulingOption {
-    return this._scheduling;
-  }
-
-  set scheduling(value: SchedulingOption) {
-    this._scheduling = value;
-  }
-
-  get specificDate(): Date | undefined {
-    return this._specificDate;
-  }
-
-  set specificDate(value: Date | undefined) {
-    this._specificDate = value;
-  }
-
-  get timeslot(): TimeSlot | undefined {
-    return this._timeslot;
-  }
-
-  set timeslot(value: TimeSlot | undefined) {
-    this._timeslot = value;
-  }
-
-  get createdAt(): Date | undefined {
-    return this._createdAt;
-  }
-
-  set createdAt(value: Date | undefined) {
-    this._createdAt = value;
-  }
-
-  get errors(): { field: string; error: string }[] {
-    return this._errors;
   }
 }

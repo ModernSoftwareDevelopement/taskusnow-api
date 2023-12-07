@@ -19,7 +19,7 @@ describe('GetTasksUseCase Testing', () => {
 
     const result = await getTasksUseCase.execute();
 
-    expect(result.tasks).toEqual([]);
+    expect(result).toEqual([]);
     expect(mockGetTasksRepo.getTasks).toHaveBeenCalledTimes(1);
   });
 });
