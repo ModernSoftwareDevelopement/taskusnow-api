@@ -1,7 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
 import { apiAuthenticateMiddleware } from './apiAuthenticate.middleware';
+import config from 'config';
+
+jest.mock('config');
 
 describe('apiAuthenticateMiddleware', () => {
+  beforeAll(() => {
+    config.get = jest.fn().mockImplementation((key: string) => {
+      if (key === 'apiAuth.username') {
+        return 'liucuxiu_username';
+      }
+      if (key === 'apiAuth.password') {
+        return 'liucuxiu_password';
+      }
+      return null;
+    });
+  });
+
   it('should return a 401 response if the "authorization" header is missing', () => {
     const req = {
       headers: {},
